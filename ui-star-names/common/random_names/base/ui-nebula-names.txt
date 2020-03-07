@@ -17,6 +17,7 @@ nebula_names = {
     "Mighty Fart"
     "Milkfoam Cloud"
     "Mlendea Nebula"
+    "Molaste Pirramid"
     "Redflame Nebula"
     "Roseblood Nebula"
     "Sanguine Cloud"

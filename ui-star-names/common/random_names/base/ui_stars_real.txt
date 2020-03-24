@@ -1,15 +1,15 @@
 star_names = {
     ### REAL ###
-    Achrid
-    Alrai
+    "Achrid"
+    "Alrai"
     "Alula Australis"
     "Delta Trianguli"
     "Gamma Virginis"
-    Menkalinan
-    Rasalmothalla
+    "Magellan"
+    "Menkalinan"
+    "Rasalmothalla"
     "Tau Bootis"
     "Upsilon Andromedae"
-    Magellan
 }
 
 nebula_names = {

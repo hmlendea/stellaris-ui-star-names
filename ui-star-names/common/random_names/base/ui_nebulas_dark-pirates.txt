@@ -1,0 +1,7 @@
+nebula_names = {
+    "Green Hell"
+    "Lotus Flairs"
+    "Mammoth Nebula"
+    "Rubine Nebula"
+    "Sandstorm Nebula"
+}

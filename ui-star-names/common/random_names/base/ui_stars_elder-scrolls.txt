@@ -1,0 +1,58 @@
+star_names = {
+    ### Gods
+    "Akatosh"
+    "Amalexia"
+    "Arkay"
+    "Auri-El"
+    "Azura"
+    "Boetiah"
+    "Dagon"
+    "Dibella"
+    "Hermaeus"
+    "Hircine"
+    "Julianos"
+    "Jyggalag"
+    "Kynareth"
+    "Magnus"
+    "Malacath"
+    "Mara"
+    "Mehrunes"
+    "Mephala"
+    "Meridia"
+    "Molag"
+    "Namira"
+    "Peryite"
+    "Sanguine"
+    "Septim"
+    "Sheogorath"
+    "Sithis"
+    "Sotha"
+    "Stendarr"
+    "Talos"
+    "Tiber"
+    "Vaermina"
+    "Vivec"
+    "Ysmir"
+    "Zenithar"
+
+    ### Continents
+    "Akavir"
+    "Atmora"
+    "Mereth"
+    "Tamriel"
+
+    ### Countries
+    "Argonia"
+    "Cyrodiil"
+    "Elsweyr"
+    "Skyrim"
+
+    ### Planets
+    "Nirn"
+
+    ### Others
+    "Daedra"
+    "Dovah"
+    "Dovahkiin"
+    "Dremora"
+}

@@ -1,0 +1,9 @@
+nebula_names = {
+    "Monsua Nebula"
+    "Kaliida Nebula"
+    "Metharian Nebula"
+    "Typhonic Nebula"
+    "Vulpinus Nebula"
+    "Queluhan Nebula"
+    "Ghost Nebula"
+}

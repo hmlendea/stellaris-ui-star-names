@@ -1,4 +1,26 @@
 star_names = {
+    Sombrero
+    Luchador
+    Guacamelee
+    Firefly
+
+    Burebista
+    Decebalus
+    Eminescu
+    Cossack
+    Dracones
+    Hades
+    Harambe
+    Horatius
+    Hori
+    Linux
+    Lotus
+    Mlendea
+    Tesla
+    Ubuntu
+    Unix
+    Zamolxis
+    
     ### Austria
     Austria
 

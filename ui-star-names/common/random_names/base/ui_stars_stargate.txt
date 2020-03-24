@@ -1,0 +1,16 @@
+star_names = {
+    "Adara"
+    "Archeva"
+    "Doranda"
+    "Edora"
+    "Hala"
+    "Hasara"
+    "Kohal"
+    "Lantean"
+    "Locnakoh"
+    "Risa"
+    "Tartarus"
+    "Tichenor"
+    "Tobin"
+    "Vorash"
+}

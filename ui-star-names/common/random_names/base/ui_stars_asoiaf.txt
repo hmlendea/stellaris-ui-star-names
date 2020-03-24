@@ -1,0 +1,30 @@
+star_names = {
+    ### Countries
+    "Asshai"
+    "Dorne"
+
+    ### Gods
+    "R'hllor"
+
+    ### Houses
+    "Lannister"
+    "Stark"
+
+    ### Cities
+    "Astapor"
+    "Braavos"
+    "Elyria"
+    "Ghiscar"
+    "Lorath"
+    "Lys"
+    "Mereen"
+    "Myr"
+    "Norvos"
+    "Pentos"
+    "Qarth"
+    "Qohor"
+    "Tyrosh"
+    "Valyria"
+    "Volantis"
+    "Yunkai"
+}

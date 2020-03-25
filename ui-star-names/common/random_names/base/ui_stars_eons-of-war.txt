@@ -1,0 +1,7 @@
+star_names = {
+    "Subra"
+    "Kochab"
+    "Tiaki"
+    "Sarin"
+    "Seginus"
+}

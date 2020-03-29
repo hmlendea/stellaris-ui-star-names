@@ -8,8 +8,8 @@ BLACK_HOLES_COUNT=$(cat $CELESTIAL_BODIES_DIR/ui_black-holes* | sed 's/ //g' | s
 NEBULAS_COUNT=$(cat $CELESTIAL_BODIES_DIR/ui_nebulas* | sed 's/ //g' | sed '/^\s*$\|=\|}\|^#/d' | sort | sed 's/\"//g' | uniq | wc -l)
 STARS_COUNT=$(cat $CELESTIAL_BODIES_DIR/ui_stars* | sed 's/ //g' | sed '/^\s*$\|=\|}\|^#/d' | sort | sed 's/\"//g' | uniq | wc -l)
 
-echo "Asteroid Postfixes:" $ASTEROID_POSTFIXES_COUNT
-echo "Asteroid Prefixes:" $ASTEROID_PREFIXES_COUNT
-echo "Black Holes:" $BLACK_HOLES_COUNT
-echo "Nebulas:" $NEBULAS_COUNT
-echo "Stars:" $STARS_COUNT
+echo " - Asteroid Postfixes:" $ASTEROID_POSTFIXES_COUNT
+echo " - Asteroid Prefixes:" $ASTEROID_PREFIXES_COUNT
+echo " - Black Holes:" $BLACK_HOLES_COUNT
+echo " - Nebulas:" $NEBULAS_COUNT
+echo " - Stars:" $STARS_COUNT

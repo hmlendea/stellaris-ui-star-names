@@ -62,6 +62,7 @@ asteroid_prefix = {
     MAC-
     MD-
     MDL-
+    MLEM-
     MNO-
     NET-
     NI-
@@ -83,6 +84,7 @@ asteroid_prefix = {
     SPA-
     SPQR-
     SRB-
+    STONK-
     SUN-
     TES-
     TUX-
@@ -92,6 +94,7 @@ asteroid_prefix = {
     WIN-
     WWW-
     XYZ-
+    YIAY-
     YOY-
     YUG-
 

@@ -4,4 +4,4 @@
  - Asteroid Prefixes: 98
  - Black Holes: 32
  - Nebulas: 740
- - Stars: 12880
+ - Stars: 13059

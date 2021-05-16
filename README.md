@@ -1,5 +1,10 @@
+# About
+
+Mod for Stellaris that adds thousands of new names for stars, nebulas, asteroids, and black holes.
+
 # Additions
 
+Quantity:
  - Asteroid Postfixes: 33
  - Asteroid Prefixes: 98
  - Black Holes: 32

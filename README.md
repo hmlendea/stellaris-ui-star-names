@@ -1,7 +1,7 @@
 # Additions
 
  - Asteroid Postfixes: 33
- - Asteroid Prefixes: 95
+ - Asteroid Prefixes: 98
  - Black Holes: 32
- - Nebulas: 739
- - Stars: 6934
+ - Nebulas: 740
+ - Stars: 14048

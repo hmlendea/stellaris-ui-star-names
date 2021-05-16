@@ -20,7 +20,7 @@ Quantity:
  - Asteroid Prefixes: 98
  - Black Holes: 32
  - Nebulas: 740
- - Stars: 6987
+ - Stars: 14101
 
 Themes:
  - A Song of Ice and Fire

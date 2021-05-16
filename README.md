@@ -24,6 +24,7 @@ Quantity:
 
 Themes:
  - A Song of Ice and Fire
+ - Age of Wonders: Planetfall
  - CoCominium
  - Dark Pirates
  - Distant Worlds
@@ -31,11 +32,14 @@ Themes:
  - Elite Dangerous
  - Eons of War
  - EVE Online
+ - Galactic Civilizations
+ - Master or Orion
  - No Man's Sky
  - Pax Nova
  - Predestination
  - Remnants of the Precursors
  - Sins of a Solar Empire
+ - Star Ruler 2
  - Star Trek
  - Star Wars
  - StarCraft

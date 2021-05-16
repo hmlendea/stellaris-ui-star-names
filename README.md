@@ -2,6 +2,15 @@
 
 Mod for Stellaris that adds thousands of new names for stars, nebulas, asteroids, and black holes.
 
+# Installation
+
+[![Get it from the Workshop](https://raw.githubusercontent.com/hmlendea/readme-assets/master/badges/stores/steam-workshop.png)](https://steamcommunity.com/sharedfiles/filedetails/?id=2040215185) [![Get it from Paradox Mods](https://raw.githubusercontent.com/hmlendea/readme-assets/master/badges/stores/paradox-mods.png)](https://mods.paradoxplaza.com/mods/25413/Any) [![Get it from the Nexus](https://raw.githubusercontent.com/hmlendea/readme-assets/master/badges/stores/nexus.png)](https://www.nexusmods.com/stellaris/mods/74/)
+
+## Manual installation
+
+ - Download the [latest release](https://github.com/hmlendea/stellaris-ui-star-names/releases)
+ - Extract the contents into your game's mod directory
+
 # Additions
 
 Quantity:

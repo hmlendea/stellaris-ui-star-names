@@ -1,0 +1,42 @@
+nebula_names = {
+    ### Belts
+    "Darkox Belt"
+    "Greater Koarnia Belt"
+
+    ### Clusters
+    "Atarvin Cluster"
+
+    ### Expanses
+    "Apius Expanse"
+    "Culas Expanse"
+    "Fomalhaut Expanse"
+    "K'amis Amonarnia Expanse"
+    "Kuandia Expanse"
+    "Thryalis Taxaddon Expanse"
+    "Tucana Expanse"
+
+    ### Nebulas
+    "Loviz Nebula"
+    "Vadara Nebula"
+
+    ### Passages
+    "Picon Thanalla Passage"
+    "Tepovin Passage"
+
+    ### Passes
+    "Epsilon Wimgania Pass"
+
+    ### Quadrants
+    "Cebus Quadrant"
+    "Ozpid Quadrant"
+    "Tepcaris Plingella Quadrant"
+
+    ### Regions
+    "Tatelius Corrus Region"
+
+    ### Sectors
+    "Alak Ariadonia Sector"
+
+    ### Spirals
+    "Galadera Spiral"
+}

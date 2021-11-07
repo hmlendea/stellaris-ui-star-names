@@ -18,9 +18,9 @@ Mod for Stellaris that adds thousands of new names for stars, nebulas, asteroids
 Quantity:
  - Asteroid Postfixes: 33
  - Asteroid Prefixes: 98
- - Black Holes: 32
- - Nebulas: 740
- - Stars: 14101
+ - Black Holes: 34
+ - Nebulas: 761
+ - Stars: 16362
 
 Themes:
  - A Song of Ice and Fire

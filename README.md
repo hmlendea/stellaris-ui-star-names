@@ -2,7 +2,7 @@
 
 # About
 
-Mod for Stellaris that adds thousands of new names for stars, nebulas, asteroids, and black holes.
+Mod for Stellaris that adds [thousands of new names](https://github.com/hmlendea/stellaris-ui-star-names/wiki/Additions) for stars, nebulas, asteroids, and black holes.
 
 # Installation
 
@@ -12,42 +12,6 @@ Mod for Stellaris that adds thousands of new names for stars, nebulas, asteroids
 
  - Download the [latest release](https://github.com/hmlendea/stellaris-ui-star-names/releases)
  - Extract the contents into your game's mod directory
-
-# Additions
-
-Quantity:
- - Asteroid Postfixes: 33
- - Asteroid Prefixes: 98
- - Black Holes: 34
- - Nebulas: 761
- - Stars: 16362
-
-Themes:
- - A Song of Ice and Fire
- - Age of Wonders: Planetfall
- - CoCominium
- - Dark Pirates
- - Distant Worlds
- - Doctor Who
- - Elite Dangerous
- - Eons of War
- - EVE Online
- - Galactic Civilizations
- - Master or Orion
- - No Man's Sky
- - Pax Nova
- - Predestination
- - Remnants of the Precursors
- - Sins of a Solar Empire
- - Star Ruler 2
- - Star Trek
- - Star Wars
- - StarCraft
- - Stargate
- - The Elder Scrolls
- - Void Bastards
- - Real life
- - Procedurally generated
 
 # Universul Unfinitum Collection
 

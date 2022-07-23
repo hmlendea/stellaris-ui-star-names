@@ -184,6 +184,7 @@ star_names = {
     "Nagligtingoss"
     "Naheim-Bebi"
     "Nahucich-Gebud"
+    "Namiraia"
     "Naoguan-Doi"
     "Nectorvi"
     "New Kudalsark Baa"

@@ -1,6 +1,6 @@
-name="Universum Infinitum - Star Names"
+name="Universum Infinitum: Star Names"
 path="mod/ui-star-names"
 tags={
     "Galaxy Generation"
 }
-supported_version="3.8.*"
+supported_version="3.9.*"

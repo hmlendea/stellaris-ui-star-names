@@ -1,0 +1,13 @@
+# Generated using https://fantasynamegenerators.com/planet-names.php
+star_names = {
+    "Bunnion"
+    "Cherilia"
+    "Cigutov"
+    "Eirus"
+    "Elorilia"
+    "Gion"
+    "Gnilucarro"
+    "Magypso"
+    "Solla"
+    "Zahovis"
+}

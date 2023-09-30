@@ -1,0 +1,4 @@
+star_names = {
+    "Niushe"
+    "Sutterer"
+}

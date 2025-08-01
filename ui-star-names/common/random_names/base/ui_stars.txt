@@ -3,11 +3,19 @@ star_names = {
     Acheyash
     Adelha
     Adevar
+    Adiya
     Afachery
+    Aggasatul
+    Agonis
+    Akambe
     Akaveer
+    Akleriya
+    Akos
     Akum
     Alawmee
     Albastris
+    Albetto
+    Alizyr
     Almette
     Altefette
     Alum
@@ -15,50 +23,82 @@ star_names = {
     Ampullenkur
     Amuytatt
     Amwatt
+    Amyeshitt
+    Ancarque
     Anker
+    Ankora
     Antibioticus
     Antrobia
     Aprilini
     Aragaz
     Arctix
+    Arippa
     Arkon
     Armalamme
+    Arushka
+    Ascomo
+    Ashternut
     Askultzy
     Aspyr
     Astartes
+    Astenga
     Astraxia
+    Asttegat
     Atyngere
     Aurolacus
+    Autonik
     Avicum
+    Aynur
+    Ayoura
+    Bakra
+    Balonash
+    Bankar
     Banutzy
     Banuuk
     Barka
     Barro
+    Barshalan
     Bashtan
+    Baska
     Bassgerd
     Beckthelen
     Bentzen
+    Berbecco
     Berys
     Berzis
     Bescanto
     Beshine
     Bhavarillen
+    Bibba
     Binkov
     Binku
     Bishkent
+    Bisku
+    Bitzikly
+    Bizousha
+    Blyster
+    Bobok
     Bobytz
     Bojler
     Bolojan
     Bonas
     Borkhot
     Borqat
+    Boukteria
+    Boussole
+    Bozgash
     Brakka
     Brancussi
+    Brenkon
     Brimark
     Brokon
+    Bromo
     Broscar
+    Brost
+    Bryak
     Buftes
     Bujet
+    Bullog
     Bunasjara
     Bunusymtz
     Burtek
@@ -66,35 +106,64 @@ star_names = {
     Busak
     Bybolas
     Bydon
+    Bykton
     Bylantz
+    Bylrox
     Bynnevam
     Byxos
+    Cabourque
     Cacaluba
     Canapella
+    Canapie
+    Caque
+    Caramizzi
+    Cartie
     Cartofisserie
     Castoire
     Castoria
+    Catique
     Cavertis
+    Caxap
+    Caxarre
     Cayo
     Ceashka
     Censys
     Centyx
     Cerko
     Chad
+    Chainik
     Charbotin
     Chargou
     Charnoria
+    Chedette
     Chinshpe
+    Chont
+    Chorappi
     Chouc
     Choumaroshie
     Choumpalaque
+    Churibury
     Ciocoflender
+    Citrix
     Closhka
+    Condousse
+    Corbeaux
+    Couierre
     Coush-Coush
+    Coushaux
+    Coushien
+    Coushoudy
+    Coushourez
+    Cremie
     Croasierre
     Cudley
     Cukassa
+    Cuptorius
+    Cushian
     Cykator
+    Cymex
+    Cynex
+    Cyrax
     Daea
     Daquin
     Daya
@@ -102,6 +171,8 @@ star_names = {
     Deacollo
     Decoursse
     Dekantor
+    Delax
+    Delost
     Deokamdata
     Depashyt
     Deshyelle
@@ -115,41 +186,69 @@ star_names = {
     Dimwatt
     Diveh
     Dobitocus
+    Dobitoque
     Dobjtok
     Dolmar
     Donuterie
+    Dormyhitor
     Dormytor
+    Doryx
     Doubash
     Doulap
+    Dozath
     Dozbow
     Drageus
     Dragostel
     Drajiimey
+    Draque
     Dreq
     Dronie
+    Dulcis
     Dvoljak
     Dyabe
     Dyandra
     Dyche
     Dygone
+    Dypax
+    Dypeth
+    Dyphang
+    Dysaux
     Dysponibille
     Dystrug
+    Edrick
+    Edrox
+    Eglybis
+    Egribba
     Egypulame
+    Elgovie
     Ember
+    Emix
     Emotzia
+    Endyx
+    Engobia
     Erkator
+    Ermyl
     Estapar
     Etacha
     Evigo
     Faktoura
+    Fakutoreou
     Fasole
+    Fayantz
+    Femurix
     Fenomen
+    Fessenegger
     Fildesh
     Flakarah
+    Fleyka
     Flusseland
+    Fluturyn
+    Fofolonka
+    Fokka
     Fonix
     Forkiz
     Fortedes
+    Foundice
     Frantsa
     Frayer
     Frenegade
@@ -157,40 +256,81 @@ star_names = {
     Fujitsi
     Furkulitz
     Fygor
+    Fynex
+    Fyrex
+    Fyrne
     Gadamus
     Gaelenna
     Gagautz
+    Gajjah
     Galetron
+    Galintrop
     Gangrah
     Ganupre
     Gargovia
+    Garnytur
     Gaskha
     Gazbalesh
     Gazvore
+    Gazz
     Geamme
+    Gelehard
+    Ghetzi
     Ghomul
     Gimbatul
     Globyn
     Goglar
     Gorenje
+    Gorytep
     Goshaw
     Goshgard
+    Grack
+    Graffar
     Granitea
     Gratoff
+    Gredina
+    Gressie
     Grija
     Grolax
+    Grontyr
+    Growlee
     Gulyx
+    Gutyerrah
     Guymetar
+    Gwerysh
+    Gwydek
+    Gyerme
+    Gyllax
+    Gyozdan
     Gyrland
     Hajnel
     Hajnorok
+    Halvitz
+    Hamish
+    Hamyhl
+    Harath
+    Harib
+    Harrix
+    Harton
+    Hashtan
+    Haveyon
+    Hazash
+    Hegen
     Hegnath
     Hilter
+    Hirtor
     Horys
     Hoshar
     Hothar
+    Hrahn
+    Hulth
+    Hulub
+    Hymac
     Hymax
+    Hymbos
     Hymnar
+    Iancou
+    Ianque
     Ideya
     Impoza
     Inaltsymme
@@ -198,60 +338,118 @@ star_names = {
     Istolny
     Ixor
     Jabaral
+    Jaina
+    Jalisk
     Jameen
     Jamille
+    Janix
     Jarosh
+    Jaxar
+    Jaxx
     Jder
+    Jermene
+    Jetix
     Jimbolia
     Jocoubanne
     Jokoban
     Jolsey
+    Jonnox
+    Jonstar
     Jothmar
     Jozalle
     Jozan
+    Juvix
+    Jybba
+    Jygler
+    Jyllkala
+    Jyllok
+    Jyllow
+    Jysar
+    Jytome
+    Jywall
+    Jyxlar
     Kaana
+    Kabatka
+    Kaborka
+    Kabros
     Kaburin
     Kakatos
+    Kalam
+    Kalanta
     Kalaroz
+    Kalgo
+    Kalgon
     Kalibra
+    Kaliya
+    Kall
+    Kalnik
     Kalorypher
+    Kaloss
+    Kaltor
+    Kanarka
     Kantaresk
     Kaparkka
+    Kapatzan
+    Kappa
+    Kapritz
+    Kaputz
+    Karamin
     Karevynn
+    Karkay
     Karon
+    Karr
     Kartoff
+    Karton
     Kartziz
+    Karyx
+    Kashty
     Kasin
     Kasnichye
     Kastor
     Kastrique
     Katarg
+    Katka
+    Katrabba
     Katzel
     Kavodh
     Kavor
+    Kawky
     Kazodul
     Kazutt
     Kazybulan
+    Kechke
     Kefachi
     Kefalexis
     Kendorx
+    Kenobis
+    Kentoura
     Keremoniya
+    Kerkel
     Kerkenysh
     Keron
     Kerov
     Kest
     Kestyasta
     Ketam
+    Ketsche
     Kezax
     Kezmesh
     Keznag
     Khajoul
     Kharin
+    Khazam
     Khazeem
     Khelbresh
+    Khelobys
     Khinjez
     Khitanza
     Khovel
+    Killot
+    Kilotz
+    Kimo
+    Kimpere
+    Kindor
+    Kinox
     Kinta
     Kipsies
     Kitmark
@@ -259,16 +457,34 @@ star_names = {
     Kitzubin
     Kitzyboush
     Klabuchel
+    Klama
+    Klemyx
     Kleshte
+    Kochel
+    Kochoaba
     Kokalar
+    Kokhet
+    Kokosch
+    Kolorix
     Kombarta
     Komyn
     Komyza
     Kontzinut
     Konura
+    Koothra
+    Kopilandru
     Kopylaresk
+    Korbyn
     Kordona
+    Korkupa
+    Korlee
+    Kornee
     Kornoy
+    Kosher
+    Kostanton
+    Kotaja
+    Kottagu
+    Koumpar
     Kouschalau
     Koushalaow
     Koutie
@@ -277,26 +493,50 @@ star_names = {
     Kraftshtoff
     Kraznej
     Kredeya
+    Kredintz
+    Krefa
+    Kremesh
+    Krepka
     Kreshte
+    Kretzis
+    Kringo
     Kriza
     Krosymene
+    Krypa
     Kubertas
     Kucherita
     Kudzow
+    Kukotz
     Kukurigu
+    Kumpreturi
     Kunoshty
+    Kuptor
     Kurka
     Kurkubellen
     Kurkubin
+    Kutye
+    Kutzaschkusch
     Kutzitt
+    Kuyer
+    Kyblos
+    Kybor
     Kycor
+    Kygo
+    Kyka
     Kylrox
     Kymbawa
+    Kyno
+    Kyntrax
     Kyrosa
+    Kytra
+    Kyzor
+    Labarr
     Lafynall
+    Lahwe
     Lakazino
     Lamama
     Lamarre
+    Lamedikk
     Lampadar
     Lanceputt
     Latsimme
@@ -304,143 +544,271 @@ star_names = {
     Layvazutt
     Lefakyo
     Lemyx
+    Leygo
     Lilandru
     Lilania
+    Lilianella
+    Lilidry
+    Lillandra
+    Lilureza
+    Lilux
     Lingouritz
     Linyshtitt
+    Littierre
     Lityerre
+    Lokh
+    Lomax
+    Loth
     Loukrez
+    Loustre
     Lungymme
+    Lupilu
     Lupol
     Lyboma
     Lycoria
+    Lygro
     Lygusta
     Lykantis
+    Lykone
+    Lymax
     Lynis
     Lypsha
+    Lyrix
     Lyshan
+    Lystra
     Machisura
     Machusa
     Madalee
     Mado
+    Mafazyr
     Mahsutz
     Maibynne
+    Majertzi
     Makaq
+    Malvyx
+    Mamaluy
     Mangour
+    Manzak
+    Maparzan
     Markaje
+    Masoutza
+    Matrick
     Matroux
     Matza
     Maybunni
     Maygrelle
     Maymultte
     Mayok
+    Mazakup
+    Meam
+    Mechka
     Meduveniv
+    Meeseex
+    Mekharyx
     Melenda
+    Melleck
+    Mellox
+    Melphor
     Melucia
+    Merym
     Meshter
     Mesteka
+    Mestekat
+    Metalephs
     Metaphorix
+    Mexos
+    Meytrix
     Mezgesh
+    Mezix
+    Mezosh
+    Mezysh
+    Mhanuyl
+    Mhebol
+    Mihay
     Mikoris
     Mikrounde
+    Mikutz
     Miky
+    Mikydi
+    Mikydona
+    Mikydonia
+    Mikydonis
+    Mikydonna
+    Millick
     Mindaria
+    Minish
+    Minnex
     Minoye
+    Mishto
     Mistokelna
+    Mistretto
     Mitag
+    Mitronella
     Mitzourasch
+    Mizura
     Mokachune
     Molex
     Morkov
     Mornau
+    Morvyn
     Morzog
+    Mozzi
     Multicula
     Multzan
     Munchim
     Mura
+    Murianella
+    Murzusch
+    Muska
+    Mustrakha
     Muture
     Muzak
     Mychkur
     Mygosh
+    Mykto
     Mylaga
     Myrcel
     Myrlexia
     Myrlon
+    Myron
     Myrtha
     Myskalera
     Mysona
     Mystoppe
     Mystretsis
+    Mytrou
     Naftariqui
     Najpututt
     Nalwyx
     Narivia
     Naskutt
+    Nassole
     Nayba
     Nayfakutt
+    Nebeste
     Nemernicus
     Nepikant
     Nepotzel
     Neprox
+    Neseb
+    Nestematte
+    Nevestikon
+    Nichka
     Nichodatt
+    Nikesh
+    Nissip
     Nisyp
+    Nixulidan
     Njetska
+    Nonix
+    Nono
+    Norell
+    Norlost
+    Noucie
     Nouclandie
+    Nouk
+    Nouquia
+    Noux
+    Nucci
+    Nuch
+    Nucia
     Nucilandia
+    Nuck
+    Nuka
+    Nukk
+    Numabag
     Numanynne
     Numashteptam
     Numayfache
     Nuntseleg
     Nupott
+    Nuque
     Nush
     Nushtyu
+    Nutsch
     Nutschland
+    Nux
+    Nymeth
+    Nyrax
     Octoriga
     Oferitza
+    Okosh
+    Oktave
     Olgunda
     Onceputt
+    Ondrosh
+    Opherta
     Opitsa
+    Orell
     Oreo
     Oreus
     Oreux
     Oriche
     Ornash
     Ornello
+    Orophtel
     Orybil
     Oski
     Ouscha
     Oyelle
+    Oyora
     Ozuman
     Pakanelle
     Panku
     Papagalos
+    Papukki
+    Papusha
     Paradoxe
+    Parkhet
+    Pasaroy
+    Pastille
     Pastrav
     Pemynne
+    Pepeix
     Pernutz
     Peshonk
     Pharmacoush
+    Pharphoura
+    Phloutour
     Phorlax
+    Phourtoun
+    Phyrephtysh
+    Phyrox
     Picantis
+    Pichorongue
     Pictris
     Piftel
+    Pisikur
     Pisunia
     Pitzyponkus
     Plache
     Plateshty
+    Plictis
+    Plikour
+    Plynta
+    Plythe
     Poftym
     Poiana
+    Pojanna
+    Pojav
+    Pojo
+    Pombar
     Porkaria
+    Pornakhe
     Porqar
     Portocque
     Portoff
     Poshtys
     Potriveshte
     Potryveshte
+    Prefett
     Preizdasan
     Premeryn
+    Presh
     Primeka
     Pross
+    Prossope
+    Prostok
     Provok
     Provyn
     Proxor
@@ -448,21 +816,43 @@ star_names = {
     Pufuletten
     Pushka
     Puyemonta
+    Pychor
+    Pyllax
+    Pyrox
+    Pyrrmid
     Pyshat
+    Pytzurk
     Pyzdjets
+    Qabulka
     Qalqaw
     Qalqe
+    Qalubba
+    Qanbu
     Quberdyte
+    Quellex
     Queve
+    Quinaloa
     Quinnka
     Quperka
+    Qvette
+    Qybbe
+    Qylis
+    Qymar
+    Qyshar
+    Rachitt
     Rakhytur
+    Rakitura
+    Rakka
+    Ranik
     Rapossel
     Rasfatzel
     Rasuchym
     Ratsa
     Rattau
+    Ratzelle
+    Ratzuschk
     Rautz
+    Reben
     Reena
     Reklame
     Reksio
@@ -470,162 +860,267 @@ star_names = {
     Retsinutt
     Rhojna
     Rhomzil
+    Ridykolet
     Risypah
+    Robinette
     Rogol
     Rogoria
     Rolex
     Rollo
+    Romysha
     Rothau
     Rouje
     Roxoria
     Rusnak
+    Ryax
+    Rymanil
     Safye
     Sagrax
+    Sahalam
     Sahidan
+    Saidel
     Sakardan
+    Salka
+    Salkoria
+    Salmori
+    Sankarrah
+    Sanvish
+    Saraki
     Sarmala
     Sashtyu
     Satzyaratt
     Schatra
     Schervetzel
+    Schitte
     Schopfer
     Schteker
+    Schunka
+    Schurub
+    Scouze
+    Secco
+    Seglix
+    Seglys
+    Seji
     Sekakka
     Sekinuye
+    Selka
     Senkheye
+    Senko
     Servichou
     Seskhimba
     Shaden
     Shantz
     Shatrix
+    Shazam
+    Sheffick
+    Sheffow
+    Shifon
     Shofat
     Shofranne
+    Shomeer
     Shornax
     Shroomen
     Shtarfa
     Shtiry
     Shtye
     Shtyu
+    Shunka
     Shyastta
+    Sizlar
+    Skatiko
+    Skatin
+    Skatolo
     Skaun
+    Skelantra
+    Skelobis
     Skorex
     Skrofus
     Smantanar
+    Soba
     Somnik
+    Sondyx
+    Sonnim
+    Soyav
+    Spalat
+    Spykh
     Spytalle
     Stellax
     Strepimuno
     Streplitz
+    Stuvihn
+    Suhnet
     Sunnix
     Sunyet
+    Supakrema
     Supeco
     Sustzyne
+    Sutyen
+    Sygo
+    Symbo
     Syngran
+    Synko
+    Synnex
     Taft
     Talmyr
     Tarom
     Tatov
+    Tavan
     Tayboltou
+    Tehnobis
     Tekesh
     Tekton
     Teleweu
+    Telewezor
     Temeritt
     Terkala
+    Thelambra
+    Thellore
     Thurbadia
     Tigryn
     Tinktoura
     Tokantis
     Tokenis
     Tokesh
+    Tokko
     Topogan
     Tormern
+    Tornora
     Torvox
     Tosha
     Totaychi
     Totympu
+    Toufow
     Tourneo
     Tovath
     Trabant
     Trajaska
+    Trakthon
     Traque
     Trennen
     Treponti
     Treysprezeche
     Trezeshte
+    Trezierres
     Tribeth
     Tricou
+    Trilleth
     Trogolino
     Troheth
     Trololo
+    Tronson
     Troski
+    Trounent
     Troxara
     Troznesk
     Trugge
     Trynka
     Trystor
+    Tseawa
+    Tsipi
     Tubesh
     Tugulur
     Tupertyr
     Turudoy
     Tyaoude
+    Tygwan
     Tyma
     Tymboukta
     Tynga
     Tyquinn
+    Tyrox
     Tyzone
+    Tzantzar
     Tzitzi
+    Tzitzikly
+    Tzitzikoa
     Uchotku
     Ugalba
     Umblank
+    Umerash
     Unokhy
+    Urgol
     Urmaresht
+    Uryat
     Uschitz
     Ushor
+    Uvezish
     Uzna
     Vahllyz
     Vakha
+    Valix
+    Valnutta
     Vamgasitt
     Vanatte
+    Vayoaga
     Vayshamar
+    Vazadan
+    Vazash
     Vejnesk
+    Vekma
+    Velynosh
+    Venk
     Venytt
+    Vergerix
     Vetzyntra
     Veva
+    Vevelle
     Veveritsa
     Veveritz
     Viclenis
     Vicria
     Vicromartia
     Viglomaris
+    Vijab
     Viktolon
     Vilazura
     Vileux
     Vilmarid
     Vindalos
     Vishtal
+    Vitryna
     Volare
+    Voole
     Vorbesk
     Vorlash
     Voryandil
+    Voss
     Voulasse
     Vrak
     Vreokriza
+    Vrog
+    Vuchere
     Vynakollo
     Vysow
+    Wagatanga
     Wagrako
     Watrix
     Wazath
+    Wegreth
+    Wezine
     Wognath
+    Wogrex
     Wolt
+    Wyax
+    Wygo
+    Wylliq
+    Xalym
+    Xaphas
     Xarnax
     Xibulka
     Xintra
+    Yaga
+    Yamkora
+    Yanku
     Yarom
     Yauitatz
     Ychisha
+    Yenethale
     Yeram
     Yeste
+    Yetva
     Yglevor
+    Yktor
+    Ymba
     Ymediatt
     Yndeciss
     Yndoitta
@@ -635,28 +1130,63 @@ star_names = {
     Ynkurand
     Ynventatt
     Yoai
+    Yobath
+    Yollex
     Yonella
+    Yonopot
+    Yorex
+    Yorm
+    Yorrock
+    Youneth
+    Yourtte
     Yovedeam
     Yskanta
+    Yslaw
     Yspitte
+    Ytsar
     Yubesht
     Yuresh
     Yurta
+    Yzvoly
+    Zabrelle
     Zaganian
+    Zahyrj
     Zarotul
+    Zawor
+    Zaxos
     Zaywin
+    Zbarchitt
+    Zeko
+    Zemax
+    Zerbesh
+    Zergax
     Zeymar
+    Zgarditz
+    Zhanle
+    Zilacco
     Zindo
+    Zinnick
+    Zmyntis
     Zoglesh
     Zogwet
+    Zolyman
     Zoomserie
     Zorex
+    Zoryn
+    Zumax
     Zumzies
     Zuzu
     Zuzuneatza
+    Zvyshtan
+    Zyber
+    Zykrone
     Zyma
     Zynax
+    Zynka
+    Zynnax
+    Zyronix
     Zytav
+    Zytox
 
     Sombrero
     Luchador

@@ -1,0 +1,23 @@
+nebula_names = {
+    # Nebulas
+    "Alaxxes Nebula"
+    "Eye of Acid"
+    "Black Nebula"
+
+    # Sectors
+    "Khymaran Drift"
+    "Elara's Veil"
+    "Endymion Cluster"
+
+    # Sub-sectos
+    "Drusus Marches"
+    "Golgenna Reach"
+    "Hazeroth Abyss"
+    "Josian Reach"
+    "Stygies Cluster"
+    "Annwyn Reaches"
+    "Quinrox Sound"
+
+    # Warp Storms
+    "Cicatrix Maledictum"
+}

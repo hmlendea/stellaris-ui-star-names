@@ -3,4 +3,4 @@ path="mod/ui-star-names"
 tags={
     "Galaxy Generation"
 }
-supported_version="4.0.*"
+supported_version="4.1.*"

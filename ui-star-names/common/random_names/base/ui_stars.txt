@@ -2,6 +2,7 @@ star_names = {
     # Invented
     Abrianko
     Acestora
+    Achai
     Acheyash
     Acrilotte
     Acyre
@@ -126,11 +127,14 @@ star_names = {
     Aynur
     Ayoura
     Ayuris
+    Azkatrup
+    Azklumba
     Azogka
     Bador
     Baffalovy
     Bakra
     Balayath
+    Balbis
     Baldain
     Baldaquin
     Balkon
@@ -184,6 +188,7 @@ star_names = {
     Bifitar
     Binkov
     Binku
+    Birchyn
     Birdae
     Birkele
     Bishkent
@@ -249,6 +254,7 @@ star_names = {
     Bramiket
     Brancussi
     Brayan
+    Brenica
     Brenkon
     Brichague
     Brikhon
@@ -329,6 +335,7 @@ star_names = {
     Caque
     Caracal
     Caramizzi
+    Cardanoc
     Carmax
     Carnette
     Caroun
@@ -373,6 +380,7 @@ star_names = {
     Chipika
     Choban
     Chokan
+    Chokannel
     Chokero
     Chokoff
     Chondra
@@ -462,6 +470,7 @@ star_names = {
     Daysonne
     Deacollo
     Decoursse
+    Degorath
     Dekantor
     Dekatuhn
     Dekazh
@@ -504,7 +513,9 @@ star_names = {
     Dobonnen
     Dobrytock
     Doggolas
+    Dogorith
     Dolamin
+    Dolemo
     Dolette
     Dolmar
     Dolmus
@@ -519,6 +530,7 @@ star_names = {
     Dormytor
     Doryx
     Doubash
+    Doubhe
     Doulap
     Doupa
     Dovlya
@@ -531,6 +543,7 @@ star_names = {
     Dragostel
     Drajiimey
     Drakada
+    Drakka
     Drakon
     Draque
     Draxos
@@ -554,6 +567,7 @@ star_names = {
     Dybach
     Dyche
     Dygone
+    Dykhor
     Dymbah
     Dynika
     Dypax
@@ -579,12 +593,14 @@ star_names = {
     Ekalos
     Ekzo
     Elania
+    Elaria
     Elenis
     Elevenus
     Elgovie
     Elmazora
     Embaduga
     Ember
+    Embrys
     Emix
     Emotzia
     Enchis
@@ -818,6 +834,8 @@ star_names = {
     Holeyx
     Holyo
     Homorod
+    Honya Monya
+    Honyan
     Horage
     Horatius
     Hori
@@ -927,6 +945,7 @@ star_names = {
     Kabral
     Kabros
     Kaburin
+    Kachalma
     Kachotka
     Kadelnis
     Kadera
@@ -952,6 +971,7 @@ star_names = {
     Kaliya
     Kall
     Kallan
+    Kalmaran
     Kalmathos
     Kalnik
     Kalorypher
@@ -969,6 +989,7 @@ star_names = {
     Kanjoka
     Kankellarion
     Kanozyr
+    Kantaman
     Kantar
     Kantaresk
     Kanystra
@@ -1021,12 +1042,14 @@ star_names = {
     Katawaka
     Katka
     Katrabba
+    Katroup
     Katylna
     Katzel
     Kavodh
     Kavor
     Kawallah
     Kawky
+    Kazaban
     Kazator
     Kaznik
     Kazodul
@@ -1127,6 +1150,7 @@ star_names = {
     Kochel
     Kochoaba
     Koditz
+    Kodoban
     Kokalar
     Kokhet
     Kokosch
@@ -1137,6 +1161,7 @@ star_names = {
     Kolorix
     Kolos
     Koltz
+    Kolya
     Kombarta
     Komyn
     Komyza
@@ -1261,6 +1286,7 @@ star_names = {
     Kylrox
     Kymantha
     Kymbawa
+    Kymber
     Kymbo
     Kyndor
     Kynekheli
@@ -1337,6 +1363,7 @@ star_names = {
     Lomax
     Lombutsch
     Longpet
+    Loompus
     Lora
     Lorsha
     Loth
@@ -1368,6 +1395,7 @@ star_names = {
     Lykore
     Lykostris
     Lymax
+    Lymbe
     Lyngus
     Lynis
     Lypsha
@@ -1394,6 +1422,7 @@ star_names = {
     Makea
     Makellaria
     Malaxe
+    Malkova
     Malkuzian
     Malpherian
     Malutha
@@ -1433,6 +1462,7 @@ star_names = {
     Mazakup
     Meam
     Mechka
+    Mecuna
     Medias
     Meduveniv
     Meeseex
@@ -1441,7 +1471,10 @@ star_names = {
     Meharius
     Mekharios
     Mekharyx
+    Mekludis
+    Mekonda
     Melcudia
+    Melcudius
     Melcus
     Melenda
     Melgoro
@@ -1460,6 +1493,7 @@ star_names = {
     Mentys
     Mercador
     Mergalop
+    Merkhon
     Merym
     Meschogg
     Meshter
@@ -1469,6 +1503,7 @@ star_names = {
     Metalephs
     Metaphorix
     Metokles
+    Metskov
     Metzko
     Mevryon
     Mexos
@@ -1504,6 +1539,7 @@ star_names = {
     Milendia
     Millick
     Minaz
+    Minchu
     Mindaria
     Mineaux
     Minish
@@ -1517,9 +1553,11 @@ star_names = {
     Mistretto
     Mitag
     Mitashonne
+    Mitrok
     Mitronella
     Mitroza
     Mitzourasch
+    Mitzoy
     Mizura
     Mjerkuri
     Mlemov
@@ -1533,6 +1571,7 @@ star_names = {
     Morvyn
     Morzog
     Moshneag
+    Motamo
     Motanski
     Motoque
     Motronea
@@ -1704,6 +1743,7 @@ star_names = {
     Nyrax
     Obyosh
     Octoriga
+    Odyde
     Oferitza
     Okol
     Okosh
@@ -1719,6 +1759,8 @@ star_names = {
     Onceputt
     Ondrosh
     Oniga
+    Oompus
+    Ophaelia
     Opherta
     Opitsa
     Orell
@@ -1778,12 +1820,14 @@ star_names = {
     Patrok
     Patroska
     Peceiro
+    Pedella
     Peepehr
     Pelasse
     Pemynne
     Pentor
     Pepeix
     Pepenello
+    Perindas
     Perna
     Pernutz
     Perpendia
@@ -2004,6 +2048,7 @@ star_names = {
     Reben
     Reena
     Regetrist
+    Regus
     Reklame
     Reksio
     Resymtzit
@@ -2148,6 +2193,7 @@ star_names = {
     Shaden
     Shalaw
     Shalyn
+    Shantenam
     Shantz
     Shatrix
     Shawalor
@@ -2214,6 +2260,7 @@ star_names = {
     Solaz
     Solija
     Somnik
+    Somyr
     Sondyx
     Sonnim
     Sopengo
@@ -2247,6 +2294,7 @@ star_names = {
     Stellax
     Stenopsis
     Stephouron
+    Strapona
     Strashnov
     Strayan
     Strenialoa
@@ -2291,6 +2339,7 @@ star_names = {
     Talekh
     Tallor
     Talmyr
+    Tanim
     Tankhal
     Tarkha
     Tarkol
@@ -2341,6 +2390,7 @@ star_names = {
     Tinabuchi
     Tinashura
     Tinktoura
+    Titikoa
     Tixtis
     Toanta
     Tofaire
@@ -2357,6 +2407,7 @@ star_names = {
     Topogan
     Toppo
     Torka
+    Torkalur
     Torkesha
     Tormern
     Tornora
@@ -2412,6 +2463,7 @@ star_names = {
     Troznesk
     Trugge
     Trugulur
+    Trupin
     Trylexos
     Trynka
     Tryntha
@@ -2611,6 +2663,7 @@ star_names = {
     Yallohr
     Yalosh
     Yamkora
+    Yanatar
     Yanku
     Yanova
     Yaph
@@ -2659,6 +2712,7 @@ star_names = {
     Yoai
     Yobath
     Yojji
+    Yoldan
     Yolkar
     Yollex
     Yolneh
@@ -2691,6 +2745,7 @@ star_names = {
     Zabrelle
     Zaganian
     Zahyrj
+    Zalaw
     Zamosa
     Zanath
     Zargis
@@ -2701,6 +2756,7 @@ star_names = {
     Zaxos
     Zaywin
     Zbarchitt
+    Zbenga
     Zborkin
     Zdrentz
     Zedkar

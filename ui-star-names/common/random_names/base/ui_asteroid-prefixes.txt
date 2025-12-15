@@ -6,8 +6,10 @@ asteroid_prefix = {
     AOE-
     AOM-
     APK-
+    APPL-
     ASI-
     AST-
+    BASH-
     BBC-
     BETA-
     BGL-
@@ -20,6 +22,7 @@ asteroid_prefix = {
     CK-
     CK2-
     CK3-
+    CLUJ-
     CNY-
     COL-
     COS-
@@ -32,6 +35,7 @@ asteroid_prefix = {
     DUNE-
     ECHO-
     ENG-
+    ESA-
     ESO-
     EU-
     EU4-
@@ -39,7 +43,9 @@ asteroid_prefix = {
     EUR-
     EURO-
     EXE-
+    EXO-
     FBU-
+    FIND-
     FNV-
     FO-
     FO3-
@@ -65,16 +71,20 @@ asteroid_prefix = {
     IOI-
     IR-
     IRE-
+    IROH-
+    ISO-
     ITA-
     ITEM-
     JAP-
     JAVA-
     JEFF-
+    JWST-
     KEK-
     LNX-
     LOL-
     LOTR-
     MAC-
+    MADA-
     MCN-
     MD-
     MDL-
@@ -82,16 +92,20 @@ asteroid_prefix = {
     MLEM-
     MLH-
     MNO-
+    NASA-
     NET-
+    NEW-
     NFS-
     NI-
     NOPE-
     NUC-
     OBJ-
+    OLD-
     OSX-
     OZN-
     POI-
     POR-
+    RAM-
     RIP-
     RO-
     ROL-
@@ -99,13 +113,16 @@ asteroid_prefix = {
     ROMA-
     ROME-
     RON-
+    ROSA-
     ROU-
+    ROXI-
     RTX-
     RUS-
     SAD-
     SC2-
     SC3-
     SEA-
+    SETI-
     SG1-
     SOL-
     SOS-

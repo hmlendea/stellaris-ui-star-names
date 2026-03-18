@@ -1,0 +1,29 @@
+star_names = {
+    # Words
+    Cossack
+    Dracones
+    Lotus
+    Luchador
+    Sombrero
+
+    # Historical/Important people
+    Burebista
+    Decebalus
+    Eminescu
+    Tesla
+
+    # Deities
+    Hades
+    Zamolxis
+
+    # Software
+    Linux
+    Ubuntu
+    Unix
+
+    # Other names
+    Harambe
+    Horatius
+    Hori
+    Mlendea
+}

@@ -17,13 +17,10 @@ jobs:
       run: wget "https://github.com/hmlendea/stellaris-ui-star-names/releases/download/${{github.ref_name}}/ui-star-names_${GITHUB_REF:11}.zip" -O "release.zip"
 
     - name: Upload
-      uses: hmlendea/nexusmods-update@latest
+      uses: Nexus-Mods/upload-action@v1.0.0-beta.3
       with:
-        account_email_address: ${{secrets.NEXUS_UPLOADER_USERNAME}}
-        account_password: ${{secrets.NEXUS_UPLOADER_PASSWORD}}
-        nexus_game_id: "stellaris"
-        nexus_mod_id: "74"
-        mod_file_name: "ui-star-names"
-        mod_version: ${{github.ref_name}}
-        file_description: "Changelog: https://github.com/hmlendea/stellaris-ui-star-names/releases/${{github.ref_name}}"
-        file_path: "release.zip"
+        api_key: ${{ secrets.NEXUSMODS_API_KEY }}
+        file_group_id: 920143
+        filename: release.zip
+        version: ${{github.ref_name}}
+        file_category: main

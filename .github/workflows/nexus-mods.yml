@@ -14,13 +14,13 @@ jobs:
     - uses: actions/checkout@v1
 
     - name: Download the release asset
-      run: wget "https://github.com/hmlendea/stellaris-ui-star-names/releases/download/${{github.ref_name}}/ui-star-names_${GITHUB_REF:11}.zip" -O "release.zip"
+      run: wget "https://github.com/hmlendea/stellaris-ui-star-names/releases/download/${{github.ref_name}}/ui-star-names_${GITHUB_REF:11}.zip" -O "ui-star-names.zip"
 
     - name: Upload
       uses: Nexus-Mods/upload-action@v1.0.0-beta.3
       with:
         api_key: ${{ secrets.NEXUSMODS_API_KEY }}
         file_group_id: 920143
-        filename: release.zip
+        filename: ui-star-names.zip
         version: ${{github.ref_name}}
         file_category: main

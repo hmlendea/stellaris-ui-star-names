@@ -31,6 +31,7 @@ jobs:
       with:
         api_key: ${{ secrets.NEXUSMODS_API_KEY }}
         file_group_id: 920143
-        filename: ui-star-names.zip
+        filename: release.zip
+        display_name: ui-star-names.zip
         version: ${{github.ref_name}}
         file_category: main

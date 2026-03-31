@@ -1,0 +1,26 @@
+star_names = {
+    # Video games
+    Deponia
+    Guacamelee
+    Neonicum
+    Samorost
+    Walden
+    Zanzarah
+
+    # Video games - Characters
+    Glados
+    Kitana
+
+    # Video games - eRepublik - Players
+    Almeu
+    Karr
+    Mibu
+    Naquash
+    Soaresol
+
+    # TV Series
+    Firefly
+
+    # Movies - Stuff in them
+    Garmanbozia
+}

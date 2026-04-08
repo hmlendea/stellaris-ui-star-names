@@ -1083,6 +1083,7 @@ star_names = {
     Estapar
     Estergis
     Estero
+    Estomi
     Estus
     Etacha
     Etceteria
@@ -4592,5 +4593,4 @@ star_names = {
     Zyronix
     Zytav
     Zytox
-    Еstomi
 }

@@ -33,5 +33,6 @@ jobs:
         file_group_id: 920143
         filename: release.zip
         display_name: ui-star-names.zip
-        version: ${{github.ref_name}}
+        version: ${{env.VERSION}}
+        description: "Changelog: https://github.com/hmlendea/stellaris-ui-star-names/releases/${{env.VERSION}}"
         file_category: main

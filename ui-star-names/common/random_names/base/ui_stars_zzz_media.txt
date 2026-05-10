@@ -1,26 +1,41 @@
 star_names = {
     # Video games
-    Deponia
-    Guacamelee
-    Neonicum
-    Samorost
-    Walden
-    Zanzarah
+    "Deponia"
+    "Guacamelee"
+    "Neonicum"
+    "Samorost"
+    "Walden"
+    "Zanzarah"
 
     # Video games - Characters
-    Glados
-    Kitana
+    "Glados"
+    "Kitana"
 
     # Video games - eRepublik - Players
-    Almeu
-    Karr
-    Mibu
-    Naquash
-    Soaresol
+    "Almeu"
+    "Karr"
+    "Mibu"
+    "Naquash"
+    "Soaresol"
+	
+    # Video games - Night in the Woods - Constellations
+    "A Fish"
+    "Adina Astra"
+    "Big Snake"
+    "Castys"
+    "Harmonium"
+    "Ibon"
+    "Invenerus"
+    "Quinona"
+    "Rubello"
+    "The Broken Snake"
+    "The Firemaker"
+    "The Mice Writers"
+    "Tollmetron"
 
     # TV Series
-    Firefly
+    "Firefly"
 
     # Movies - Stuff in them
-    Garmanbozia
+    "Garmanbozia"
 }

@@ -18,8 +18,12 @@ star_names = {
 
     # Software
     Linux
-    Ubuntu
     Unix
+
+    # Linux distros
+    Manjaro
+    Ubuntu
+    Zorin
 
     # Other names
     Harambe

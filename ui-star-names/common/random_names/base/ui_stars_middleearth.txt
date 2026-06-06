@@ -1,0 +1,35 @@
+star_names = {
+    # Characters
+    Aragorn
+    Arathorn
+    Azog
+    Baggins
+    Beorn
+    Bilbo
+    Boromir
+    Celeborn
+    Celebrimbor
+    Dain
+    Denethor
+    Durin
+    Elendil
+    Eowin
+    Faramir
+    Frodo
+    Galadriel
+    Gamgee
+    Gandalf
+    Gimli
+    Gollum
+    Grima
+    Isildur
+    Legolas
+    Pippin
+    Saruman
+    Sauron
+    Smeagol
+    Theoden
+    Theodred
+    Thorin
+    Thranduil
+}

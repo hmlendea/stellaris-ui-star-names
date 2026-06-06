@@ -1,6 +1,7 @@
 black_hole_names = {
     "Babylon's Fall"
     "Belzebuth's Abyss"
+    "Big Empty"
     "Byzantium's Fall"
     "Cat's Eye"
     "Cthulhu's Void"
@@ -19,7 +20,9 @@ black_hole_names = {
     "Lucifer's Vortex"
     "Medusa's Eye"
     "Milkdrinker's End"
+    "Nada"
     "Teleorman Black Hole"
+    "The Great Emptage"
     "Vampire's Fang"
     "Zamolxis Black Hole"
 
@@ -34,7 +37,10 @@ black_hole_names = {
     ### Doctor Who ###
     "Black Hole of Tartarus"
     "Magellan Black Hole"
-    
+
+    ### Interstellar ###
+    "Gargantua"
+
     ### The Elder Scrolls ###
     "Hew's Bane"
     "Pelagius' Madness"

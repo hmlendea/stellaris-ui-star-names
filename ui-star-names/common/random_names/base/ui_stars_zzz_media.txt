@@ -1,4 +1,7 @@
 star_names = {
+    # Other Media Characters
+    Doraleous
+
     # Video games
     "Deponia"
     "Guacamelee"

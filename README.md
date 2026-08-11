@@ -6,7 +6,18 @@
 
 Mod for Stellaris that adds [thousands of new names](https://github.com/hmlendea/stellaris-ui-star-names/wiki/Additions) for stars, nebulas, asteroids, and black holes, drawn from science fiction, fantasy, games, and real astronomical catalogues.
 
-## ✨ Features
+## 📑 Table of Contents
+
+- [Capabilities](#-capabilities)
+- [Usage](#-usage)
+- [Installation](#-installation)
+- [Development](#-development)
+- [Contributing](#-contributing)
+- [Related Projects](#-related-projects)
+- [Supporting the Project](#-supporting-the-project)
+- [License](#-license)
+
+## ✨ Capabilities
 
 - Star names from dozens of universes, including Star Wars, Star Trek, Dune, Elder Scrolls, Doctor Who, Stargate, StarCraft, and many more
 - Nebula names from Elite Dangerous, No Man's Sky, Warhammer 40K, Star Wars, and other sources
@@ -35,15 +46,28 @@ Enable the mod in the Stellaris launcher and start a new game. The additional na
 
 - [Stellaris](https://store.steampowered.com/app/281990/Stellaris/)
 
+### Setup
+
+Copy or symlink `ui-star-names/` and `ui-star-names.mod` inside your Stellaris' `mod/` directory.
+
 ### Build
 
 No build step is required. Edit the `.txt` name list files under `ui-star-names/common/random_names/base/` directly.
 
+### Run
+
+Enable the mod in the Stellaris launcher and start a new game.
+
 ## 🤝 Contributing
 
-Contributions are welcome. Please:
-- Keep the changes cross-platform
-- Keep the pull requests focused and consistent with the existing code style
+You are welcome to submit any suggestion, feedback, or modification to this project.
+
+When doing so, please:
+- Maintain cross-platform compatibility
+- Maintain the pull requests as focused and consistent with the existing code style
+- Maintain your branch up-to-date with `master`
+- Revise the documentation when behaviour changes
+- Properly test all changes
 
 ## 🔗 Related Projects
 
@@ -57,13 +81,15 @@ Contributions are welcome. Please:
 - [Species Names](https://github.com/hmlendea/stellaris-ui-species-names): Adds new species name options
 - [Species Traits](https://github.com/hmlendea/stellaris-ui-species-traits): Adds new species trait names
 
-## 💝 Support
+## 💝 Supporting the Project
 
-Found a bug or have a suggestion? [Open an issue](https://github.com/hmlendea/stellaris-ui-star-names/issues)!
+Discovered a problem or have a suggestion? [Open an issue](https://github.com/hmlendea/stellaris-ui-star-names/issues)!
 
-If you find this project useful, consider [funding it](https://hmlendea.go.ro/funding) or giving a ⭐️ on GitHub!
+If you find this project useful, consider [funding it](https://hmlendea.go.ro/funding) or starring ⭐️ it on GitHub!
 
-## 📄 Licence
+[![Donate](https://raw.githubusercontent.com/hmlendea/readme-assets/master/donate_generic.png)](https://hmlendea.go.ro/funding)
 
-Licensed under the `GNU General Public Licence v3` or later.
-See [LICENSE](./LICENSE) for details.
+## 📄 License
+
+This project is being distributed under the `GNU General Public Licence v3` or later.
+See [LICENSE](./LICENSE) for further information.

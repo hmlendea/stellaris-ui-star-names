@@ -3,6 +3,7 @@ star_names = {
     Abachuka
     Abeche
     Abigugu
+    Abisdi
     Abrianko
     Aburill
     Abynar
@@ -22,6 +23,7 @@ star_names = {
     Acyria
     Adalco
     Adamula
+    Adarcher
     Adelha
     Adevar
     Adiya
@@ -40,6 +42,7 @@ star_names = {
     Aendo
     Afachery
     Afinus
+    Aftiko
     Aggasatul
     Agoluhl
     Agomalo
@@ -63,7 +66,9 @@ star_names = {
     Akadika
     Akambe
     Akamion
+    Akanthor
     Akanui
+    Akarakuta
     Akarenth
     Akasos
     Akatolia
@@ -73,10 +78,12 @@ star_names = {
     Akatsushk
     Akaveer
     Akeena
+    Akhava
     Akhtalin
     Akhuzirsk
     Akita
     Akleriya
+    Aklomba
     Akmarim
     Akmoth
     Akoize
@@ -107,6 +114,7 @@ star_names = {
     Albetto
     Albidan
     Albitte
+    Alcumba
     Alegus
     Alestaria
     Algarath
@@ -130,6 +138,7 @@ star_names = {
     Alsiya
     Altefette
     Altegonia
+    Althalin
     Altoy
     Alucantar
     Alum
@@ -140,8 +149,11 @@ star_names = {
     Alunia
     Alunis
     Alunitz
+    Alupinsk
     Alus
     Aluseth
+    Alvandar
+    Alvandor
     Alyo
     Amadona
     Amanar
@@ -197,6 +209,7 @@ star_names = {
     Andalephs
     Andiamo
     Andok
+    Andralia
     Andruga
     Anezh
     Angis
@@ -205,6 +218,7 @@ star_names = {
     Angrox
     Angustek
     Aniato
+    Anillear
     Anillio
     Anjamanja
     Ankaro
@@ -341,6 +355,7 @@ star_names = {
     Auropa
     Autonik
     Autraea
+    Avalio
     Avasil
     Avastes
     Aveyonne
@@ -379,11 +394,13 @@ star_names = {
     Baffalovy
     Bagadumba
     Bagam
+    Bagatang
     Baguwesi
     Baiea
     Bajatuhl
     Bakalamba
     Bakchoba
+    Bakhonios
     Bakra
     Balankada
     Balayath
@@ -393,10 +410,12 @@ star_names = {
     Baldaquin
     Balealis
     Baleeza
+    Balenkar
     Balinoutsa
     Balkon
     Ballakita
     Ballamouc
+    Balogia
     Balonash
     Balonella
     Balonski
@@ -405,6 +424,7 @@ star_names = {
     Bammel
     Bandaral
     Bandong
+    Bangas
     Banjogohl
     Bankar
     Bantalops
@@ -420,10 +440,12 @@ star_names = {
     Barlinek
     Baron
     Barosan
+    Barosija
     Barro
     Barshalan
     Barza
     Basaradogos
+    Basarilla
     Basculus
     Bashkidiba
     Bashtan
@@ -504,6 +526,7 @@ star_names = {
     Beweyta
     Bewlogg
     Bexos
+    Beylath
     Beyus
     Bezkomba
     Bezkondris
@@ -523,8 +546,10 @@ star_names = {
     Binkov
     Binku
     Binobe
+    Binsch
     Biorsk
     Bipard
+    Biquesh
     Birchyn
     Birdae
     Birinsk
@@ -629,6 +654,7 @@ star_names = {
     Boukestra
     Boukhis
     Boukteria
+    Boumbakos
     Bourelle
     Bousaque
     Boussole
@@ -648,8 +674,10 @@ star_names = {
     Brambrun
     Bramiket
     Brances
+    Brancodia
     Brancussi
     Branox
+    Branzeth
     Braqoll
     Bratarra
     Bravotex
@@ -666,6 +694,7 @@ star_names = {
     Brichague
     Brikhon
     Brikoman
+    Brikov
     Brimark
     Brindol
     Brinelle
@@ -686,6 +715,7 @@ star_names = {
     Brokon
     Bromo
     Bronco
+    Bronconius
     Bronkh
     Bronzoula
     Broscar
@@ -749,6 +779,7 @@ star_names = {
     Bybola
     Bybolas
     Byborz
+    Bycia
     Bydalkon
     Bydon
     Byktar
@@ -762,6 +793,7 @@ star_names = {
     Byphitar
     Byra
     Byragoz
+    Byrsait
     Bysaleth
     Byshab
     Bystosh
@@ -831,9 +863,11 @@ star_names = {
     Carmax
     Carmst
     Carnette
+    Caropano
     Carosia
     Caroun
     Cartagonium
+    Cartaneo
     Cartie
     Cartofisserie
     Cascadorie
@@ -843,6 +877,7 @@ star_names = {
     Castane іunie
     Castoire
     Castoria
+    Casvestus
     Catalia
     Cateque
     Catique
@@ -873,11 +908,13 @@ star_names = {
     Chabladon
     Chacloquito
     Chad
+    Chadokub
     Chaglom
     Chainik
     Chakatamba
     Chaklakita
     Chamgal
+    Champadur
     Chanciel
     Chandromyl
     Channeg
@@ -959,6 +996,7 @@ star_names = {
     Ciocoflender
     Cipario
     Cipixa
+    Cippi
     Cirteo
     Citamo
     Citrix
@@ -997,6 +1035,7 @@ star_names = {
     Condousse
     Conensis
     Connack
+    Copaegio
     Corania
     Corbeaux
     Corcodelle
@@ -1021,6 +1060,7 @@ star_names = {
     Cremie
     Creponna
     Cressinth
+    Crille
     Cringoles
     Cringolia
     Cringolla
@@ -1038,6 +1078,7 @@ star_names = {
     Cuptor
     Cuptorius
     Curan
+    Curirentus
     Curtossa
     Cushian
     Cyadore
@@ -1075,10 +1116,14 @@ star_names = {
     Dalmateo
     Dambogon
     Damin
+    Damovia
+    Dananda
     Danaron
     Dankoa
+    Dankomedia
     Dapinsk
     Daquin
+    Darbond
     Darla
     Daronga
     Darquila
@@ -1110,12 +1155,14 @@ star_names = {
     Dekantor
     Dekatuhn
     Dekazh
+    Dekhaba
     Dekharskiv
     Dekkar
     Dekont
     Dekourg
     Delakis
     Delatio
+    Delauft
     Delavachyn
     Delax
     Deliaphos
@@ -1184,17 +1231,20 @@ star_names = {
     Dimnitz
     Dimwatt
     Dingloyo
+    Dinkabour
     Dinkapulg
     Dinkobal
     Dinnin
     Dinozh
     Dintos
+    Dippu
     Dirivech
     Dirkabeloyam
     Dis
     Disdos
     Disponi
     Dispritz
+    Dissting
     Distriakon
     Distropoid
     Diveh
@@ -1232,6 +1282,7 @@ star_names = {
     Domolinsk
     Donabia
     Donboen
+    Donjek
     Donqaffe
     Donrith
     Donuterie
@@ -1242,6 +1293,7 @@ star_names = {
     Dormyhitor
     Dormytor
     Doruba
+    Dorvoya
     Doryx
     Dospis
     Dotet
@@ -1266,6 +1318,7 @@ star_names = {
     Drakada
     Drakka
     Drakon
+    Dramambug
     Drango
     Draque
     Draxos
@@ -1294,6 +1347,7 @@ star_names = {
     Dulcis
     Dumek
     Dumestul
+    Dumnia
     Dumplak
     Dungilla
     Dunlop
@@ -1311,6 +1365,7 @@ star_names = {
     Dykhor
     Dykhore
     Dymbah
+    Dynbinsh
     Dyngole
     Dynika
     Dynkollo
@@ -1381,6 +1436,7 @@ star_names = {
     Eliana
     Elicus
     Elindor
+    Elinga
     Elmazora
     Elmenios
     Elmenor
@@ -1412,6 +1468,7 @@ star_names = {
     Emich
     Emix
     Emkot
+    Emmen
     Emotzia
     Empillo
     Empoia
@@ -1465,6 +1522,7 @@ star_names = {
     Eraname
     Erdael
     Eretni
+    Ergabold
     Ergeberd
     Ergle
     Ergorah
@@ -1564,6 +1622,7 @@ star_names = {
     Firesk
     Firtesh
     Fitzkarr
+    Flaecus
     Flakarah
     Flamija
     Fleshka
@@ -1594,6 +1653,7 @@ star_names = {
     Foundice
     Foytage
     Foytazh
+    Framork
     Frantsa
     Franzhur
     Frayer
@@ -1656,13 +1716,16 @@ star_names = {
     Galintrop
     Galix
     Gallab
+    Galmino
     Galobus
     Galushka
     Galyas
     Gamagor
     Gambadar
     Gambas
+    Gambozia
     Gamparra
+    Gamskin
     Gamty
     Gandan
     Gandokan
@@ -1738,6 +1801,7 @@ star_names = {
     Gibtek
     Gidonka
     Gienius
+    Gilanobda
     Gilbyn
     Gimbalond
     Gimbath
@@ -1745,6 +1809,7 @@ star_names = {
     Gimbayol
     Gimbirium
     Gingolle
+    Ginomaire
     Gipitti
     Gjego
     Gjegor
@@ -1754,6 +1819,7 @@ star_names = {
     Gjudecz
     Gjunty
     Glabattar
+    Glakasabar
     Glevost
     Glib
     Gliegor
@@ -1772,6 +1838,7 @@ star_names = {
     Goizy
     Gojawi
     Gojnitz
+    Goldbie
     Golex
     Golganion
     Golner
@@ -1785,6 +1852,7 @@ star_names = {
     Gorgoth
     Gorlath
     Gormulia
+    Gorodin
     Gorytep
     Goshaw
     Goshgard
@@ -1814,9 +1882,11 @@ star_names = {
     Gressie
     Grija
     Grijulia
+    Grimaine
     Grinovargo
     Grisaeng
     Grisamar
+    Grodan
     Grognik
     Grohitsch
     Grolax
@@ -1857,6 +1927,7 @@ star_names = {
     Habalaka
     Habauk
     Habben
+    Habel
     Habuhr
     Hadiburka
     Hagadun
@@ -1900,6 +1971,7 @@ star_names = {
     Harsan
     Harton
     Hartschog
+    Hashbelle
     Hashdeic
     Hashtan
     Hatambal
@@ -1923,6 +1995,7 @@ star_names = {
     Henchibal
     Hendimoka
     Henji
+    Henticia
     Heptagohl
     Heregard
     Herina
@@ -1990,6 +2063,7 @@ star_names = {
     Hwith
     Hwitt
     Hyacinth
+    Hybix
     Hycambus
     Hygolia
     Hygonath
@@ -2039,6 +2113,8 @@ star_names = {
     Ilberth
     Ilib
     Ilinque
+    Illida
+    Iltek
     Ilux
     Imaia
     Imara
@@ -2047,9 +2123,11 @@ star_names = {
     Imboreda
     Imboria
     Imbrack
+    Imoem
     Impodyr
     Imponello
     Impoza
+    Imuth
     Inaltsymme
     Incetux
     Indio
@@ -2059,8 +2137,11 @@ star_names = {
     Inija
     Innix
     Intinzella
+    Ionius
     Ioxis
+    Ipuku
     Irae
+    Irgalos
     Iribus
     Irlaea
     Irsus
@@ -2076,11 +2157,13 @@ star_names = {
     Iszkat
     Itmarra
     Itsik
+    Itsmaya
     Itzka
     Itzkikor
     Itzku
     Iulus
     Ixor
+    Ixoy
     Ixus
     Izily
     Izir
@@ -2093,6 +2176,7 @@ star_names = {
     Jalisk
     Jalla
     Jalomme
+    Jambok
     Jameen
     Jamille
     Jamolia
@@ -2100,6 +2184,7 @@ star_names = {
     Jaroma
     Jarosh
     Jarwin
+    Jasorias
     Javra
     Jaxar
     Jaxx
@@ -2161,6 +2246,7 @@ star_names = {
     Kabeion
     Kabiansk
     Kablandur
+    Kabler
     Kabolnik
     Kaboreia
     Kaborizul
@@ -2271,6 +2357,7 @@ star_names = {
     Kamimenton
     Kaminbet
     Kamiteka
+    Kammagor
     Kamoth
     Kampatur
     Kampyr
@@ -2282,6 +2369,7 @@ star_names = {
     Kandinda
     Kaniga
     Kanikula
+    Kanjitz
     Kanjoka
     Kankellarion
     Kanna
@@ -2304,6 +2392,7 @@ star_names = {
     Kapart
     Kapashe
     Kapastrak
+    Kapastros
     Kapatzan
     Kapchu
     Kapdung
@@ -2314,6 +2403,8 @@ star_names = {
     Kapitz
     Kapkanna
     Kapoola
+    Kapouk
+    Kapoukis
     Kapov
     Kappa
     Kappadan
@@ -2348,9 +2439,11 @@ star_names = {
     Karideria
     Karka
     Karkay
+    Karkoff
     Karkotas
     Karkouton
     Karkub
+    Karnakol
     Karnatz
     Karobad
     Karon
@@ -2359,10 +2452,12 @@ star_names = {
     Karovia
     Karpa
     Karr
+    Karrman
     Karshayar
     Kartagon
     Kartalan
     Kartalon
+    Kartaneia
     Karthon
     Kartitsa
     Kartitz
@@ -2400,6 +2495,7 @@ star_names = {
     Kastrique
     Kastrohl
     Kastronis
+    Katakash
     Katalba
     Katarg
     Katawaka
@@ -2420,6 +2516,7 @@ star_names = {
     Kaupha
     Kautand
     Kavekash
+    Kavelin
     Kavelindt
     Kavend
     Kavodh
@@ -2439,11 +2536,13 @@ star_names = {
     Kazodul
     Kazorias
     Kazorin
+    Kazpakun
     Kazutt
     Kazybulan
     Kebalex
     Kebalos
     Kebalozur
+    Kebbar
     Kebdon
     Kebedun
     Kebrantor
@@ -2463,6 +2562,7 @@ star_names = {
     Kelepsos
     Kelesk
     Kelmax
+    Kelrith
     Kelron
     Kelybas
     Kembestra
@@ -2509,6 +2609,7 @@ star_names = {
     Keron
     Kerov
     Kerpetun
+    Kerrick
     Kersiban
     Kesalith
     Kesbald
@@ -2568,6 +2669,7 @@ star_names = {
     Khelkal
     Khellos
     Khelobys
+    Khembaloq
     Khenkov
     Khepal
     Kheptophlos
@@ -2596,14 +2698,17 @@ star_names = {
     Khymerios
     Khysh
     Khyston
+    Kibambo
     Kibanda
     Kiblinur
     Kidnaj
     Kidov
+    Kidovath
     Kidrum
     Kigu
     Kikalon
     Kikalos
+    Kikalou
     Kikinder
     Killot
     Kilotz
@@ -2623,6 +2728,7 @@ star_names = {
     Kipadunga
     Kipalog
     Kippirippi
+    Kipsche
     Kipsies
     Kipsy
     Kiptun
@@ -2656,6 +2762,7 @@ star_names = {
     Klam
     Klama
     Klantsa
+    Klaverth
     Klempt
     Klemyx
     Kleptra
@@ -2691,6 +2798,7 @@ star_names = {
     Kobanez
     Kobeito
     Koberta
+    Kobiaros
     Koblyzan
     Kobyndan
     Kochean
@@ -2909,6 +3017,7 @@ star_names = {
     Kumpreturi
     Kumptha
     Kumulath
+    Kunalmyr
     Kunizhka
     Kunor
     Kunoshty
@@ -3005,10 +3114,14 @@ star_names = {
     Labarre
     Labbar
     Labonke
+    Labyndos
     Lachutsk
+    Lacoutie
     Ladraqou
+    Laeyou
     Lafynall
     Lagazh
+    Laggaeth
     Lahwe
     Lajlet
     Lajos
@@ -3020,6 +3133,7 @@ star_names = {
     Laktah
     Laktat
     Lakur
+    Lakutije
     Lakya
     Lalatak
     Laloise
@@ -3029,6 +3143,7 @@ star_names = {
     Lamarre
     Lambegus
     Lamboo
+    Lambrix
     Lamedikk
     Lampadar
     Lamuralgus
@@ -3042,10 +3157,12 @@ star_names = {
     Lashka
     Lasido
     Laskosh
+    Latenna
     Latoya
     Latsimme
     Lattim
     Latyque
+    Lavalu
     Lavianka
     Laypi
     Layvazutt
@@ -3079,6 +3196,7 @@ star_names = {
     Lephantus
     Lephteros
     Lequaes
+    Lequr
     Lerro
     Lespedis
     Lessew
@@ -3116,6 +3234,7 @@ star_names = {
     Lilijak
     Lilijaque
     Lilik
+    Lilikantis
     Lilikonda
     Liliku
     Lilinium
@@ -3177,6 +3296,7 @@ star_names = {
     Loompus
     Loonix
     Lora
+    Loraliss
     Loritin
     Lorker
     Lorkin
@@ -3184,6 +3304,7 @@ star_names = {
     Loshent
     Lostin
     Loth
+    Lotovit
     Lotter
     Louben
     Loubenelle
@@ -3206,6 +3327,7 @@ star_names = {
     Lunagust
     Lundor
     Lungymme
+    Lupeth
     Lupilu
     Lupol
     Luret
@@ -3308,6 +3430,7 @@ star_names = {
     Mangour
     Manichok
     Mankarea
+    Manlondin
     Mannis
     Manphicus
     Manshaq
@@ -3338,6 +3461,7 @@ star_names = {
     Markusha
     Marleth
     Marphis
+    Martenakhon
     Maryeui
     Marylle
     Masarro
@@ -3350,6 +3474,7 @@ star_names = {
     Massera
     Mataniya
     Matha
+    Matophlos
     Matragonia
     Matrick
     Matroux
@@ -3368,6 +3493,7 @@ star_names = {
     Mayonne
     Mazakup
     Mazare
+    Mazarius
     Mazgalib
     Meam
     Mebex
@@ -3437,6 +3563,7 @@ star_names = {
     Mentrou
     Mentys
     Mepelnicus
+    Meraetio
     Merakhos
     Meraki
     Mercador
@@ -3460,6 +3587,7 @@ star_names = {
     Meshkot
     Meshter
     Meskoulis
+    Messales
     Mesteka
     Mestekanis
     Mestekat
@@ -3475,6 +3603,7 @@ star_names = {
     Metkin
     Metokles
     Metroglu
+    Metrogon
     Metroklos
     Metronexis
     Metrugana
@@ -3500,6 +3629,7 @@ star_names = {
     Mialmo
     Mibbit
     Mibu
+    Mibus
     Micazo
     Midalopsis
     Midianon
@@ -3579,6 +3709,7 @@ star_names = {
     Miyar
     Mizok
     Mizura
+    Mjerasol
     Mjerkuri
     Mlemov
     Mleng
@@ -3692,6 +3823,7 @@ star_names = {
     Myrtha
     Myrwe
     Mysette
+    Myshgar
     Myshtoq
     Myskalera
     Myskantis
@@ -3724,6 +3856,7 @@ star_names = {
     Naktarefa
     Nakthur
     Nalwyx
+    Namiro
     Namman
     Namnur
     Nandrachita
@@ -3792,11 +3925,14 @@ star_names = {
     Nemtjo
     Nemuhl
     Nemum
+    Nendelle
     Nenja
     Neperko
     Nepikant
     Nepotzel
     Neprox
+    Nerbelox
+    Nerbendis
     Nerell
     Nescucha
     Nescuro
@@ -3814,6 +3950,7 @@ star_names = {
     Netopia
     Netopy
     Netoth
+    Netskayo
     Nettler
     Nevasta
     Nevelkop
@@ -3824,6 +3961,7 @@ star_names = {
     Nevoska
     Nexif
     Nexillo
+    Nexios
     Nexis
     Neyow
     Nhaji
@@ -3834,6 +3972,8 @@ star_names = {
     Nichodatt
     Nicome
     Nicoterka
+    Nigmor
+    Nigomaq
     Nihma
     Nijkotz
     Nijmbros
@@ -3850,8 +3990,10 @@ star_names = {
     Nikuru
     Nima
     Nimaleia
+    Nimblaus
     Nimbrot
     Nimkla
+    Nimlador
     Nimura
     Ninus
     Niobi
@@ -3970,6 +4112,7 @@ star_names = {
     Okrotinsk
     Okrotiya
     Oktave
+    Okumentid
     Olgunda
     Oliya
     Oljak
@@ -3995,6 +4138,7 @@ star_names = {
     Oompus
     Ophaelia
     Opherta
+    Ophertina
     Ophineia
     Ophosa
     Ophus
@@ -4014,6 +4158,7 @@ star_names = {
     Orkalyn
     Orkhag
     Orkiel
+    Orlonius
     Orloth
     Ornash
     Ornashura
@@ -4027,6 +4172,7 @@ star_names = {
     Orshoy
     Ortos
     Orub
+    Orvestis
     Orybil
     Oryneo
     Oschan
@@ -4074,6 +4220,7 @@ star_names = {
     Palakalath
     Palethos
     Palga
+    Palka
     Pallex
     Pallog
     Pamador
@@ -4131,12 +4278,14 @@ star_names = {
     Patsakian
     Patskayan
     Patsokanos
+    Pattarath
     Patucus
     Patux
     Pavarolo
     Pavaye
     Pavno
     Pawadha
+    Payangus
     Pârtie
     Peceiro
     Pecord
@@ -4148,10 +4297,12 @@ star_names = {
     Pekatabela
     Pekeman
     Pelakom
+    Pelangus
     Pelasse
     Pelenko
     Pelogo
     Pemynne
+    Pendinso
     Penelle
     Penetzeschede
     Penice
@@ -4165,7 +4316,9 @@ star_names = {
     Pepulco
     Peraj
     Percuth
+    Pergalopsias
     Pergalos
+    Pergolis
     Perindas
     Perindeo
     Perinna
@@ -4211,6 +4364,7 @@ star_names = {
     Pflong
     Pfrotge
     Phaes
+    Phaestia
     Phagadaros
     Phagados
     Phailas
@@ -4243,6 +4397,7 @@ star_names = {
     Pherox
     Pherphelia
     Pherphelitsa
+    Phestiakon
     Phestos
     Phezmyr
     Phinestro
@@ -4284,6 +4439,7 @@ star_names = {
     Phouternitsa
     Phouterre
     Phoutos
+    Phredas
     Phrensis
     Phrikos
     Phriphro
@@ -4374,6 +4530,7 @@ star_names = {
     Plapuma
     Plateshty
     Platogril
+    Pleinora
     Pleosk
     Plestokhos
     Plestokinos
@@ -4410,6 +4567,7 @@ star_names = {
     Poklofantis
     Pokrath
     Polinox
+    Pollerth
     Polostra
     Poltania
     Polyro
@@ -4489,6 +4647,7 @@ star_names = {
     Primeka
     Prinko
     Priquindelle
+    Pritna
     Prius
     Priverius
     Privnitz
@@ -4545,6 +4704,7 @@ star_names = {
     Puturoska
     Putyge
     Puyemonta
+    Puzhitz
     Pychor
     Pycolix
     Pyept
@@ -4573,6 +4733,7 @@ star_names = {
     Quaeristo
     Quakaza
     Qualiko
+    Quallipilus
     Quantarre
     Quatistahe
     Quaxor
@@ -4601,6 +4762,7 @@ star_names = {
     Qyshar
     Rabla
     Rachitt
+    Radashko
     Radella
     Raffa
     Ragabad
@@ -4617,6 +4779,8 @@ star_names = {
     Rakitura
     Rakka
     Ralos
+    Ramalente
+    Rambako
     Ramulga
     Ranella
     Ranik
@@ -4626,6 +4790,7 @@ star_names = {
     Raph
     Raphyn
     Rapossel
+    Rapushu
     Raque
     Raquela
     Rariphlo
@@ -4686,8 +4851,10 @@ star_names = {
     Reschou
     Restabut
     Resymtzit
+    Reta
     Retsinutt
     Revenyol
+    Revio
     Rewa
     Rexon
     Rexonium
@@ -4716,8 +4883,11 @@ star_names = {
     Rikah
     Rikasdron
     Rindrahita
+    Rinnox
+    Riphicatus
     Rippick
     Ripudo
+    Rishnitz
     Riskalos
     Ristault
     Risypah
@@ -4772,6 +4942,7 @@ star_names = {
     Roxalis
     Roxis
     Roxoria
+    Rozhnitz
     Rozito
     Rukna
     Rulantis
@@ -4841,6 +5012,7 @@ star_names = {
     Samanchok
     Samank
     Sambatay
+    Samjerta
     Sammaroz
     Samolyn
     Sanaverde
@@ -4857,12 +5029,14 @@ star_names = {
     Sapaliga
     Saphone
     Sapthovidon
+    Saracca
     Saraki
     Sarayama
     Sarkodol
     Sarkram
     Sarkubrija
     Sarmala
+    Sarrakath
     Sasa
     Sasapunna
     Sashtyu
@@ -4878,6 +5052,7 @@ star_names = {
     Savareen
     Saveed
     Saveta
+    Savidokla
     Sayzonne
     Sbokjor
     Scamia
@@ -4908,12 +5083,14 @@ star_names = {
     Schprong
     Schprot
     Schprotte
+    Schreck
     Schrobyn
     Schrtumpf
     Schtaiker
     Schtantza
     Schtechter
     Schteker
+    Schtok
     Schtrengar
     Schunka
     Schurub
@@ -5060,6 +5237,7 @@ star_names = {
     Sibyew
     Sidewa
     Sieven
+    Sigjar
     Sigmir
     Sigthar
     Sikalaba
@@ -5071,6 +5249,7 @@ star_names = {
     Silvacho
     Simbalur
     Sipex
+    Sippipola
     Siptesh
     Sistano
     Sitama
@@ -5081,6 +5260,7 @@ star_names = {
     Siwisagi
     Sizlar
     Skabalud
+    Skabbat
     Skadee
     Skadet
     Skadis
@@ -5108,7 +5288,10 @@ star_names = {
     Skanou
     Skaparych
     Skapat
+    Skappar
+    Skarath
     Skarbos
+    Skardalin
     Skaridan
     Skarmantos
     Skarpa
@@ -5130,6 +5313,7 @@ star_names = {
     Skelobis
     Skelops
     Skibro
+    Skintos
     Skleptsis
     Sklyphos
     Skobja
@@ -5204,6 +5388,7 @@ star_names = {
     Sorbinsk
     Sorelle
     Sorex
+    Sorstyn
     Sotra
     Souphon
     Souphoulia
@@ -5273,6 +5458,7 @@ star_names = {
     Stegis
     Stegwell
     Steing
+    Stelkas
     Stellax
     Stelox
     Stenopsis
@@ -5290,6 +5476,7 @@ star_names = {
     Stolija
     Stolno
     Stopno
+    Storboros
     Stouph
     Strabha
     Strajjah
@@ -5361,6 +5548,7 @@ star_names = {
     Tabaikara
     Tabakamozul
     Tabara
+    Tabarra
     Tabbam
     Tablek
     Tablitz
@@ -5371,6 +5559,7 @@ star_names = {
     Taft
     Taikoy
     Tainz
+    Taitei
     Tajkath
     Takalek
     Takaloka
@@ -5384,6 +5573,7 @@ star_names = {
     Talatala
     Talaz
     Talekh
+    Taligri
     Talkaer
     Talkavir
     Talkhit
@@ -5430,6 +5620,7 @@ star_names = {
     Tatorsk
     Tatov
     Tatovia
+    Tatski
     Tavan
     Taxola
     Tayboltou
@@ -5475,6 +5666,7 @@ star_names = {
     Temnitz
     Tempries
     Temprye
+    Tenancia
     Tenebre
     Tenkapur
     Tennah
@@ -5518,11 +5710,13 @@ star_names = {
     Tiklabox
     Timbarcul
     Timbrus
+    Timolino
     Timona
     Timoski
     Timphalos
     Tinabuchi
     Tinashura
+    Tinelios
     Tingalla
     Tinkabulk
     Tinkalos
@@ -5629,6 +5823,7 @@ star_names = {
     Trangus
     Tranka
     Transk
+    Traphaletos
     Traque
     Tratee
     Travantis
@@ -5657,6 +5852,8 @@ star_names = {
     Trikalopsis
     Trikhton
     Trilleth
+    Tripholidon
+    Trisstock
     Trivago
     Trixis
     Trobka
@@ -5829,6 +6026,7 @@ star_names = {
     Vahllyz
     Vaiteo
     Vakha
+    Vakoutsa
     Valerica
     Valio
     Valix
@@ -5866,6 +6064,7 @@ star_names = {
     Vejnesk
     Vekhnos
     Vekma
+    Velgor
     Velintos
     Veloderra
     Velpytar
@@ -5908,6 +6107,7 @@ star_names = {
     Viklean
     Viklos
     Viktolon
+    Vikton
     Vilakeia
     Vilazura
     Vileda
@@ -5949,6 +6149,7 @@ star_names = {
     Vomwah
     Vongosh
     Voole
+    Vopaengis
     Vorakle
     Vorbesk
     Vordoss
@@ -5956,6 +6157,7 @@ star_names = {
     Voryandil
     Voss
     Voulasse
+    Voulners
     Vovoda
     Voyorking
     Vrak
@@ -6000,6 +6202,7 @@ star_names = {
     Wedev
     Wegreth
     Welgraz
+    Wellob
     Welossia
     Wernetto
     Wertsig
@@ -6026,11 +6229,13 @@ star_names = {
     Wyax
     Wygo
     Wylliq
+    Wylo
     Xalym
     Xamaran
     Xanos
     Xaphas
     Xarnax
+    Xenpo
     Xibelkis
     Xibolnik
     Xiboula
@@ -6084,6 +6289,7 @@ star_names = {
     Yegoro
     Yeleme
     Yelimna
+    Yeliska
     Yemba
     Yenethale
     Yenita
@@ -6103,6 +6309,7 @@ star_names = {
     Yesprin
     Yeste
     Yetage
+    Yetta
     Yette
     Yetva
     Yeweth
@@ -6175,6 +6382,7 @@ star_names = {
     Yorha
     Yorm
     Yorrock
+    Yorve
     Youah
     Youbitha
     Youdent
@@ -6221,6 +6429,7 @@ star_names = {
     Yzmenah
     Yzvoly
     Zabest
+    Zabka
     Zabrelle
     Zadrinsk
     Zafira
@@ -6310,9 +6519,11 @@ star_names = {
     Zgarditz
     Zgarjat
     Zgrill
+    Zhagz
     Zhalje
     Zhalon
     Zhanle
+    Zhertfinsk
     Zhneaptz
     Zhniptzel
     Zhnitzy
@@ -6331,6 +6542,7 @@ star_names = {
     Zinnick
     Zinseth
     Zintensa
+    Ziski
     Zixos
     Zmera
     Zmyntis
@@ -6364,6 +6576,7 @@ star_names = {
     Zyma
     Zynax
     Zynga
+    Zyngoria
     Zynka
     Zynnax
     Zyronix

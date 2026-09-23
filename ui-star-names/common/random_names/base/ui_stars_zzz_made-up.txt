@@ -22,6 +22,185 @@ star_names = {
     Acrilotte
     Acyre
     Acyria
+    Menopius
+    Sned
+    Jellesur
+    Lambustee
+    Khortyn
+    Guropej
+    Felkath
+    Durbin
+    Ciacoionis
+    Utbek
+    Sangalor
+    Mesalur
+    Satofastal
+    Baskoula
+    Plezentis
+    Klabortsin
+    Potrox
+    Chardelly
+    Naptyllus
+    Eselenex
+    Majgandith
+    Baldaquin
+    Macedo
+    Dimanzo
+    Zurvin
+    Gromango
+    Kopchuk
+    Pholos
+    Mikobo
+    Velkryth
+    Syngoll
+    Lobren
+    Vojnatz
+    Oudiokod
+    Kharnar
+    Moeq
+    Kazou
+    Travierre
+    Benquis
+    Amster
+    Versoulis
+    Ghivex
+    Ezbox
+    Kymbador
+    Ubecijo
+    Wheth
+    Azynkos
+    Deame
+    Silka
+    Adalkar
+    Bukhatzel
+    Katiko
+    Schopenhauer
+    Mitzkohl
+    Herym
+    Strydd
+    Capacus
+    Byllog
+    Ygloben
+    Semyrin
+    Nalona
+    Engobiel
+    Scurgerelung
+    Noxoma
+    Rabanta
+    Argey
+    Monister
+    Erpoula
+    Speherole
+    Kaphia
+    Sumesh
+    Kukurazh
+    Deprunis
+    Triceph
+    Treklohr
+    Modronok
+    Dibruggen
+    Molyzh
+    Ouskator
+    Spimb
+    Metsi
+    Zinter
+    Zunterigh
+    Engobaldo
+    Niskerda
+    Darga
+    Yotnikh
+    Njotik
+    Saratinsk
+    Aygox
+    Angobeld
+    Angebald
+    Nahkend
+    Lerika
+    Veykal
+    Antrebius
+    Molnitz
+    Ylannoth
+    Aubal
+    Eglamobis
+    Wadma
+    Saem
+    Hovrenz
+    Azvenkan
+    Gamiash
+    Dinraigh
+    Arqueposa
+    Akayan
+    Ekbem
+    Andian
+    Tekoulyn
+    Arbavur
+    Friggen
+    Atunchiya
+    Akaiya
+    Olgos
+    Adreena
+    Agrigon
+    Yurles
+    Davenston
+    Zenich
+    Dasistol
+    Nembval
+    Kirigan
+    Lorendama
+    Kappath
+    Gamatron
+    Adavizir
+    Exogal
+    Calessa
+    Nikacho
+    Kabelun
+    Kavendar
+    Riphika
+    Galobial
+    Lacoutsa
+    Kalaphos
+    Kaizor
+    Mystro
+    Mistrosan
+    Celdaria
+    Matzan
+    Rakoleth
+    Ungabal
+    Rikivpa
+    Urkan
+    Bersyobe
+    Kazinga
+    Pitakamba
+    Raquallon
+    Gamboria
+    Dakhall
+    Koznak
+    Avvakian
+    Elkudyne
+    Engobald
+    Saginta
+    Katrid
+    Rosswet
+    Rossert
+    Regalten
+    Alukalu
+    Lorilane
+    Leshtudda
+    Prossling
+    Dephtero
+    Zakkafan
+    Krebven
+    Niskonda
+    Kakadio
+    Kerobin
+    Lerigga
+    Lestelon
+    Kabelka
+    Cavello
+    Nekellob
+    Aurantina
+    Maldevar
+    Mountsatsar
     Adalco
     Adamula
     Adarcher
@@ -214,7 +393,6 @@ star_names = {
     Ampullenkur
     Ampulya
     Amrik
-    Amster
     Amura
     Amuriad
     Amuytath
@@ -457,7 +635,6 @@ star_names = {
     Balbis
     Balce
     Baldain
-    Baldaquin
     Balealis
     Baleeza
     Balenkar
@@ -502,7 +679,6 @@ star_names = {
     Bashtan
     Baska
     Baskoukis
-    Baskoula
     Baskoulon
     Bassgerd
     Bastaw
@@ -925,7 +1101,6 @@ star_names = {
     Canoria
     Canpanda
     Canzare
-    Capacus
     Capitonel
     Caque
     Caracal
@@ -1604,7 +1779,6 @@ star_names = {
     Engalop
     Engelobs
     Englott
-    Engobald
     Engobia
     Engon
     Engoras
@@ -4182,7 +4356,6 @@ star_names = {
     Negustor
     Negwen
     Neje
-    Nekellob
     Nekhamikonta
     Nekhtona
     Neklamora

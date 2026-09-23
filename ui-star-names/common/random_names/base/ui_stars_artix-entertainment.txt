@@ -1,0 +1,11 @@
+star_names = {
+    # Dragon Fable - Characters
+    "Cysero"
+    "Artix"
+    "Jing"
+    "Nicto"
+
+    # EpicDuel - Characters
+    "Baelius"
+    "Torgan"
+}

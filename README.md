@@ -89,6 +89,16 @@ If you find this project useful, consider [funding it](https://hmlendea.go.ro/fu
 
 [![Donate](https://raw.githubusercontent.com/hmlendea/readme-assets/master/donate_generic.png)](https://hmlendea.go.ro/funding)
 
+## 🛡️ Privacy and Data
+
+Stellaris - Universum Infinitum - Star Names does not collect, process, store, or transmit any personal data. The mod consists of static text files containing fictional and real astronomical names for use in Stellaris.
+
+For the detailed description of how the application handles privacy and personal data, see [PRIVACY.md](./PRIVACY.md).
+
+| Data | Purpose | Storage | Retention | Optional |
+|------|---------|---------|-----------|----------|
+| None | N/A | N/A | N/A | N/A |
+
 ## 📄 License
 
 This project is being distributed under the `GNU General Public Licence v3` or later.

@@ -58,6 +58,12 @@ No build step is required. Edit the `.txt` name list files under `ui-star-names/
 
 Enable the mod in the Stellaris launcher and start a new game.
 
+## 🏗️ Architecture
+
+Stellaris - Universum Infinitum - Star Names is a pure data mod consisting of static name list files in Clausewitz script format. The Stellaris game engine loads these files during galaxy generation and randomly selects names for stars, nebulas, asteroids, and black holes. There is no executable code, build step, or runtime.
+
+See the [architecture documentation](./ARCHITECTURE.md) for the system context, data architecture, deployment model, compatibility contracts, and source map.
+
 ## 🤝 Contributing
 
 You are welcome to submit any suggestion, feedback, or modification to this project.

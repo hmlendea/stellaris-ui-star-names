@@ -5,6 +5,7 @@ This document covers the guidelines and processes for contributing to this proje
 ## 📑 Table of Contents
 
 - [How to Contribute](#how-to-contribute)
+- [Code of Conduct](#code-of-conduct)
 - [Security](#security)
 - [License](#license)
 - [Getting Assistance](#getting-assistance)
@@ -60,6 +61,10 @@ Report security vulnerabilities per the [Security Policy](./SECURITY.md).
 ## 📄 License
 
 By contributing, you agree that your contributions will be licensed under the GNU General Public Licence v3.
+
+## 📋 Code of Conduct
+
+This project follows the [Code of Conduct](./CODE_OF_CONDUCT.md).
 
 ## ❓ Getting Assistance
 

@@ -107,6 +107,10 @@ Stellaris - Universum Infinitum - Star Names consists solely of static text file
 
 For the security policy, supported versions, and vulnerability reporting process, see [SECURITY.md](./SECURITY.md).
 
+## 📜 Code of Conduct
+
+See the [Code of Conduct](./CODE_OF_CONDUCT.md) for the standards of conduct expected in all project spaces.
+
 ## 📄 License
 
 This project is being distributed under the `GNU General Public Licence v3` or later.

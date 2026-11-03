@@ -69,6 +69,8 @@ When doing so, please:
 - Revise the documentation when behaviour changes
 - Properly test all changes
 
+See the [contributing guidelines](./CONTRIBUTING.md) for details on how to report issues, suggest enhancements, and submit changes.
+
 ## 🔗 Related Projects
 
 - [Character Traits](https://github.com/hmlendea/stellaris-ui-character-traits): Adds new character trait names for leaders and rulers

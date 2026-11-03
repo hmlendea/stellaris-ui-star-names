@@ -99,6 +99,12 @@ For the detailed description of how the application handles privacy and personal
 |------|---------|---------|-----------|----------|
 | None | N/A | N/A | N/A | N/A |
 
+## 🔒 Security
+
+Stellaris - Universum Infinitum - Star Names consists solely of static text files and does not execute code, process user data, or communicate over networks. Security issues are limited to supply chain integrity of distribution packages.
+
+For the security policy, supported versions, and vulnerability reporting process, see [SECURITY.md](./SECURITY.md).
+
 ## 📄 License
 
 This project is being distributed under the `GNU General Public Licence v3` or later.

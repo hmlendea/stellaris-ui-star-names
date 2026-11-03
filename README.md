@@ -12,6 +12,7 @@ Mod for Stellaris that adds [thousands of new names](https://github.com/hmlendea
 - [Usage](#-usage)
 - [Installation](#-installation)
 - [Development](#-development)
+- [Documentation](#-documentation)
 - [Contributing](#-contributing)
 - [Related Projects](#-related-projects)
 - [Supporting the Project](#-supporting-the-project)
@@ -63,6 +64,23 @@ Enable the mod in the Stellaris launcher and start a new game.
 Stellaris - Universum Infinitum - Star Names is a pure data mod consisting of static name list files in Clausewitz script format. The Stellaris game engine loads these files during galaxy generation and randomly selects names for stars, nebulas, asteroids, and black holes. There is no executable code, build step, or runtime.
 
 See the [architecture documentation](./ARCHITECTURE.md) for the system context, data architecture, deployment model, compatibility contracts, and source map.
+
+## 📚 Documentation
+
+Comprehensive documentation is available in the [`docs/`](./docs/) directory:
+
+- [Documentation Index](./docs/INDEX.md) — Master catalogue with navigation
+- [Architecture & Design](./docs/architecture.md) — Implementation detail
+- [Repository Structure](./docs/repository-structure.md) — Source tree layout
+- [Data Model](./docs/data-model.md) — Domain entities and relationships
+- [Components](./docs/components/) — Name lists, metadata, release automation
+- [Flows](./docs/flows/) — Mod loading, release distribution
+- [Behaviour](./docs/behaviour/) — Name selection, contribution workflow
+- [Configuration](./docs/config/) — Descriptor schema, name list format
+- [Testing](./docs/testing/test-strategy.md) — Test strategy
+- [Operations](./docs/operations/) — Deployment, troubleshooting
+- [API Reference](./docs/api-reference/) — Engine internal APIs
+- [Logging](./docs/logging.md) — Engine log patterns
 
 ## 🤝 Contributing
 

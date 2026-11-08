@@ -112,6 +112,7 @@ star_names = {
     "Muugrah"
     "Mykapo"
     "Naboo"
+    "Neri"
     "Nilrebmah"
     "Obroa-skai"
     "Oetchi"

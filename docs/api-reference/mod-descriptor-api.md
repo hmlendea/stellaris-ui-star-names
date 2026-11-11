@@ -118,7 +118,7 @@ bool IsCompatible(const Descriptor& desc, const std::string& gameVersion) {
 
 ```yaml
 # .github/workflows/steam-workshop.yml
-uses: hmlendea/steam-workshop-update@v1.0.0
+uses: hmlendea/steam-workshop-update@v1.3.0
 with:
   appid: 281990              # Stellaris App ID
   itemid: 2040215185         # Workshop item ID (from remote_file_id)

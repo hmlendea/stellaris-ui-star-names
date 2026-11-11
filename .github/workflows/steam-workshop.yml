@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v7
 
     - name: Build the release archive
       run: |
@@ -22,7 +22,7 @@ jobs:
         unzip "release.zip" -d "release/"
 
     - name: Upload
-      uses: hmlendea/steam-workshop-update@v1.0.0
+      uses: hmlendea/steam-workshop-update@v1.3.0
       with:
         appid: 281990
         itemid: 2040215185

@@ -14,7 +14,7 @@ The release automation component consists of three GitHub Actions workflows that
 1. Checkout repository
 2. Build the release archive `release.zip` containing `ui-star-names/` and `ui-star-names.mod`
 3. Unzip to `release/` directory
-4. Upload to Steam Workshop using `hmlendea/steam-workshop-update@v1.0.0`
+4. Upload to Steam Workshop using `hmlendea/steam-workshop-update@v1.3.0`
 
 **Required Secrets**:
 - `STEAM_USERNAME`
@@ -171,7 +171,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v7
     - name: Build the release archive
       run: |
         zip -r "release.zip" "ui-star-names" "ui-star-names.mod"
@@ -179,7 +179,7 @@ jobs:
       run: |
         unzip "release.zip" -d "release/"
     - name: Upload
-      uses: hmlendea/steam-workshop-update@v1.0.0
+      uses: hmlendea/steam-workshop-update@v1.3.0
       with:
         appid: 281990
         itemid: 2040215185

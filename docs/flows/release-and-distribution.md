@@ -88,7 +88,7 @@ ui-star-names_<version>.zip
    zip -r "release.zip" "ui-star-names" "ui-star-names.mod"
    ```
 3. Unzip to `release/`
-4. Upload using `hmlendea/steam-workshop-update@v1.0.0`:
+4. Upload using `hmlendea/steam-workshop-update@v1.3.0`:
    - `appid`: 281990
    - `itemid`: 2040215185
    - `path`: `release/ui-star-names/`

@@ -1,0 +1,45 @@
+name: GitHub Release
+
+on:
+  release:
+    types:
+      - published
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-upload:
+    name: Publish
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Build the release archive
+      id: package
+      shell: bash
+      env:
+        RELEASE_BODY: ${{ github.event.release.body }}
+      run: |
+        version="${{ github.event.release.tag_name }}"
+        version="${version#v}"
+        archive_name="ui-star-names_${version}.zip"
+        release_notes_file="release_notes.md"
+
+        zip -r "$archive_name" "ui-star-names" "ui-star-names.mod"
+        archive_sha1="$(sha1sum "$archive_name" | awk '{print $1}')"
+
+        printf '%s\n\n**SHA1 Checksum**: %s\n' "$RELEASE_BODY" "$archive_sha1" > "$release_notes_file"
+
+        echo "archive_name=$archive_name" >> "$GITHUB_OUTPUT"
+        echo "release_notes_file=$release_notes_file" >> "$GITHUB_OUTPUT"
+
+    - name: Upload the release archive
+      uses: softprops/action-gh-release@v2
+      with:
+        files: ${{ steps.package.outputs.archive_name }}
+        body_path: ${{ steps.package.outputs.release_notes_file }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

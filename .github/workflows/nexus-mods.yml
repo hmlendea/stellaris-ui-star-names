@@ -21,10 +21,9 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Download the release asset
+    - name: Build the release archive
       run: |
-        RELEASE_ASSET_NAME="ui-star-names_${VERSION#v}.zip"
-        wget "https://github.com/hmlendea/stellaris-ui-star-names/releases/download/${VERSION}/${RELEASE_ASSET_NAME}" -O "release.zip"
+        zip -r "release.zip" "ui-star-names" "ui-star-names.mod"
 
     - name: Upload
       uses: Nexus-Mods/upload-action@v1.0.0-beta.10

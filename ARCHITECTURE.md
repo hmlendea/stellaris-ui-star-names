@@ -65,7 +65,7 @@ flowchart TB
         AsteroidFiles[ui_asteroid-*.txt]
         BlackHoleFiles[ui_black-holes_*.txt]
     end
-    
+
     Descriptor -->|References| Common
     Common -->|Contains| RandomNames
     RandomNames -->|Contains| Base
@@ -90,7 +90,7 @@ sequenceDiagram
     participant Launcher as Stellaris Launcher
     participant Engine as Stellaris Game Engine
     participant Mod as Mod Files
-    
+
     User->>Launcher: Enable mod
     Launcher->>Engine: Load enabled mods
     Engine->>Mod: Read descriptor.mod
@@ -150,17 +150,21 @@ Boundary rules:
 Paths:
 - `.github/workflows/steam-workshop.yml`
 - `.github/workflows/nexus-mods.yml`
+- `.github/workflows/github-release.yml`
 - `count-additions.sh`
 
 Responsibilities:
-- Automate packaging and publishing to Steam Workshop and Nexus Mods on version tag push
+- Automate packaging and publishing to Steam Workshop, Nexus Mods, and GitHub Releases on version tag push
 - `count-additions.sh`: Utility script to count unique names across all list files for release notes
 
 Boundary rules:
-- Workflows trigger on Git tags matching `v*.*.*`
+- Workflows trigger on Git tags matching `v*.*.*`, while the GitHub Release workflow triggers on release publication
+- Each workflow builds the release archive itself from the checked-out repository
+- Release archive contents: the `ui-star-names/` directory and `ui-star-names.mod`
 - Steam workflow uses `hmlendea/steam-workshop-update` action with stored credentials
-- Nexus workflow downloads the GitHub release asset and uploads via Nexus Mods API
-- Release asset naming convention: `ui-star-names_<version>.zip`
+- Nexus workflow uploads the archive via the Nexus Mods API
+- GitHub Release workflow uploads `ui-star-names_<version>.zip` with `softprops/action-gh-release` and appends a SHA1 checksum to the release notes
+- GitHub release asset naming convention: `ui-star-names_<version>.zip`
 
 ## 💾 Data Architecture
 
@@ -199,9 +203,10 @@ Asteroid prefixes/suffixes use `prefix = "..."` and `suffix = "..."` instead of 
 |--------------------------|-----------|----------|-------|-------------------|
 | Stellaris Mod Descriptor | Outbound | `descriptor.mod` with `name`, `path`, `tags`, `supported_version` | Mod maintainers | Mod not listed in launcher if invalid |
 | Stellaris Name List Format | Outbound | Clausewitz script `name_list` blocks with `category`, `name`/`prefix`/`suffix` | Mod maintainers | Names not used if syntax invalid |
-| Steam Workshop API | Outbound | ZIP archive with `ui-star-names/` directory structure | GitHub Actions workflow | Release fails; manual upload required |
+| Workflow release packaging | Internal | ZIP archive containing `ui-star-names/` and `ui-star-names.mod`, built from the repository | GitHub Actions workflow | Release fails; manual upload required |
+| Steam Workshop API | Outbound | ZIP archive with `ui-star-names/` and `ui-star-names.mod` | GitHub Actions workflow | Release fails; manual upload required |
 | Nexus Mods API | Outbound | ZIP archive uploaded via API with version metadata | GitHub Actions workflow | Release fails; manual upload required |
-| GitHub Releases | Outbound | ZIP archive attached to Git tag | Maintainers (manual) | Users cannot download from GitHub |
+| GitHub Releases | Outbound | `ui-star-names_<version>.zip` archive attached to the published release, with a SHA1 checksum in the release notes | GitHub Actions workflow | Users cannot download from GitHub |
 
 ## 🧭 Dependency Direction and Rules
 
@@ -234,14 +239,14 @@ flowchart TB
 | Steam Workshop | Distribution platform | GitHub Actions workflow + release ZIP | Requires Steam credentials in repository secrets; workflow must match Steam's upload API |
 | Nexus Mods | Distribution platform | GitHub Actions workflow + release ZIP | Requires Nexus API key in repository secrets; workflow must match Nexus upload API |
 | Paradox Mods | Distribution platform | Manual upload by maintainers | No automation; maintainers must manually publish each release |
-| GitHub Actions | CI/CD runtime | Workflow YAML files | Workflows run on Ubuntu runners; depend on third-party actions (`hmlendea/steam-workshop-update`, `Nexus-Mods/upload-action`) |
+| GitHub Actions | CI/CD runtime | Workflow YAML files | Workflows run on Ubuntu runners; depend on third-party actions (`hmlendea/steam-workshop-update`, `Nexus-Mods/upload-action`, `softprops/action-gh-release`) |
 
 ## 🚀 Deployment and Operations
 
 | Concern | Current Design | Architectural Consequence |
 |---------|----------------|---------------------------|
 | Process topology | No processes; static files loaded by game engine | Zero operational overhead; no servers, daemons, or background tasks |
-| Deployment unit | ZIP archive containing `ui-star-names/` directory | Single artefact deployed to all platforms; version tagged in Git |
+| Deployment unit | ZIP archive containing `ui-star-names/` and `ui-star-names.mod` | Single artefact deployed to all platforms; version tagged in Git; built by each workflow at release time |
 | Persistent state | None | No migration, backup, or state management needed |
 | Filesystem requirements | Mod directory placed in Stellaris `mod/` folder | User or launcher handles placement; mod is self-contained |
 | Scaling assumptions | N/A (single-user, client-side) | No scaling concerns |
@@ -250,10 +255,11 @@ flowchart TB
 
 Release process:
 1. Maintainer creates and pushes a Git tag `vX.Y.Z`
-2. GitHub Actions builds release ZIP and publishes to GitHub Releases
-3. Steam Workshop workflow triggers, downloads release asset, uploads to Steam
-4. Nexus Mods workflow triggers, downloads release asset, uploads to Nexus
-5. Maintainer manually uploads to Paradox Mods
+2. Maintainer publishes a GitHub Release for the tag
+3. GitHub Release workflow triggers, builds `ui-star-names_<version>.zip`, attaches it to the release, and appends its SHA1 checksum to the release notes
+4. Steam Workshop workflow triggers, builds the release archive from the repository, and uploads to Steam
+5. Nexus Mods workflow triggers, builds the release archive from the repository, and uploads to Nexus
+6. Maintainer manually uploads the archive to Paradox Mods
 
 ## 🛡️ Compatibility Contracts
 
@@ -261,7 +267,7 @@ Release process:
 |----------|-------|-----------|--------------|---------------|
 | Stellaris `supported_version` | Mod maintainers | `descriptor.mod` `supported_version` matches target game version | Manual verification on game update | Update on each major/minor Stellaris release |
 | Name list format | Mod maintainers | All `.txt` files parse as valid Clausewitz `name_list` blocks | Game loads mod without errors | Preserve format; only add/remove name entries |
-| Release asset structure | GitHub Actions | ZIP contains `ui-star-names/` with `descriptor.mod` and `common/` | Workflow validation; manual test install | Maintain directory structure; do not rename top-level folder |
+| Release archive structure | GitHub Actions | ZIP contains `ui-star-names/` (with `descriptor.mod` and `common/`) and `ui-star-names.mod` | Workflow validation; manual test install | Maintain directory structure; do not rename top-level folder or archive entries |
 | Mod name and path | Mod maintainers | `ui-star-names.mod` and `descriptor.mod` have identical `name` and `path` | Manual review | Change only if mod identity changes |
 
 ## ✅ Testing and Verification
@@ -309,8 +315,10 @@ Material coverage gaps:
 | Black hole name lists | `ui-star-names/common/random_names/base/ui_black-holes_*.txt` |
 | Steam Workshop workflow | `.github/workflows/steam-workshop.yml` |
 | Nexus Mods workflow | `.github/workflows/nexus-mods.yml` |
+| GitHub Release workflow | `.github/workflows/github-release.yml` |
 | Name counting script | `count-additions.sh` |
-| Release artefacts | `ui-star-names_*.zip` (generated) |
+| Release archive (generated) | `ui-star-names_<version>.zip` |
+| Workflow archive (generated) | `release.zip` |
 
 ## 📚 Related Documentation
 

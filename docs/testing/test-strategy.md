@@ -102,19 +102,20 @@ Black holes: ~75
 
 **Frequency**: Before each release, after Stellaris version updates
 
-### 5. Release Asset Validation (Manual)
+### 5. Release Archive Validation (Manual)
 
-**Purpose**: Ensure ZIP asset has correct structure
+**Purpose**: Ensure the workflow-built archive has the correct structure
 
 **Checks**:
-- [ ] Asset named `ui-star-names_<version>.zip`
-- [ ] Contains `ui-star-names/` directory
+- [ ] Workflow packaging step completes without errors
+- [ ] Archive contains `ui-star-names/` directory
+- [ ] Archive contains `ui-star-names.mod`
 - [ ] Contains `descriptor.mod`
 - [ ] Contains `common/random_names/base/*.txt`
 - [ ] No extra files (`.git`, `.github`, `docs/`, etc.)
 - [ ] Extracts cleanly
 
-**Frequency**: After GitHub Release creation
+**Frequency**: First release after workflow changes
 
 ## Automation Opportunities
 
@@ -126,7 +127,7 @@ Black holes: ~75
 | Duplicate detection within files | grep/sort/uniq pipeline | Low |
 | Cross-file duplicate detection | Custom script | Medium |
 | Descriptor consistency check | diff/shell script | Low |
-| Release asset structure check | shell script | Low |
+| Release archive structure check | shell script | Low |
 | CI pipeline | GitHub Actions | Medium |
 
 ### Recommended CI Pipeline
@@ -181,7 +182,7 @@ Record counts at each release for regression comparison:
 | Descriptor drift | Medium | Medium | Diff check in CI |
 | Wrong category field | Low | Medium | Format validation |
 | Duplicate file committed | Low | Low | Naming convention check |
-| Release asset corrupt | Low | High | Asset validation |
+| Release archive corrupt | Low | High | Archive validation |
 
 ## Test Execution Checklist (Pre-Release)
 
@@ -189,8 +190,7 @@ Record counts at each release for regression comparison:
 - [ ] Diff descriptor files — verify identical
 - [ ] Install mod locally — verify launcher shows compatible
 - [ ] Start new game — verify mod names appear
-- [ ] Create GitHub Release — verify asset structure
-- [ ] Trigger workflows — verify Steam/Nexus upload
+- [ ] Trigger workflows — verify archive build and Steam/Nexus upload
 - [ ] Manual Paradox upload — verify success
 
 ## Future Improvements
@@ -199,4 +199,4 @@ Record counts at each release for regression comparison:
 2. Add GitHub Actions workflow for validation
 3. Add duplicate detection (within and across files)
 4. Create test seed gallery with screenshots
-5. Automate release asset validation
+5. Automate release archive validation

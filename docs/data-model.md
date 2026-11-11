@@ -104,7 +104,7 @@ This is an organisational convention only; the engine treats all loaded names eq
 Repository (.txt files)
         │
         ▼
-GitHub Release (ZIP archive)
+Release archive (built by each workflow)
         │
         ▼
 User Installation (Steam/Nexus/Paradox/Manual)

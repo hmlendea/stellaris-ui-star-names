@@ -111,8 +111,9 @@ Special naming:
 
 ### Release Automation (`.github/workflows/`)
 
-- **`steam-workshop.yml`**: Triggers on version tags (`v*.*.*`). Downloads release asset from GitHub Releases, unzips, and uploads to Steam Workshop using `hmlendea/steam-workshop-update` action.
-- **`nexus-mods.yml`**: Triggers on version tags or manual dispatch. Downloads release asset and uploads to Nexus Mods using `Nexus-Mods/upload-action`.
+- **`steam-workshop.yml`**: Triggers on version tags (`v*.*.*`). Builds the release archive (`ui-star-names/` and `ui-star-names.mod`), unzips it, and uploads to Steam Workshop using `hmlendea/steam-workshop-update` action.
+- **`nexus-mods.yml`**: Triggers on version tags or manual dispatch. Builds the release archive and uploads it to Nexus Mods using `Nexus-Mods/upload-action`.
+- **`github-release.yml`**: Triggers on release publication. Builds `ui-star-names_<version>.zip`, attaches it to the release using `softprops/action-gh-release`, and appends the SHA1 checksum to the release notes.
 
 ### Utility Scripts
 

@@ -50,16 +50,19 @@ The root `ARCHITECTURE.md` provides the authoritative system-level architecture.
 
 ### Release Automation Component
 
-**Paths**: `.github/workflows/steam-workshop.yml`, `.github/workflows/nexus-mods.yml`
+**Paths**: `.github/workflows/steam-workshop.yml`, `.github/workflows/nexus-mods.yml`, `.github/workflows/github-release.yml`
 
 **Responsibilities**:
-- Automate packaging and publishing on version tag push (`v*.*.*`)
-- Steam workflow: Downloads GitHub release asset, unzips, uploads to Steam Workshop
-- Nexus workflow: Downloads GitHub release asset, uploads to Nexus Mods via API
+- Automate packaging and publishing on version tag push (`v*.*.*`) and release publication
+- Steam workflow: Builds the release archive, extracts it, uploads to Steam Workshop
+- Nexus workflow: Builds the release archive, uploads to Nexus Mods via API
+- GitHub Release workflow: Builds `ui-star-names_<version>.zip`, attaches it to the published release, and appends its SHA1 checksum to the release notes
 
 **Boundary Rules**:
-- Workflows trigger on Git tags matching `v*.*.*`
-- Release asset naming convention: `ui-star-names_<version>.zip`
+- Tag-triggered workflows match `v*.*.*`; the GitHub Release workflow triggers on the `published` release event
+- Each workflow builds the release archive itself from the checked-out repository
+- Release archive contents: the `ui-star-names/` directory and `ui-star-names.mod`
+- GitHub release asset naming convention: `ui-star-names_<version>.zip`
 - Steam workflow requires secrets: `STEAM_USERNAME`, `STEAM_PASSWORD`, `STEAM_2FA_SEED`
 - Nexus workflow requires secret: `NEXUSMODS_API_KEY`
 - Paradox Mods requires manual upload (no automation)
@@ -110,10 +113,13 @@ Generated Celestial Bodies (receive names from mod lists)
 Git Tag Push (vX.Y.Z)
          │
          ▼
-GitHub Actions: Create Release + Build ZIP
+GitHub Release Published
          │
-         ├──────────────────┬──────────────────┐
-         ▼                  ▼                  ▼
+         ▼
+GitHub Actions: Build Release Archive
+         │
+         ├──────────────────┬──────────────────┬──────────────────┐
+         ▼                  ▼                  ▼                  ▼
    Steam Workshop      Nexus Mods         GitHub Releases
    (automated)         (automated)        (asset storage)
          │                  │                  │
@@ -167,11 +173,11 @@ GitHub Actions: Create Release + Build ZIP
 1. Ensure all changes are on `master` branch
 2. Create and push annotated tag: `git tag -a vX.Y.Z -m "Release vX.Y.Z" && git push origin vX.Y.Z`
 3. GitHub Actions automatically:
-   - Creates GitHub Release with ZIP asset
+   - Builds the release archive from the repository and attaches it to the GitHub Release
    - Publishes to Steam Workshop
    - Publishes to Nexus Mods
-4. Manually upload ZIP to Paradox Mods
-5. Verify all three platforms show the new version
+4. Manually upload the archive to Paradox Mods
+5. Verify all four platforms show the new version
 
 ## Design Rationale
 
@@ -189,7 +195,7 @@ They must remain identical in `name` and `path` fields.
 
 ### No Build Step
 
-The mod is pure data. The "build" is simply creating a ZIP archive of the `ui-star-names/` directory. This is handled by GitHub Actions during release creation.
+The mod is pure data. The "build" is simply creating a ZIP archive containing the `ui-star-names/` directory and `ui-star-names.mod`. Each release workflow builds this archive itself from the checked-out repository, so publishing no longer depends on a pre-existing GitHub release asset.
 
 ### Category Field in Name Lists
 
@@ -202,7 +208,7 @@ Each `name_list` block must declare its `category` so the engine knows which cel
 | All name list files parse as valid Clausewitz script | Game loads mod without errors |
 | Both descriptor files have identical `name` and `path` | Manual review / diff |
 | `supported_version` matches target game version | Manual verification on game update |
-| Release ZIP contains `ui-star-names/` with `descriptor.mod` and `common/` | Workflow validation; manual test install |
+| Release archive contains `ui-star-names/` (with `descriptor.mod` and `common/`) and `ui-star-names.mod` | Workflow validation; manual test install |
 | No executable code or binary assets in mod | Repository inspection |
 
 ## Extension Points
@@ -230,6 +236,7 @@ Not currently implemented. Would require:
 - **Missing descriptor**: Mod not listed in launcher
 - **Version mismatch**: Mod shows as incompatible in launcher
 - **Upload failures**: Workflow fails; manual upload required
+- **Archive build failure**: Missing or renamed `ui-star-names/` directory or `ui-star-names.mod` causes the packaging step to fail
 
 ### Observability
 
@@ -241,7 +248,7 @@ Not currently implemented. Would require:
 
 - No secrets in repository (workflow secrets stored in GitHub)
 - No user data processed
-- Supply chain: Release ZIP built from repository source; verify checksums if concerned
+- Supply chain: Release archive built from repository source by each workflow; verify checksums if concerned
 
 ## Testing and Verification
 
@@ -274,5 +281,6 @@ Not currently implemented. Would require:
 | Black hole lists | `ui-star-names/common/random_names/base/ui_black-holes_*.txt` | 3 files |
 | Steam workflow | `.github/workflows/steam-workshop.yml` | Steam publishing automation |
 | Nexus workflow | `.github/workflows/nexus-mods.yml` | Nexus publishing automation |
+| GitHub Release workflow | `.github/workflows/github-release.yml` | GitHub Release asset automation |
 | Count script | `count-additions.sh` | Name counting utility |
-| Release artefacts | `ui-star-names_*.zip` | Generated release packages |
+| Release archive (generated) | `ui-star-names_<version>.zip` | Archive attached to the GitHub Release |

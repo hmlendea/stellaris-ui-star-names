@@ -139,7 +139,7 @@ Remove duplicates manually or with script.
 |-------|-----------|----------|
 | Invalid credentials | `Authentication failed` | Update `STEAM_USERNAME` / `STEAM_PASSWORD` secrets |
 | 2FA seed expired | `2FA token invalid` | Update `STEAM_2FA_SEED` secret |
-| Release asset missing | `404 Not Found` for ZIP | Ensure release asset attached to GitHub Release |
+| Archive build fails | `zip: ... No such file or directory` | Verify `ui-star-names/` and `ui-star-names.mod` exist at repository root |
 | Rate limited | `Too many requests` | Wait 1 hour and re-run workflow |
 
 ### Nexus Mods Upload Fails
@@ -154,19 +154,31 @@ Remove duplicates manually or with script.
 | File ID mismatch | `404 File not found` | Verify `file_id` (920143) matches Nexus page |
 | Tag format wrong | `Version parse error` | Tag must be `vX.Y.Z` |
 
+### GitHub Release Upload Fails
+
+**Symptoms**: GitHub Actions `GitHub Release` workflow fails
+
+**Causes & Solutions**:
+
+| Cause | Error Log | Solution |
+|-------|-----------|----------|
+| Missing permissions | `Resource not accessible by integration` | Ensure the workflow declares `permissions: contents: write` |
+| Archive build fails | `zip: ... No such file or directory` | Verify `ui-star-names/` and `ui-star-names.mod` exist at repository root |
+
 ### Paradox Mods Upload Rejected
 
 **Symptoms**: Paradox Mods rejects uploaded ZIP
 
 **Cause**: Invalid directory structure in ZIP
 
-**Solution**: ZIP must contain `ui-star-names/` folder at root, not contents directly:
+**Solution**: The archive must contain the `ui-star-names/` folder at root, not its contents directly, alongside `ui-star-names.mod`:
 
 ```
-ui-star-names_1.2.3.zip
-└── ui-star-names/        ← Required wrapper folder
-    ├── descriptor.mod
-    └── common/
+release.zip
+├── ui-star-names/        ← Required wrapper folder
+│   ├── descriptor.mod
+│   └── common/
+└── ui-star-names.mod
 ```
 
 ### Descriptor Files Out of Sync

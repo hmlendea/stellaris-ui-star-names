@@ -11,7 +11,9 @@ This document describes the deployment process for the Universum Infinitum: Star
 | Steam Workshop | GitHub Actions | Full | Steam users |
 | Nexus Mods | GitHub Actions | Full | Nexus users (Vortex/MO2) |
 | Paradox Mods | Manual upload | None | Paradox launcher users |
-| GitHub Releases | Git tag push | Full | Direct download, mod managers |
+| GitHub Releases | GitHub Actions | Full | Direct download, mod managers |
+
+Each release workflow builds the archive itself from the checked-out repository; no previously published release asset is downloaded. The GitHub Release workflow attaches `ui-star-names_<version>.zip` and its SHA1 checksum to the published release.
 
 ## Deployment Triggers
 
@@ -25,19 +27,20 @@ git push origin v1.2.3
 ```
 
 **Sequence**:
-1. GitHub creates Release
-2. Release asset must be attached (manual or separate workflow)
-3. Steam workflow downloads asset → uploads to Workshop
-4. Nexus workflow downloads asset → uploads to Nexus
-5. GitHub Release page updated with asset
+1. Tag push creates the release
+2. Publishing the GitHub Release triggers the GitHub Release workflow, which attaches `ui-star-names_<version>.zip` and appends the SHA1 checksum to the release notes
+3. Each workflow checks out the repository at the tagged commit
+4. Each workflow builds the release archive (`ui-star-names/` and `ui-star-names.mod`)
+5. Steam workflow uploads the extracted contents to the Workshop
+6. Nexus workflow uploads the archive to Nexus
 
 ### Manual (Paradox Mods)
 
 **Trigger**: Maintainer action after automated deployments succeed
 
 **Procedure**:
-1. Download release asset from GitHub
-2. Log in to mods.paradoxplaza.com
+1. Download the release archive from GitHub, or build it locally with `zip -r ui-star-names_<version>.zip ui-star-names ui-star-names.mod`
+2. Log in to `https://mods.paradoxplaza.com/mods/`
 3. Navigate to mod page
 4. Upload new version
 5. Submit for review/publish
@@ -71,24 +74,24 @@ git push origin vX.Y.Z
 
 1. Go to `https://github.com/hmlendea/stellaris-ui-star-names/releases`
 2. Confirm new release `vX.Y.Z` exists
-3. Confirm asset `ui-star-names_X.Y.Z.zip` attached
-4. If missing: create ZIP locally and attach manually
+3. Confirm asset `ui-star-names_X.Y.Z.zip` is attached with its SHA1 checksum in the release notes
 
 ### 3. Monitor Automated Workflows
 
 1. Go to Actions tab
-2. Watch `Steam Workshop` workflow
-3. Watch `Nexus Mods` workflow
-4. Wait for both to complete (green checkmarks)
+2. Watch `GitHub Release` workflow
+3. Watch `Steam Workshop` workflow
+4. Watch `Nexus Mods` workflow
+5. Wait for all to complete (green checkmarks)
 
 ### 4. Manual Paradox Mods Upload
 
-1. Download `ui-star-names_X.Y.Z.zip` from GitHub Release
+1. Download `ui-star-names_X.Y.Z.zip` from GitHub Release, or build it locally with `zip -r ui-star-names_X.Y.Z.zip ui-star-names ui-star-names.mod`
 2. Go to `https://mods.paradoxplaza.com/mods/`
 3. Log in
 4. Find "Universum Infinitum: Star Names"
 5. Click "Add Version" or "Update"
-6. Upload ZIP
+6. Upload the archive
 7. Fill changelog (copy from GitHub Release notes)
 8. Submit/Publish
 
@@ -96,7 +99,7 @@ git push origin vX.Y.Z
 
 | Platform | Check |
 |----------|-------|
-| GitHub | Release visible, asset downloadable |
+| GitHub | Release visible with attached archive and checksum |
 | Steam Workshop | Version updated, changenote visible |
 | Nexus Mods | Version updated, file downloadable |
 | Paradox Mods | Version updated, approved |
@@ -116,8 +119,9 @@ No automated rollback. To fix a bad release:
 | Step | Duration |
 |------|----------|
 | Tag push → GitHub Release | ~30s |
-| GitHub Release → Steam | 2-5 min |
-| GitHub Release → Nexus | 1-3 min |
+| Release published → GitHub Release archive attached | ~1 min |
+| Release published → Steam | 2-5 min |
+| Release published → Nexus | 1-3 min |
 | Manual Paradox | 5-10 min |
 | **Total** | **~10-20 min** |
 
@@ -135,6 +139,7 @@ No automated rollback. To fix a bad release:
 
 | Secret | Purpose | Rotation |
 |--------|---------|----------|
+| `GITHUB_TOKEN` | Built-in token used by the GitHub Release workflow to attach assets | Automatic |
 | `NEXUSMODS_API_KEY` | Nexus Mods API authentication | On key regeneration |
 
 ### Configuration

@@ -13,9 +13,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Download the release asset
+    - name: Build the release archive
       run: |
-        wget "https://github.com/hmlendea/stellaris-ui-star-names/releases/download/${{github.ref_name}}/ui-star-names_${GITHUB_REF:11}.zip" -O "release.zip"
+        zip -r "release.zip" "ui-star-names" "ui-star-names.mod"
+
+    - name: Extract the release archive
+      run: |
         unzip "release.zip" -d "release/"
 
     - name: Upload

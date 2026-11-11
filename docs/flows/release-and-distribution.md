@@ -2,7 +2,7 @@
 
 ## Overview
 
-This flow describes the end-to-end process from code change to published mod on all three distribution platforms.
+This flow describes the end-to-end process from code change to published mod on all four distribution platforms.
 
 ## Sequence Diagram
 
@@ -17,12 +17,13 @@ sequenceDiagram
 
     Dev->>GitHub: Push changes to master
     Dev->>GitHub: Create & push tag vX.Y.Z
+    Dev->>GitHub: Publish GitHub Release
     GitHub->>Actions: Trigger release workflows
-    Actions->>GitHub: Create GitHub Release
-    Actions->>GitHub: Attach ZIP asset
+    Actions->>Actions: Build release archive from repository
+    Actions->>GitHub: Attach ui-star-names_<version>.zip + SHA1 checksum
     Actions->>Steam: Upload via steam-workshop-update
     Actions->>Nexus: Upload via Nexus-Mods/upload-action
-    Dev->>Paradox: Manual upload ZIP
+    Dev->>Paradox: Manual upload archive
     Steam-->>User: Mod update available
     Nexus-->>User: Mod update available
     Paradox-->>User: Mod update available
@@ -56,22 +57,24 @@ git tag -a vX.Y.Z -m "Release vX.Y.Z - <summary>"
 git push origin vX.Y.Z
 ```
 
-### 4. GitHub Actions: Release Creation
+### 4. GitHub Actions: Release Archive Construction
 
-1. Tag push triggers GitHub Release creation (automatic)
-2. GitHub creates release at `https://github.com/hmlendea/stellaris-ui-star-names/releases/tag/vX.Y.Z`
-3. Release asset must be attached — currently manual or via separate workflow
-4. Expected asset name: `ui-star-names_<version>.zip` (e.g., `ui-star-names_1.2.3.zip`)
+1. Publishing the GitHub Release triggers the GitHub Release workflow
+2. Each workflow checks out the repository at the tagged commit
+3. Each workflow builds the release archive itself from the repository contents
+4. The GitHub Release workflow publishes it as `ui-star-names_<version>.zip`; the Steam and Nexus workflows use the local name `release.zip`
+5. GitHub release asset naming convention: `ui-star-names_<version>.zip` (e.g., `ui-star-names_1.2.3.zip`)
 
-**Asset Structure**:
+**Archive Structure**:
 ```
-ui-star-names_1.2.3.zip
-└── ui-star-names/
-    ├── descriptor.mod
-    └── common/
-        └── random_names/
-            └── base/
-                └── *.txt
+ui-star-names_<version>.zip
+├── ui-star-names/
+│   ├── descriptor.mod
+│   └── common/
+│       └── random_names/
+│           └── base/
+│               └── *.txt
+└── ui-star-names.mod
 ```
 
 ### 5. Steam Workshop Workflow (`.github/workflows/steam-workshop.yml`)
@@ -80,9 +83,9 @@ ui-star-names_1.2.3.zip
 
 **Execution**:
 1. Checkout repository
-2. Download release asset:
+2. Build the release archive:
    ```bash
-   wget "https://github.com/hmlendea/stellaris-ui-star-names/releases/download/${{github.ref_name}}/ui-star-names_${GITHUB_REF:11}.zip" -O "release.zip"
+   zip -r "release.zip" "ui-star-names" "ui-star-names.mod"
    ```
 3. Unzip to `release/`
 4. Upload using `hmlendea/steam-workshop-update@v1.0.0`:
@@ -104,10 +107,9 @@ ui-star-names_1.2.3.zip
 **Execution**:
 1. Checkout repository
 2. Determine version: `${{ inputs.tag || github.ref_name }}`
-3. Download release asset:
+3. Build the release archive:
    ```bash
-   RELEASE_ASSET_NAME="ui-star-names_${VERSION#v}.zip"
-   wget "https://github.com/hmlendea/stellaris-ui-star-names/releases/download/${VERSION}/${RELEASE_ASSET_NAME}" -O "release.zip"
+   zip -r "release.zip" "ui-star-names" "ui-star-names.mod"
    ```
 4. Upload using `Nexus-Mods/upload-action@v1.0.0-beta.10`:
    - `file_id`: 920143
@@ -120,28 +122,40 @@ ui-star-names_1.2.3.zip
 **Secrets Required**:
 - `NEXUSMODS_API_KEY`
 
-### 7. Paradox Mods (Manual)
+### 7. GitHub Release Workflow (`.github/workflows/github-release.yml`)
+
+**Trigger**: GitHub Release publication
+
+**Execution**:
+1. Checkout repository
+2. Build `ui-star-names_<version>.zip` and compute its SHA1 checksum
+3. Append the SHA1 checksum to the release notes
+4. Upload using `softprops/action-gh-release@v2`
+
+**Permissions Required**:
+- `contents: write`
+
+### 8. Paradox Mods (Manual)
 
 1. Go to `https://mods.paradoxplaza.com/mods/`
 2. Log in with Paradox account
 3. Find "Universum Infinitum: Star Names"
 4. Click "Update" or "New Version"
-5. Upload `ui-star-names_<version>.zip`
+5. Upload the release archive (`ui-star-names_<version>.zip` or locally built `release.zip`)
 6. Fill changelog
 7. Submit for review (if required)
 8. Publish
 
-### 8. Post-Release Verification
+### 9. Post-Release Verification
 
 | Platform | Check |
 |----------|-------|
-| GitHub | Release exists with ZIP asset |
+| GitHub | Release exists with the attached archive and SHA1 checksum |
 | Steam Workshop | Version updated, changenote visible |
 | Nexus Mods | Version updated, file downloadable |
 | Paradox Mods | Version updated, approved |
 
-### 9. User Update Flow
-
+### 10. User Update Flow
 1. User launches Stellaris
 2. Launcher checks for mod updates
 3. Steam: Auto-updates subscribed mods
@@ -153,9 +167,9 @@ ui-star-names_1.2.3.zip
 ## Data Flow
 
 ```
-Git tag push
+Git tag push → GitHub Release published
        ↓
-GitHub Release + ZIP asset
+GitHub Actions build release archive
        ↓
 ┌─────────────────────────────────────┐
 │         Parallel Uploads            │
@@ -179,8 +193,9 @@ GitHub Release + ZIP asset
 | Step | Duration |
 |------|----------|
 | Tag push → GitHub Release | ~30 seconds |
-| GitHub Release → Steam upload | ~2-5 minutes |
-| GitHub Release → Nexus upload | ~1-3 minutes |
+| Release published → archive attached to GitHub Release | ~1 minute |
+| Release published → Steam upload | ~2-5 minutes |
+| Release published → Nexus upload | ~1-3 minutes |
 | Manual Paradox upload | ~5-10 minutes |
 | **Total automated** | **~3-8 minutes** |
 | **Total with manual** | **~10-20 minutes** |
@@ -211,13 +226,16 @@ GitHub Release + ZIP asset
    - Re-run workflow manually
    - Or upload manually via Nexus Mods website
 
-### Release Asset Missing
+### Archive Build Failure
 
-1. Check GitHub Release page
-2. If no asset attached:
-   - Create ZIP locally: `zip -r ui-star-names_<version>.zip ui-star-names/`
-   - Attach to release via GitHub UI
-   - Re-run both workflows
+1. Check the failing workflow logs
+2. Common cause: `ui-star-names/` or `ui-star-names.mod` missing or renamed in the repository
+3. Fix the paths, then re-run the workflow
+
+### Local Archive Construction (Manual Recovery)
+
+1. Build locally: `zip -r ui-star-names_<version>.zip ui-star-names ui-star-names.mod`
+2. Attach to the GitHub release or upload manually to the target platform
 
 ### Paradox Mods Rejection
 
@@ -228,14 +246,14 @@ GitHub Release + ZIP asset
 ## Invariants
 
 1. Tag format must be `vX.Y.Z` (semantic versioning)
-2. Release asset name must match `ui-star-names_<version>.zip`
+2. GitHub release asset name must match `ui-star-names_<version>.zip`
 3. Both descriptor files must have identical `name` and `path`
 4. `supported_version` must match target Stellaris version
-5. All three platforms should receive same version simultaneously
+5. All four platforms should receive same version simultaneously
 
 ## Known Issues
 
-- No automated release asset creation (relies on manual or separate process)
+- Release archives are built independently by each workflow; no shared artefact is reused
 - Paradox Mods has no API — always manual
 - Steam 2FA seed expires periodically
 - Nexus Mods action is beta (`v1.0.0-beta.10`)

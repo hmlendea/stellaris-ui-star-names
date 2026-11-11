@@ -12,6 +12,7 @@ Mod for Stellaris that adds [thousands of new names](https://github.com/hmlendea
 - [Usage](#-usage)
 - [Installation](#-installation)
 - [Development](#-development)
+- [GitHub Actions](#-github-actions)
 - [Architecture](#-architecture)
 - [Documentation](#-documentation)
 - [Privacy and Data](#-privacy-and-data)
@@ -62,6 +63,14 @@ No build step is required. Edit the `.txt` name list files under `ui-star-names/
 ### Run
 
 Enable the mod in the Stellaris launcher and start a new game.
+
+## ⚙️ GitHub Actions
+
+| Workflow | Purpose | What it does |
+|----------|---------|--------------|
+| [ Steam Workshop ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/steam-workshop.yml) | Publish releases to the Steam Workshop | Builds the release archive containing `ui-star-names/` and `ui-star-names.mod`, then uploads it with the `hmlendea/steam-workshop-update` action |
+| [ Nexus Mods ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/nexus-mods.yml) | Publish releases to Nexus Mods | Builds the release archive containing `ui-star-names/` and `ui-star-names.mod`, then uploads it with the `Nexus-Mods/upload-action` action |
+| [ GitHub Release ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/github-release.yml) | Publish the release archive to GitHub Releases | Builds `ui-star-names_<version>.zip` containing `ui-star-names/` and `ui-star-names.mod`, uploads it with `softprops/action-gh-release`, and appends the SHA1 checksum to the release notes |
 
 ## 🏗️ Architecture
 

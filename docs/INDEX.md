@@ -32,7 +32,7 @@ This repository contains a pure data mod for the game Stellaris that adds thousa
 |------|-------------|
 | [components/name-list-data.md](./components/name-list-data.md) | Name list data files: stars, nebulas, asteroids, black holes |
 | [components/mod-metadata.md](./components/mod-metadata.md) | Mod descriptor files and their contracts |
-| [components/release-automation.md](./components/release-automation.md) | GitHub Actions workflows for Steam Workshop and Nexus Mods |
+| [components/release-automation.md](./components/release-automation.md) | GitHub Actions workflows for Steam Workshop, Nexus Mods, and GitHub Releases |
 
 ### Flows
 

@@ -28,7 +28,7 @@ The repository contains:
 
 ## Repository Type
 
-This is a **content-only repository** for a game mod. It contains no executable code, build system, test suite, or runtime. The "build" is a simple ZIP archive of the `ui-star-names/` directory.
+This is a **content-only repository** for a game mod. It contains no executable code, build system, test suite, or runtime. The "build" is a simple ZIP archive containing the `ui-star-names/` directory and `ui-star-names.mod`, produced by each release workflow.
 
 ## Target Audience
 

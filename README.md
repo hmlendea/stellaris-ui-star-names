@@ -10,16 +10,28 @@ Mod for Stellaris that adds [thousands of new names](https://github.com/hmlendea
 
 - [Capabilities](#-capabilities)
 - [Usage](#-usage)
+- [Known Limitations](#-known-limitations)
 - [Installation](#-installation)
+  - [Manual Installation](#manual-installation)
+- [Compatibility](#-compatibility)
+- [Privacy and Data](#-privacy-and-data)
 - [Development](#-development)
+  - [Requirements](#requirements)
+  - [Setup](#setup)
+  - [Build](#build)
+  - [Run](#run)
+  - [Test](#test)
 - [GitHub Actions](#-github-actions)
+- [Project Structure](#-project-structure)
+  - [Directories](#directories)
 - [Architecture](#-architecture)
 - [Documentation](#-documentation)
-- [Privacy and Data](#-privacy-and-data)
-- [Security](#-security)
-- [Code of Conduct](#-code-of-conduct)
+- [Troubleshooting](#-troubleshooting)
 - [Contributing](#-contributing)
+- [Code of Conduct](#-code-of-conduct)
 - [Related Projects](#-related-projects)
+- [Security](#security)
+- [Support](#-support)
 - [Project Engagement](#-project-engagement)
 - [License](#-license)
 
@@ -34,6 +46,10 @@ Mod for Stellaris that adds [thousands of new names](https://github.com/hmlendea
 
 Enable the mod in the Stellaris launcher and start a new game. The additional names are applied automatically when starting a new game.
 
+## ⚠️ Known Limitations
+
+- Names are selected during galaxy generation, so they apply only to newly generated galaxies and do not rename celestial bodies in existing saved games.
+
 ## 📦 Installation
 
 [![Obtain it from Steam Workshop](https://raw.githubusercontent.com/hmlendea/readme-assets/master/badges/stores/steam-workshop.png)](https://steamcommunity.com/sharedfiles/filedetails/?id=2040215185)
@@ -46,11 +62,24 @@ Enable the mod in the Stellaris launcher and start a new game. The additional na
 1. Download the [latest release](https://github.com/hmlendea/stellaris-ui-star-names/releases).
 2. Extract the contents into your game's mod directory.
 
+## 🧩 Compatibility
+
+| Component | Supported Versions | Notes |
+|-----------|--------------------|-------|
+| Stellaris | `4.5.x` | Declared through `supported_version` in both `ui-star-names.mod` and `ui-star-names/descriptor.mod` |
+
+## 🛡️ Privacy and Data
+
+Stellaris - Universum Infinitum - Star Names does not collect, process, store, or transmit any personal data.
+
+For the detailed description of how the application handles privacy and personal data, see the [Privacy Statement](./PRIVACY.md).
+
 ## 🛠️ Development
 
 ### Requirements
 
 - [Stellaris](https://store.steampowered.com/app/281990/Stellaris/)
+- [Bash](https://www.gnu.org/software/bash/), used by the name count script
 
 ### Setup
 
@@ -64,19 +93,38 @@ No build step is required. Edit the `.txt` name list files under `ui-star-names/
 
 Enable the mod in the Stellaris launcher and start a new game.
 
+### Test
+
+Run the name count script to detect accidental removals or additions of name entries:
+
+```bash
+./count-additions.sh
+```
+
 ## ⚙️ GitHub Actions
 
 | Workflow | Purpose | What it does |
 |----------|---------|--------------|
-| [ Steam Workshop ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/steam-workshop-release.yml) | Publish releases to the Steam Workshop | Updates the mod version, builds the release archive containing `ui-star-names/` and `ui-star-names.mod`, then uploads it with the `hmlendea/steam-workshop-update` action |
-| [ Nexus Mods ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/nexus-mods-release.yml) | Publish releases to Nexus Mods | Updates the mod version, builds the release archive containing `ui-star-names/` and `ui-star-names.mod`, then uploads it with the `Nexus-Mods/upload-action` action |
-| [ GitHub Release ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/github-release.yml) | Publish the release archive to GitHub Releases | Updates the mod version, builds `ui-star-names_<version>.zip` containing `ui-star-names/` and `ui-star-names.mod`, and uploads it with `softprops/action-gh-release` |
+| [ Steam Workshop ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/steam-workshop-release.yml) | Publish releases to the Steam Workshop | Triggers on version tags or manual dispatch, updates the mod version, builds the release archive containing `ui-star-names/` and `ui-star-names.mod`, then uploads it with the `hmlendea/steam-workshop-update` action |
+| [ Nexus Mods ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/nexus-mods-release.yml) | Publish releases to Nexus Mods | Triggers on version tags or manual dispatch, updates the mod version, builds the release archive containing `ui-star-names/` and `ui-star-names.mod`, then uploads it with the `Nexus-Mods/upload-action` action |
+| [ GitHub Release ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/github-release.yml) | Publish the release archive to GitHub Releases | Triggers on release publication, updates the mod version, builds `ui-star-names_<version>.zip` containing `ui-star-names/` and `ui-star-names.mod`, and uploads it with `softprops/action-gh-release` |
+
+## 🗂️ Project Structure
+
+### Directories
+
+| Directory | Purpose |
+|-----------|---------|
+| `ui-star-names/common/random_names/base/` | Name list files for stars, nebulas, asteroids, and black holes |
+| `ui-star-names/` | Mod content, including `descriptor.mod` |
+| `docs/` | Repository documentation |
+| `.github/workflows/` | Release automation workflows |
 
 ## 🏗️ Architecture
 
 Stellaris - Universum Infinitum - Star Names is a pure data mod consisting of static name list files in Clausewitz script format. The Stellaris game engine loads these files during galaxy generation and randomly selects names for stars, nebulas, asteroids, and black holes. There is no executable code, build step, or runtime.
 
-See the [architecture documentation](./ARCHITECTURE.md) for the system context, data architecture, deployment model, compatibility contracts, and source map.
+See the [Architecture Documentation](./ARCHITECTURE.md) for the system context, principal components, runtime flows, ownership boundaries, dependencies, constraints, and extension points.
 
 ## 📚 Documentation
 
@@ -97,17 +145,13 @@ Comprehensive documentation is available in the [`docs/`](./docs/) directory:
 | [API Reference](./docs/api-reference/) | Engine internal APIs |
 | [Logging](./docs/logging.md) | Engine log patterns |
 
-## 🛡️ Privacy and Data
+## 🩺 Troubleshooting
 
-Stellaris - Universum Infinitum - Star Names does not collect, process, store, or transmit any personal data.
-
-For the detailed description of how the application handles privacy and personal data, see [PRIVACY.md](./PRIVACY.md).
-
-## 🔒 Security
-
-Stellaris - Universum Infinitum - Star Names consists solely of static text files and does not execute code, process user data, or communicate over networks.
-
-For information on reporting security vulnerabilities, see [SECURITY.md](./SECURITY.md).
+| Symptom | Probable Cause | Resolution |
+|---------|----------------|------------|
+| Mod absent from the launcher mod list | Descriptor not placed at `ui-star-names/descriptor.mod`, or the mod folder is outside the Stellaris `mod/` directory | Move the descriptor to the correct path and place the mod folder inside the Stellaris `mod/` directory |
+| Launcher reports the mod as incompatible | `supported_version` does not match the installed Stellaris version | Update `supported_version` in both descriptor files, then restart the launcher |
+| Only vanilla names appear in game | Mod disabled, incorrect category field, or a syntax error in a referenced file | Enable the mod in the launcher, verify the `category` value, and inspect `logs/error.log` |
 
 ## 📜 Code of Conduct
 
@@ -126,15 +170,33 @@ When doing so, please:
 - Include tests for additional or modified functionality
 - Raise a new [issue](https://github.com/hmlendea/stellaris-ui-star-names/issues) for problems or suggestions
 
-See the [contributing guidelines](./CONTRIBUTING.md) for details on how to report issues, suggest enhancements, and submit changes.
+See the [Contributing Guidelines](./CONTRIBUTING.md) for details on how to report issues, suggest enhancements, and submit changes.
 
 ## 🔗 Related Projects
 
-- [Character Traits](https://github.com/hmlendea/stellaris-ui-character-traits): Adds new character trait names for leaders and rulers
+- [Character Traits](https://github.com/hmlendea/stellaris-ui-character-traits): Adds character traits for Stellaris.
+- [Deposit Blockers](https://github.com/hmlendea/stellaris-ui-deposit-blockers): Adds deposit blockers for Stellaris.
+- [Flags](https://github.com/hmlendea/stellaris-ui-flags): Supplies flag assets used by this mod.
+- [Galaxy Sizes](https://github.com/hmlendea/stellaris-ui-galaxy-sizes): Adds galaxy size options for Stellaris.
+- [Name Lists](https://github.com/hmlendea/stellaris-ui-name-lists): Supplies name lists used by this mod.
+- [Planet Modifiers](https://github.com/hmlendea/stellaris-ui-planet-modifiers): Adds planet modifiers for Stellaris.
+- [Species Names](https://github.com/hmlendea/stellaris-ui-species-names): Adds species names for Stellaris.
+- [Species Traits](https://github.com/hmlendea/stellaris-ui-species-traits): Supplies species traits used by this mod.
+- [Star Names](https://github.com/hmlendea/stellaris-ui-star-names): Adds star names for Stellaris.
+
+## 🔒 Security
+
+Stellaris - Universum Infinitum - Star Names consists solely of static text files and does not execute code, process user data, or communicate over networks.
+
+For information on reporting security vulnerabilities, see the [Security Policy](./SECURITY.md).
+
+## 💬 Support
+
+For support, please [open an issue](https://github.com/hmlendea/stellaris-ui-star-names/issues).
 
 ## 💝 Project Engagement
 
-Discovered a problem or have a suggestion? [Open an issue](https://github.com/hmlendea/stellaris-ui-star-names/issues)!
+Discovered a problem with Stellaris - Universum Infinitum - Star Names or have a suggestion for it? [Open an issue](https://github.com/hmlendea/stellaris-ui-star-names/issues)!
 
 If you find this project useful, consider [funding it](https://hmlendea.go.ro/funding) or starring ⭐️ it on GitHub, or giving it a thumbs up and adding it as a favourite on the [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2040215185)!
 
@@ -142,5 +204,5 @@ If you find this project useful, consider [funding it](https://hmlendea.go.ro/fu
 
 ## 📄 License
 
-This project is being distributed under the GNU General Public License v3 or later.
+This project is being distributed under the `GNU General Public License v3` or later.
 See [LICENSE](./LICENSE) for additional information.

@@ -13,7 +13,7 @@ This document describes the deployment process for the Universum Infinitum: Star
 | Paradox Mods | Manual upload | None | Paradox launcher users |
 | GitHub Releases | GitHub Actions | Full | Direct download, mod managers |
 
-Each release workflow builds the archive itself from the checked-out repository; no previously published release asset is downloaded. The GitHub Release workflow attaches `ui-star-names_<version>.zip` and its SHA1 checksum to the published release.
+Each release workflow builds the archive itself from the checked-out repository; no previously published release asset is downloaded. The GitHub Release workflow attaches `ui-star-names_<version>.zip` to the published release.
 
 ## Deployment Triggers
 
@@ -27,12 +27,13 @@ git push origin v1.2.3
 ```
 
 **Sequence**:
-1. Tag push creates the release
-2. Publishing the GitHub Release triggers the GitHub Release workflow, which attaches `ui-star-names_<version>.zip` and appends the SHA1 checksum to the release notes
-3. Each workflow checks out the repository at the tagged commit
-4. Each workflow builds the release archive (`ui-star-names/` and `ui-star-names.mod`)
-5. Steam workflow uploads the extracted contents to the Workshop
-6. Nexus workflow uploads the archive to Nexus
+1. Tag push triggers the Steam and Nexus workflows
+2. Publishing the GitHub Release triggers the GitHub Release workflow, which attaches `ui-star-names_<version>.zip` to the release
+3. Each workflow checks out the tagged commit
+4. Each workflow updates the `version` field in both descriptors
+5. Each workflow builds the release archive (`ui-star-names/` and `ui-star-names.mod`)
+6. Steam workflow uploads the extracted contents to the Workshop
+7. Nexus workflow uploads the archive to Nexus
 
 ### Manual (Paradox Mods)
 
@@ -74,7 +75,7 @@ git push origin vX.Y.Z
 
 1. Go to `https://github.com/hmlendea/stellaris-ui-star-names/releases`
 2. Confirm new release `vX.Y.Z` exists
-3. Confirm asset `ui-star-names_X.Y.Z.zip` is attached with its SHA1 checksum in the release notes
+3. Confirm asset `ui-star-names_X.Y.Z.zip` is attached to the release
 
 ### 3. Monitor Automated Workflows
 

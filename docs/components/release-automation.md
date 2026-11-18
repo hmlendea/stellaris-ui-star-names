@@ -6,15 +6,16 @@ The release automation component consists of three GitHub Actions workflows that
 
 ## Workflows
 
-### Steam Workshop (`.github/workflows/steam-workshop.yml`)
+### Steam Workshop (`.github/workflows/steam-workshop-release.yml`)
 
-**Trigger**: Push of Git tag matching `v*.*.*`
+**Trigger**: Push of Git tag matching `v*.*.*` OR manual workflow dispatch with tag input
 
 **Steps**:
-1. Checkout repository
-2. Build the release archive `release.zip` containing `ui-star-names/` and `ui-star-names.mod`
-3. Unzip to `release/` directory
-4. Upload to Steam Workshop using `hmlendea/steam-workshop-update@v1.3.0`
+1. Checkout the requested tag
+2. Update the `version` field in `ui-star-names.mod` and `ui-star-names/descriptor.mod`
+3. Build the release archive `release.zip` containing `ui-star-names/` and `ui-star-names.mod`
+4. Unzip to `release/` directory
+5. Upload to Steam Workshop using `hmlendea/steam-workshop-update@latest`
 
 **Required Secrets**:
 - `STEAM_USERNAME`
@@ -27,14 +28,15 @@ The release automation component consists of three GitHub Actions workflows that
 - `path`: `release/ui-star-names/`
 - `changenote`: Links to GitHub release page
 
-### Nexus Mods (`.github/workflows/nexus-mods.yml`)
+### Nexus Mods (`.github/workflows/nexus-mods-release.yml`)
 
 **Trigger**: Push of Git tag matching `v*.*.*` OR manual workflow dispatch with tag input
 
 **Steps**:
-1. Checkout repository
-2. Build the release archive `release.zip` containing `ui-star-names/` and `ui-star-names.mod`
-3. Upload to Nexus Mods using `Nexus-Mods/upload-action@v1.0.0-beta.10`
+1. Checkout the requested tag
+2. Update the `version` field in `ui-star-names.mod` and `ui-star-names/descriptor.mod`
+3. Build the release archive `release.zip` containing `ui-star-names/` and `ui-star-names.mod`
+4. Upload to Nexus Mods using `Nexus-Mods/upload-action@v1.0.0-beta.11`
 
 **Required Secrets**:
 - `NEXUSMODS_API_KEY`
@@ -55,16 +57,18 @@ The release automation component consists of three GitHub Actions workflows that
 
 **Steps**:
 1. Checkout repository
-2. Build `ui-star-names_<version>.zip` containing `ui-star-names/` and `ui-star-names.mod`
-3. Compute the archive SHA1 checksum and append it to the release notes
-4. Upload the archive with `softprops/action-gh-release@v2`
+2. Extract the version from the GitHub release tag
+3. Update the `version` field in `ui-star-names.mod` and `ui-star-names/descriptor.mod`
+4. Build `ui-star-names_<version>.zip` containing `ui-star-names/` and `ui-star-names.mod`
+5. Publish it with `softprops/action-gh-release@v2`
 
 **Required Permissions**:
 - `contents: write`
 
 **Configuration**:
 - `files`: Generated archive name
-- `body_path`: Generated release notes file with the SHA1 checksum
+
+The release body is left exactly as the maintainer wrote it; no checksum is computed or appended.
 
 ## Release Archive
 
@@ -82,7 +86,7 @@ ui-star-names_<version>.zip
 └── ui-star-names.mod
 ```
 
-The Steam and Nexus workflows build the same contents as `release.zip`; the Nexus workflow uploads it under the display name `ui-star-names.zip`, while the GitHub Release workflow publishes it as `ui-star-names_<version>.zip` and appends a SHA1 checksum to the release notes.
+The Steam and Nexus workflows build the same contents as `release.zip`; the Nexus workflow uploads it under the display name `ui-star-names.zip`, while the GitHub Release workflow publishes it as `ui-star-names_<version>.zip`.
 
 ## Dependencies
 
@@ -120,7 +124,7 @@ The Steam and Nexus workflows build the same contents as `release.zip`; the Nexu
 2. Publish a GitHub Release for the tag
 
 3. GitHub Actions automatically:
-   - Attaches `ui-star-names_<version>.zip` to the GitHub Release with its SHA1 checksum appended to the notes
+   - Attaches `ui-star-names_<version>.zip` to the GitHub Release
    - Triggers Steam workflow, which builds and uploads the release archive
    - Triggers Nexus workflow, which builds and uploads the release archive
 
@@ -132,7 +136,7 @@ The Steam and Nexus workflows build the same contents as `release.zip`; the Nexu
 
 ### Post-Release Verification
 
-1. Check GitHub Release page for the attached archive and checksum
+1. Check GitHub Release page for the attached archive
 2. Check Steam Workshop page for update
 3. Check Nexus Mods page for update
 4. Check Paradox Mods page (manual)
@@ -153,6 +157,7 @@ The Steam and Nexus workflows build the same contents as `release.zip`; the Nexu
 - Paradox Mods requires manual upload (no API)
 - Workflows depend on third-party actions (`hmlendea/steam-workshop-update`, `Nexus-Mods/upload-action`, `softprops/action-gh-release`)
 - No automated verification of release archive contents
+- The mod `version` field is written into the checked-out descriptor files at release time; the committed descriptors carry no `version` line
 - No rollback mechanism (must push new tag)
 - Secrets management: Steam 2FA seed must be kept current
 - Version tag format must be exactly `vX.Y.Z` (semantic versioning)
@@ -167,24 +172,46 @@ on:
   push:
     tags:
     - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to release'
+        required: true
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ inputs.tag || github.ref_name }}
     steps:
     - uses: actions/checkout@v7
+      with:
+        ref: ${{ env.VERSION }}
+    - name: Update the mod version
+      run: |
+        MOD_VERSION="${VERSION#v}"
+
+        for DESCRIPTOR in "ui-star-names.mod" "ui-star-names/descriptor.mod"
+        do
+          if grep -q '^version=' "${DESCRIPTOR}"; then
+            sed -i "s/^version=.*/version=\"${MOD_VERSION}\"/" "${DESCRIPTOR}"
+          else
+            printf 'version="%s"\n' "${MOD_VERSION}" | cat - "${DESCRIPTOR}" > "${DESCRIPTOR}.tmp"
+            mv "${DESCRIPTOR}.tmp" "${DESCRIPTOR}"
+          fi
+        done
     - name: Build the release archive
       run: |
-        zip -r "release.zip" "ui-star-names" "ui-star-names.mod"
+        zip -r "release.zip" "ui-star-names/" "ui-star-names.mod"
     - name: Extract the release archive
       run: |
         unzip "release.zip" -d "release/"
     - name: Upload
-      uses: hmlendea/steam-workshop-update@v1.3.0
+      uses: hmlendea/steam-workshop-update@latest
       with:
         appid: 281990
         itemid: 2040215185
         path: "release/ui-star-names/"
-        changenote: "[url=https://github.com/hmlendea/stellaris-ui-star-names/releases/tag/${{github.ref_name}}]Version ${{github.ref_name}}[/url]"
+        changenote: "[url=https://github.com/hmlendea/stellaris-ui-star-names/releases/tag/${{env.VERSION}}]Version ${{env.VERSION}}[/url]"
       env:
         STEAM_USERNAME: ${{secrets.STEAM_USERNAME}}
         STEAM_PASSWORD: ${{secrets.STEAM_PASSWORD}}
@@ -210,12 +237,27 @@ jobs:
     env:
       VERSION: ${{ inputs.tag || github.ref_name }}
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v7
+      with:
+        ref: ${{ env.VERSION }}
+    - name: Update the mod version
+      run: |
+        MOD_VERSION="${VERSION#v}"
+
+        for DESCRIPTOR in "ui-star-names.mod" "ui-star-names/descriptor.mod"
+        do
+          if grep -q '^version=' "${DESCRIPTOR}"; then
+            sed -i "s/^version=.*/version=\"${MOD_VERSION}\"/" "${DESCRIPTOR}"
+          else
+            printf 'version="%s"\n' "${MOD_VERSION}" | cat - "${DESCRIPTOR}" > "${DESCRIPTOR}.tmp"
+            mv "${DESCRIPTOR}.tmp" "${DESCRIPTOR}"
+          fi
+        done
     - name: Build the release archive
       run: |
-        zip -r "release.zip" "ui-star-names" "ui-star-names.mod"
+        zip -r "release.zip" "ui-star-names/" "ui-star-names.mod"
     - name: Upload
-      uses: Nexus-Mods/upload-action@v1.0.0-beta.10
+      uses: Nexus-Mods/upload-action@v1.0.0-beta.11
       with:
         api_key: ${{ secrets.NEXUSMODS_API_KEY }}
         file_id: 920143
@@ -234,39 +276,49 @@ jobs:
 name: GitHub Release
 on:
   release:
-    types:
-      - published
+    types: [ published ]
 permissions:
   contents: write
 jobs:
-  build-and-upload:
+  release:
+    name: Build and publish
     runs-on: ubuntu-latest
     steps:
-    - name: Check out repository
-      uses: actions/checkout@v4
+    - name: Check out the repository
+      uses: actions/checkout@v7
+    - name: Extract the version from the GitHub tag
+      id: version
+      run: |
+        VERSION="${{ github.event.release.tag_name }}"
+        VERSION="${VERSION#v}"
+        echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+    - name: Update the mod version
+      shell: bash
+      run: |
+        MOD_VERSION="${{ steps.version.outputs.version }}"
+
+        for DESCRIPTOR in "ui-star-names.mod" "ui-star-names/descriptor.mod"
+        do
+          if grep -q '^version=' "${DESCRIPTOR}"; then
+            sed -i "s/^version=.*/version=\"${MOD_VERSION}\"/" "${DESCRIPTOR}"
+          else
+            printf 'version="%s"\n' "${MOD_VERSION}" | cat - "${DESCRIPTOR}" > "${DESCRIPTOR}.tmp"
+            mv "${DESCRIPTOR}.tmp" "${DESCRIPTOR}"
+          fi
+        done
     - name: Build the release archive
       id: package
       shell: bash
-      env:
-        RELEASE_BODY: ${{ github.event.release.body }}
       run: |
-        version="${{ github.event.release.tag_name }}"
-        version="${version#v}"
-        archive_name="ui-star-names_${version}.zip"
-        release_notes_file="release_notes.md"
+        ARCHIVE_NAME="ui-star-names_${{ steps.version.outputs.version }}.zip"
 
-        zip -r "$archive_name" "ui-star-names" "ui-star-names.mod"
-        archive_sha1="$(sha1sum "$archive_name" | awk '{print $1}')"
+        zip -r "${ARCHIVE_NAME}" "ui-star-names/" "ui-star-names.mod"
 
-        printf '%s\n\n**SHA1 Checksum**: %s\n' "$RELEASE_BODY" "$archive_sha1" > "$release_notes_file"
-
-        echo "archive_name=$archive_name" >> "$GITHUB_OUTPUT"
-        echo "release_notes_file=$release_notes_file" >> "$GITHUB_OUTPUT"
-    - name: Upload the release archive
+        echo "archive_name=${ARCHIVE_NAME}" >> "$GITHUB_OUTPUT"
+    - name: Publish the release asset
       uses: softprops/action-gh-release@v2
       with:
         files: ${{ steps.package.outputs.archive_name }}
-        body_path: ${{ steps.package.outputs.release_notes_file }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```

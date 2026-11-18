@@ -50,13 +50,13 @@ The root `ARCHITECTURE.md` provides the authoritative system-level architecture.
 
 ### Release Automation Component
 
-**Paths**: `.github/workflows/steam-workshop.yml`, `.github/workflows/nexus-mods.yml`, `.github/workflows/github-release.yml`
+**Paths**: `.github/workflows/steam-workshop-release.yml`, `.github/workflows/nexus-mods-release.yml`, `.github/workflows/github-release.yml`
 
 **Responsibilities**:
 - Automate packaging and publishing on version tag push (`v*.*.*`) and release publication
-- Steam workflow: Builds the release archive, extracts it, uploads to Steam Workshop
-- Nexus workflow: Builds the release archive, uploads to Nexus Mods via API
-- GitHub Release workflow: Builds `ui-star-names_<version>.zip`, attaches it to the published release, and appends its SHA1 checksum to the release notes
+- Steam workflow: Updates the mod version, builds the release archive, extracts it, uploads to Steam Workshop
+- Nexus workflow: Updates the mod version, builds the release archive, uploads to Nexus Mods via API
+- GitHub Release workflow: Updates the mod version, builds `ui-star-names_<version>.zip`, and attaches it to the published release
 
 **Boundary Rules**:
 - Tag-triggered workflows match `v*.*.*`; the GitHub Release workflow triggers on the `published` release event
@@ -279,8 +279,8 @@ Not currently implemented. Would require:
 | Asteroid prefixes | `ui-star-names/common/random_names/base/ui_asteroid-prefixes.txt` | 1 file |
 | Asteroid postfixes | `ui-star-names/common/random_names/base/ui_asteroid-postfixes.txt` | 1 file |
 | Black hole lists | `ui-star-names/common/random_names/base/ui_black-holes_*.txt` | 3 files |
-| Steam workflow | `.github/workflows/steam-workshop.yml` | Steam publishing automation |
-| Nexus workflow | `.github/workflows/nexus-mods.yml` | Nexus publishing automation |
+| Steam workflow | `.github/workflows/steam-workshop-release.yml` | Steam publishing automation |
+| Nexus workflow | `.github/workflows/nexus-mods-release.yml` | Nexus publishing automation |
 | GitHub Release workflow | `.github/workflows/github-release.yml` | GitHub Release asset automation |
 | Count script | `count-additions.sh` | Name counting utility |
 | Release archive (generated) | `ui-star-names_<version>.zip` | Archive attached to the GitHub Release |

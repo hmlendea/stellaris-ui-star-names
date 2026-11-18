@@ -148,8 +148,8 @@ Boundary rules:
 ### Release Automation
 
 Paths:
-- `.github/workflows/steam-workshop.yml`
-- `.github/workflows/nexus-mods.yml`
+- `.github/workflows/steam-workshop-release.yml`
+- `.github/workflows/nexus-mods-release.yml`
 - `.github/workflows/github-release.yml`
 - `count-additions.sh`
 
@@ -163,7 +163,7 @@ Boundary rules:
 - Release archive contents: the `ui-star-names/` directory and `ui-star-names.mod`
 - Steam workflow uses `hmlendea/steam-workshop-update` action with stored credentials
 - Nexus workflow uploads the archive via the Nexus Mods API
-- GitHub Release workflow uploads `ui-star-names_<version>.zip` with `softprops/action-gh-release` and appends a SHA1 checksum to the release notes
+- GitHub Release workflow uploads `ui-star-names_<version>.zip` with `softprops/action-gh-release`
 - GitHub release asset naming convention: `ui-star-names_<version>.zip`
 
 ## 💾 Data Architecture
@@ -206,7 +206,7 @@ Asteroid prefixes/suffixes use `prefix = "..."` and `suffix = "..."` instead of 
 | Workflow release packaging | Internal | ZIP archive containing `ui-star-names/` and `ui-star-names.mod`, built from the repository | GitHub Actions workflow | Release fails; manual upload required |
 | Steam Workshop API | Outbound | ZIP archive with `ui-star-names/` and `ui-star-names.mod` | GitHub Actions workflow | Release fails; manual upload required |
 | Nexus Mods API | Outbound | ZIP archive uploaded via API with version metadata | GitHub Actions workflow | Release fails; manual upload required |
-| GitHub Releases | Outbound | `ui-star-names_<version>.zip` archive attached to the published release, with a SHA1 checksum in the release notes | GitHub Actions workflow | Users cannot download from GitHub |
+| GitHub Releases | Outbound | `ui-star-names_<version>.zip` archive attached to the published release | GitHub Actions workflow | Users cannot download from GitHub |
 
 ## 🧭 Dependency Direction and Rules
 
@@ -256,7 +256,7 @@ flowchart TB
 Release process:
 1. Maintainer creates and pushes a Git tag `vX.Y.Z`
 2. Maintainer publishes a GitHub Release for the tag
-3. GitHub Release workflow triggers, builds `ui-star-names_<version>.zip`, attaches it to the release, and appends its SHA1 checksum to the release notes
+3. GitHub Release workflow triggers, builds `ui-star-names_<version>.zip`, and attaches it to the release
 4. Steam Workshop workflow triggers, builds the release archive from the repository, and uploads to Steam
 5. Nexus Mods workflow triggers, builds the release archive from the repository, and uploads to Nexus
 6. Maintainer manually uploads the archive to Paradox Mods
@@ -313,8 +313,8 @@ Material coverage gaps:
 | Asteroid prefix lists | `ui-star-names/common/random_names/base/ui_asteroid-prefixes*.txt` |
 | Asteroid postfix lists | `ui-star-names/common/random_names/base/ui_asteroid-postfixes*.txt` |
 | Black hole name lists | `ui-star-names/common/random_names/base/ui_black-holes_*.txt` |
-| Steam Workshop workflow | `.github/workflows/steam-workshop.yml` |
-| Nexus Mods workflow | `.github/workflows/nexus-mods.yml` |
+| Steam Workshop workflow | `.github/workflows/steam-workshop-release.yml` |
+| Nexus Mods workflow | `.github/workflows/nexus-mods-release.yml` |
 | GitHub Release workflow | `.github/workflows/github-release.yml` |
 | Name counting script | `count-additions.sh` |
 | Release archive (generated) | `ui-star-names_<version>.zip` |

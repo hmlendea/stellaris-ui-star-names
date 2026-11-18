@@ -2,44 +2,55 @@ name: GitHub Release
 
 on:
   release:
-    types:
-      - published
+    types: [ published ]
 
 permissions:
   contents: write
 
 jobs:
-  build-and-upload:
-    name: Publish
+  release:
+    name: Build and publish
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out repository
-      uses: actions/checkout@v4
+    - name: Check out the repository
+      uses: actions/checkout@v7
+
+    - name: Extract the version from the GitHub tag
+      id: version
+      run: |
+        VERSION="${{ github.event.release.tag_name }}"
+        VERSION="${VERSION#v}"
+        echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+
+    - name: Update the mod version
+      shell: bash
+      run: |
+        MOD_VERSION="${{ steps.version.outputs.version }}"
+
+        for DESCRIPTOR in "ui-star-names.mod" "ui-star-names/descriptor.mod"
+        do
+          if grep -q '^version=' "${DESCRIPTOR}"; then
+            sed -i "s/^version=.*/version=\"${MOD_VERSION}\"/" "${DESCRIPTOR}"
+          else
+            printf 'version="%s"\n' "${MOD_VERSION}" | cat - "${DESCRIPTOR}" > "${DESCRIPTOR}.tmp"
+            mv "${DESCRIPTOR}.tmp" "${DESCRIPTOR}"
+          fi
+        done
 
     - name: Build the release archive
       id: package
       shell: bash
-      env:
-        RELEASE_BODY: ${{ github.event.release.body }}
       run: |
-        version="${{ github.event.release.tag_name }}"
-        version="${version#v}"
-        archive_name="ui-star-names_${version}.zip"
-        release_notes_file="release_notes.md"
+        ARCHIVE_NAME="ui-star-names_${{ steps.version.outputs.version }}.zip"
 
-        zip -r "$archive_name" "ui-star-names" "ui-star-names.mod"
-        archive_sha1="$(sha1sum "$archive_name" | awk '{print $1}')"
+        zip -r "${ARCHIVE_NAME}" "ui-star-names/" "ui-star-names.mod"
 
-        printf '%s\n\n**SHA1 Checksum**: %s\n' "$RELEASE_BODY" "$archive_sha1" > "$release_notes_file"
+        echo "archive_name=${ARCHIVE_NAME}" >> "$GITHUB_OUTPUT"
 
-        echo "archive_name=$archive_name" >> "$GITHUB_OUTPUT"
-        echo "release_notes_file=$release_notes_file" >> "$GITHUB_OUTPUT"
-
-    - name: Upload the release archive
+    - name: Publish the release asset
       uses: softprops/action-gh-release@v2
       with:
         files: ${{ steps.package.outputs.archive_name }}
-        body_path: ${{ steps.package.outputs.release_notes_file }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

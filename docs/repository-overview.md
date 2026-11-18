@@ -22,8 +22,8 @@ The repository contains:
 | Mod descriptor (launcher) | `ui-star-names/descriptor.mod` | Defines mod identity, version compatibility, and tags for the game launcher |
 | Mod descriptor (Steam) | `ui-star-names.mod` | Used by Steam Workshop upload workflow; references the mod directory |
 | Name list directory | `ui-star-names/common/random_names/base/` | Flat directory containing all name list files |
-| Steam Workshop workflow | `.github/workflows/steam-workshop.yml` | Automates packaging and publishing to Steam Workshop on version tag push |
-| Nexus Mods workflow | `.github/workflows/nexus-mods.yml` | Automates packaging and publishing to Nexus Mods on version tag push |
+| Steam Workshop workflow | `.github/workflows/steam-workshop-release.yml` | Automates packaging and publishing to Steam Workshop on version tag push |
+| Nexus Mods workflow | `.github/workflows/nexus-mods-release.yml` | Automates packaging and publishing to Nexus Mods on version tag push |
 | Name counting script | `count-additions.sh` | Utility to count unique names across all list files for release notes |
 
 ## Repository Type

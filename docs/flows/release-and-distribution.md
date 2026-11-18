@@ -20,7 +20,7 @@ sequenceDiagram
     Dev->>GitHub: Publish GitHub Release
     GitHub->>Actions: Trigger release workflows
     Actions->>Actions: Build release archive from repository
-    Actions->>GitHub: Attach ui-star-names_<version>.zip + SHA1 checksum
+    Actions->>GitHub: Attach ui-star-names_<version>.zip
     Actions->>Steam: Upload via steam-workshop-update
     Actions->>Nexus: Upload via Nexus-Mods/upload-action
     Dev->>Paradox: Manual upload archive
@@ -60,10 +60,12 @@ git push origin vX.Y.Z
 ### 4. GitHub Actions: Release Archive Construction
 
 1. Publishing the GitHub Release triggers the GitHub Release workflow
-2. Each workflow checks out the repository at the tagged commit
-3. Each workflow builds the release archive itself from the repository contents
-4. The GitHub Release workflow publishes it as `ui-star-names_<version>.zip`; the Steam and Nexus workflows use the local name `release.zip`
-5. GitHub release asset naming convention: `ui-star-names_<version>.zip` (e.g., `ui-star-names_1.2.3.zip`)
+2. Pushing a `v*.*.*` tag triggers the Steam and Nexus workflows
+3. Each workflow checks out the tagged commit
+4. Each workflow updates the `version` field in `ui-star-names.mod` and `ui-star-names/descriptor.mod`
+5. Each workflow builds the release archive itself from the repository contents
+6. The GitHub Release workflow publishes it as `ui-star-names_<version>.zip`; the Steam and Nexus workflows use the local name `release.zip`
+7. GitHub release asset naming convention: `ui-star-names_<version>.zip` (e.g., `ui-star-names_1.2.3.zip`)
 
 **Archive Structure**:
 ```
@@ -77,41 +79,43 @@ ui-star-names_<version>.zip
 └── ui-star-names.mod
 ```
 
-### 5. Steam Workshop Workflow (`.github/workflows/steam-workshop.yml`)
+### 5. Steam Workshop Workflow (`.github/workflows/steam-workshop-release.yml`)
 
-**Trigger**: Tag push `v*.*.*`
+**Trigger**: Tag push `v*.*.*` or manual dispatch
 
 **Execution**:
-1. Checkout repository
-2. Build the release archive:
+1. Checkout the requested tag
+2. Update the `version` field in both descriptors
+3. Build the release archive:
    ```bash
-   zip -r "release.zip" "ui-star-names" "ui-star-names.mod"
+   zip -r "release.zip" "ui-star-names/" "ui-star-names.mod"
    ```
-3. Unzip to `release/`
-4. Upload using `hmlendea/steam-workshop-update@v1.3.0`:
+4. Unzip to `release/`
+5. Upload using `hmlendea/steam-workshop-update@latest`:
    - `appid`: 281990
    - `itemid`: 2040215185
    - `path`: `release/ui-star-names/`
    - `changenote`: BBCode link to GitHub release
-5. Steam Workshop page updated
+6. Steam Workshop page updated
 
 **Secrets Required**:
 - `STEAM_USERNAME`
 - `STEAM_PASSWORD`
 - `STEAM_2FA_SEED`
 
-### 6. Nexus Mods Workflow (`.github/workflows/nexus-mods.yml`)
+### 6. Nexus Mods Workflow (`.github/workflows/nexus-mods-release.yml`)
 
 **Trigger**: Tag push `v*.*.*` OR manual dispatch with tag input
 
 **Execution**:
-1. Checkout repository
+1. Checkout the requested tag
 2. Determine version: `${{ inputs.tag || github.ref_name }}`
-3. Build the release archive:
+3. Update the `version` field in both descriptors
+4. Build the release archive:
    ```bash
-   zip -r "release.zip" "ui-star-names" "ui-star-names.mod"
+   zip -r "release.zip" "ui-star-names/" "ui-star-names.mod"
    ```
-4. Upload using `Nexus-Mods/upload-action@v1.0.0-beta.10`:
+5. Upload using `Nexus-Mods/upload-action@v1.0.0-beta.11`:
    - `file_id`: 920143
    - `version`: Tag without `v` prefix
    - `description`: Link to GitHub release
@@ -127,10 +131,11 @@ ui-star-names_<version>.zip
 **Trigger**: GitHub Release publication
 
 **Execution**:
-1. Checkout repository
-2. Build `ui-star-names_<version>.zip` and compute its SHA1 checksum
-3. Append the SHA1 checksum to the release notes
-4. Upload using `softprops/action-gh-release@v2`
+1. Checkout repository at the release tag
+2. Extract the version from the tag
+3. Update the `version` field in both descriptors
+4. Build `ui-star-names_<version>.zip`
+5. Upload using `softprops/action-gh-release@v2`
 
 **Permissions Required**:
 - `contents: write`
@@ -150,7 +155,7 @@ ui-star-names_<version>.zip
 
 | Platform | Check |
 |----------|-------|
-| GitHub | Release exists with the attached archive and SHA1 checksum |
+| GitHub | Release exists with the attached archive |
 | Steam Workshop | Version updated, changenote visible |
 | Nexus Mods | Version updated, file downloadable |
 | Paradox Mods | Version updated, approved |
@@ -256,6 +261,6 @@ GitHub Actions build release archive
 - Release archives are built independently by each workflow; no shared artefact is reused
 - Paradox Mods has no API — always manual
 - Steam 2FA seed expires periodically
-- Nexus Mods action is beta (`v1.0.0-beta.10`)
+- Nexus Mods action is beta (`v1.0.0-beta.11`)
 - No automated verification of uploaded content
 - No rollback — must push new tag to fix

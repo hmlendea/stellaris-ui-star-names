@@ -480,6 +480,7 @@ star_names = {
     Ateca
     Atem
     Atepinsk
+    Atgit
     Atheronia
     Atkrubic
     Atrengus
@@ -1549,6 +1550,7 @@ star_names = {
     Desmee
     Despa
     Desprey
+    Dessib
     Desulga
     Desymna
     Detesta
@@ -1618,6 +1620,7 @@ star_names = {
     Dobonnen
     Dobrijan
     Dobrytock
+    Docum
     Doggolas
     Dogorith
     Dogovan
@@ -1696,6 +1699,7 @@ star_names = {
     Driblazin
     Drillnock
     Drimisk
+    Drimus
     Drobette
     Drogh
     Drogo
@@ -2037,6 +2041,7 @@ star_names = {
     Fasibo
     Fasole
     Fayantz
+    Febbe
     Fekefomas
     Fekjo
     Fekolehr
@@ -2167,6 +2172,7 @@ star_names = {
     Gadamus
     Gaddah
     Gaelenna
+    Gaephilus
     Gaetio
     Gagautz
     Gajidh
@@ -2184,6 +2190,7 @@ star_names = {
     Galetta
     Galgaron
     Galikhos
+    Galinaldo
     Galintrop
     Galix
     Gallab
@@ -2987,6 +2994,7 @@ star_names = {
     Kamaron
     Kamarugu
     Kamaryd
+    Kamatoj
     Kamatrojna
     Kamberling
     Kamblos
@@ -3682,6 +3690,7 @@ star_names = {
     Krekeda
     Krelux
     Kremesh
+    Kremir
     Kremmin
     Kremonia
     Kremonis
@@ -4253,6 +4262,7 @@ star_names = {
     Maibynne
     Majertzi
     Majgandith
+    Majona
     Makadol
     Makaphion
     Makaq
@@ -4596,6 +4606,7 @@ star_names = {
     Mindaria
     Mineaux
     Minish
+    Minkolas
     Minkopovlja
     Minkopow
     Minn
@@ -5167,6 +5178,7 @@ star_names = {
     Okeos
     Okol
     Okolesh
+    Okophero
     Okosh
     Okothel
     Okropis
@@ -5228,6 +5240,7 @@ star_names = {
     Oreux
     Oriango
     Oriche
+    Orifi
     Orima
     Orimba
     Orinex
@@ -5323,6 +5336,7 @@ star_names = {
     Pandevis
     Pangola
     Panku
+    Pantakar
     Pantas
     Pantek
     Pantiglo
@@ -5532,6 +5546,7 @@ star_names = {
     Phlokos
     Phlorika
     Phloutour
+    Phodolkos
     Phokantis
     Phokas
     Phokos
@@ -5811,11 +5826,13 @@ star_names = {
     Prius
     Priverius
     Privnitz
+    Prizantor
     Proce
     Profeeh
     Profyx
     Proknour
     Prokopio
+    Prolloth
     Proon
     Prophee
     Prophon
@@ -5874,6 +5891,7 @@ star_names = {
     Pychor
     Pycolix
     Pyept
+    Pylantor
     Pyllax
     Pylome
     Pynachuk
@@ -6110,6 +6128,7 @@ star_names = {
     Robello
     Robex
     Robinette
+    Robojna
     Robor
     Robughe
     Robych
@@ -6518,6 +6537,7 @@ star_names = {
     Shomeer
     Shoriq
     Shornax
+    Shoultarian
     Shozi
     Shroomen
     Shtarfa
@@ -6555,6 +6575,7 @@ star_names = {
     Sippipola
     Siptesh
     Sirebka
+    Sirveu
     Sistano
     Sitama
     Sitralis
@@ -6580,6 +6601,7 @@ star_names = {
     Skajeth
     Skalathor
     Skalator
+    Skallabor
     Skallabur
     Skaltuba
     Skamatinsk
@@ -6854,6 +6876,7 @@ star_names = {
     Strya
     Strybalops
     Strydd
+    Stus
     Stuvihn
     Styanos
     Stygonia
@@ -6973,6 +6996,7 @@ star_names = {
     Tanglav
     Tangul
     Tangwyn
+    Tanienne
     Tanim
     Tanimas
     Tankhal
@@ -7177,6 +7201,7 @@ star_names = {
     Tokitha
     Tokko
     Tokojo
+    Tolapha
     Tolgic
     Toljak
     Toloth
@@ -7281,6 +7306,7 @@ star_names = {
     Triabba
     Triam
     Trianka
+    Triaviso
     Tribeth
     Triceph
     Tricome
@@ -7580,6 +7606,7 @@ star_names = {
     Versaion
     Versoulis
     Vertige
+    Vertuth
     Veshtrol
     Vestarna
     Vestinal
@@ -7938,6 +7965,7 @@ star_names = {
     Yorha
     Yorm
     Yorrock
+    Yorroi
     Yorve
     Yotnikh
     Youah

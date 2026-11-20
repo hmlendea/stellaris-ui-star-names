@@ -1,4 +1,0 @@
-black_hole_names = {
-    "Vulurrinia Veracan Vortex"
-    "Wimtan Vortex"
-}

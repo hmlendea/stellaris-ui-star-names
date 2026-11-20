@@ -23,23 +23,14 @@ jobs:
       with:
         ref: ${{ env.VERSION }}
 
-    - name: Update the mod version
+    - name: Generate the mod
       run: |
-        MOD_VERSION="${VERSION#v}"
-
-        for DESCRIPTOR in "ui-star-names.mod" "ui-star-names/descriptor.mod"
-        do
-          if grep -q '^version=' "${DESCRIPTOR}"; then
-            sed -i "s/^version=.*/version=\"${MOD_VERSION}\"/" "${DESCRIPTOR}"
-          else
-            printf 'version="%s"\n' "${MOD_VERSION}" | cat - "${DESCRIPTOR}" > "${DESCRIPTOR}.tmp"
-            mv "${DESCRIPTOR}.tmp" "${DESCRIPTOR}"
-          fi
-        done
+        python3 scripts/generate-mod.py "${VERSION#v}"
 
     - name: Build the release archive
       run: |
-        zip -r "release.zip" "ui-star-names/" "ui-star-names.mod"
+        cd out/stellaris
+        zip -r "${GITHUB_WORKSPACE}/release.zip" "ui-star-names/" "ui-star-names.mod"
 
     - name: Upload
       uses: Nexus-Mods/upload-action@v1.0.0-beta.11

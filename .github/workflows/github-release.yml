@@ -23,20 +23,10 @@ jobs:
         VERSION="${VERSION#v}"
         echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
 
-    - name: Update the mod version
+    - name: Generate the mod
       shell: bash
       run: |
-        MOD_VERSION="${{ steps.version.outputs.version }}"
-
-        for DESCRIPTOR in "ui-star-names.mod" "ui-star-names/descriptor.mod"
-        do
-          if grep -q '^version=' "${DESCRIPTOR}"; then
-            sed -i "s/^version=.*/version=\"${MOD_VERSION}\"/" "${DESCRIPTOR}"
-          else
-            printf 'version="%s"\n' "${MOD_VERSION}" | cat - "${DESCRIPTOR}" > "${DESCRIPTOR}.tmp"
-            mv "${DESCRIPTOR}.tmp" "${DESCRIPTOR}"
-          fi
-        done
+        python3 scripts/generate-mod.py "${{ steps.version.outputs.version }}"
 
     - name: Build the release archive
       id: package
@@ -44,7 +34,8 @@ jobs:
       run: |
         ARCHIVE_NAME="ui-star-names_${{ steps.version.outputs.version }}.zip"
 
-        zip -r "${ARCHIVE_NAME}" "ui-star-names/" "ui-star-names.mod"
+        cd out/stellaris
+        zip -r "${GITHUB_WORKSPACE}/${ARCHIVE_NAME}" "ui-star-names/" "ui-star-names.mod"
 
         echo "archive_name=${ARCHIVE_NAME}" >> "$GITHUB_OUTPUT"
 

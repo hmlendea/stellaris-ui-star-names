@@ -1,6 +1,0 @@
-star_names = {
-    "Irina"
-    "Cygnus"
-    "Mirrus"
-    "Glyptal"
-}

@@ -23,34 +23,16 @@ jobs:
       with:
         ref: ${{ env.VERSION }}
 
-    - name: Update the mod version
+    - name: Generate the mod
       run: |
-        MOD_VERSION="${VERSION#v}"
-
-        for DESCRIPTOR in "ui-star-names.mod" "ui-star-names/descriptor.mod"
-        do
-          if grep -q '^version=' "${DESCRIPTOR}"; then
-            sed -i "s/^version=.*/version=\"${MOD_VERSION}\"/" "${DESCRIPTOR}"
-          else
-            printf 'version="%s"\n' "${MOD_VERSION}" | cat - "${DESCRIPTOR}" > "${DESCRIPTOR}.tmp"
-            mv "${DESCRIPTOR}.tmp" "${DESCRIPTOR}"
-          fi
-        done
-
-    - name: Build the release archive
-      run: |
-        zip -r "release.zip" "ui-star-names/" "ui-star-names.mod"
-
-    - name: Extract the release archive
-      run: |
-        unzip "release.zip" -d "release/"
+        python3 scripts/generate-mod.py "${VERSION#v}"
 
     - name: Upload
       uses: hmlendea/steam-workshop-update@latest
       with:
         appid: 281990
         itemid: 2040215185
-        path: "release/ui-star-names/"
+        path: "out/stellaris/ui-star-names/"
         changenote: "[url=https://github.com/hmlendea/stellaris-ui-star-names/releases/tag/${{env.VERSION}}]Version ${{env.VERSION}}[/url]"
       env:
         STEAM_USERNAME: ${{secrets.STEAM_USERNAME}}

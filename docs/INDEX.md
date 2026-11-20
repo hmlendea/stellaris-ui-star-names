@@ -2,7 +2,7 @@
 
 ## Repository Summary
 
-This repository contains a pure data mod for the game Stellaris that adds thousands of new names for stars, nebulas, asteroids, and black holes. The mod consists entirely of static text files in Clausewitz script format that the Stellaris game engine reads during galaxy generation. There is no executable code, build step, or runtime.
+This repository contains the name list sources for a data mod for the game Stellaris that adds thousands of new names for stars, nebulas, asteroids, and black holes. The mod data consists of static text files in Clausewitz script format that the Stellaris game engine reads during galaxy generation; the repository also contains the generation script that aggregates those sources into the distributable mod and the release automation that publishes it.
 
 ## Root Document Map
 

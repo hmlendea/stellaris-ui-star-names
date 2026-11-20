@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This repository hosts the source files for the Stellaris - Universum Infinitum - Star Names mod, a pure data modification for the game Stellaris that adds thousands of new names for stars, nebulas, asteroids, and black holes. The mod is distributed via Steam Workshop, Nexus Mods, Paradox Mods, and GitHub Releases.
+This repository hosts the name list sources for the Stellaris - Universum Infinitum - Star Names mod, a data modification for the game Stellaris that adds thousands of new names for stars, nebulas, asteroids, and black holes. The mod is distributed via Steam Workshop, Nexus Mods, Paradox Mods, and GitHub Releases.
 
 ## Scope
 
@@ -22,13 +22,16 @@ The repository contains:
 | Mod descriptor (launcher) | `ui-star-names/descriptor.mod` | Defines mod identity, version compatibility, and tags for the game launcher |
 | Mod descriptor (Steam) | `ui-star-names.mod` | Used by Steam Workshop upload workflow; references the mod directory |
 | Name list directory | `ui-star-names/common/random_names/base/` | Flat directory containing all name list files |
+| Build workflow | `.github/workflows/build.yml` | Generates the complete mod from the source name lists on every push and pull request to `master` |
 | Steam Workshop workflow | `.github/workflows/steam-workshop-release.yml` | Automates packaging and publishing to Steam Workshop on version tag push |
 | Nexus Mods workflow | `.github/workflows/nexus-mods-release.yml` | Automates packaging and publishing to Nexus Mods on version tag push |
-| Name counting script | `count-additions.sh` | Utility to count unique names across all list files for release notes |
+| GitHub Release workflow | `.github/workflows/github-release.yml` | Builds and attaches the release archive to a published GitHub Release |
+| Name counting script | `scripts/count-additions.sh` | Utility to count unique names across all list files for release notes |
+| Mod generation script | `scripts/generate-mod.py` | Generates the distributable mod under `out/stellaris/` from `src/names/`, taking the version number as its only argument |
 
 ## Repository Type
 
-This is a **content-only repository** for a game mod. It contains no executable code, build system, test suite, or runtime. The "build" is a simple ZIP archive containing the `ui-star-names/` directory and `ui-star-names.mod`, produced by each release workflow.
+This is a **data-driven** repository for a game mod. The distributable mod is generated from the source name lists in `src/names/` by `scripts/generate-mod.py`, which writes the complete mod to `out/stellaris/`. The packaged release is a ZIP archive containing the `ui-star-names/` directory and `ui-star-names.mod`, produced by each release workflow.
 
 ## Target Audience
 

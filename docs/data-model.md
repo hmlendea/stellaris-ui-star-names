@@ -160,7 +160,7 @@ The mod itself has no persistence mechanism.
 
 ## Statistics (Approximate)
 
-Run `./count-additions.sh` for current counts.
+Run `./scripts/count-additions.sh` for current counts.
 
 | Category | File Count | Unique Names (approx) |
 |----------|------------|----------------------|

@@ -23,7 +23,7 @@ This document describes the testing strategy for the Universum Infinitum: Star N
 
 ### 1. Count Regression Testing (Automated)
 
-**Tool**: `./count-additions.sh`
+**Tool**: `./scripts/count-additions.sh`
 
 **Purpose**: Detect accidental deletions or massive additions
 
@@ -141,7 +141,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Count entries
-      run: ./count-additions.sh
+      run: ./scripts/count-additions.sh
     - name: Validate descriptors
       run: |
         diff ui-star-names/descriptor.mod ui-star-names.mod
@@ -186,7 +186,7 @@ Record counts at each release for regression comparison:
 
 ## Test Execution Checklist (Pre-Release)
 
-- [ ] Run `./count-additions.sh` — verify reasonable counts
+- [ ] Run `./scripts/count-additions.sh` — verify reasonable counts
 - [ ] Diff descriptor files — verify identical
 - [ ] Install mod locally — verify launcher shows compatible
 - [ ] Start new game — verify mod names appear

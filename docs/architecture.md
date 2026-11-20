@@ -71,10 +71,11 @@ The root `ARCHITECTURE.md` provides the authoritative system-level architecture.
 
 ### Utility Scripts Component
 
-**Paths**: `count-additions.sh`
+**Paths**: `scripts/count-additions.sh`, `scripts/generate-mod.py`
 
 **Responsibilities**:
 - Count unique names across all list files by category
+- Generate the complete distributable mod under `out/stellaris/`
 - Output used for release notes and verification
 
 **Boundary Rules**:
@@ -159,7 +160,7 @@ GitHub Actions: Build Release Archive
    }
    ```
 4. For asteroids: use `prefix` and `suffix` instead of `name`
-5. Run `./count-additions.sh` to verify counts
+5. Run `./scripts/count-additions.sh` to verify counts
 6. Test by installing mod and starting new game
 
 ### Updating Game Version Compatibility
@@ -257,7 +258,7 @@ Not currently implemented. Would require:
 1. **Installation**: Mod appears in Stellaris launcher after install
 2. **Load**: No errors when enabling mod and starting game
 3. **Content**: Custom names appear in generated galaxy for all four categories
-4. **Counts**: `./count-additions.sh` output matches expectations
+4. **Counts**: `./scripts/count-additions.sh` output matches expectations
 
 ### Coverage Gaps
 
@@ -279,8 +280,10 @@ Not currently implemented. Would require:
 | Asteroid prefixes | `ui-star-names/common/random_names/base/ui_asteroid-prefixes.txt` | 1 file |
 | Asteroid postfixes | `ui-star-names/common/random_names/base/ui_asteroid-postfixes.txt` | 1 file |
 | Black hole lists | `ui-star-names/common/random_names/base/ui_black-holes_*.txt` | 3 files |
+| Build workflow | `.github/workflows/build.yml` | Continuous integration build |
 | Steam workflow | `.github/workflows/steam-workshop-release.yml` | Steam publishing automation |
 | Nexus workflow | `.github/workflows/nexus-mods-release.yml` | Nexus publishing automation |
 | GitHub Release workflow | `.github/workflows/github-release.yml` | GitHub Release asset automation |
-| Count script | `count-additions.sh` | Name counting utility |
+| Count script | `scripts/count-additions.sh` | Name counting utility |
+| Mod generation script | `scripts/generate-mod.py` | Mod generation utility |
 | Release archive (generated) | `ui-star-names_<version>.zip` | Archive attached to the GitHub Release |

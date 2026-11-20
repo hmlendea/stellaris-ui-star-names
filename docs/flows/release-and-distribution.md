@@ -34,7 +34,7 @@ sequenceDiagram
 ### 1. Development Phase
 
 1. Developer makes changes to name list files
-2. Runs `./count-additions.sh` to verify entry counts
+2. Runs `./scripts/count-additions.sh` to verify entry counts
 3. Tests locally by installing mod and starting new game
 4. Commits changes to feature branch
 5. Opens Pull Request

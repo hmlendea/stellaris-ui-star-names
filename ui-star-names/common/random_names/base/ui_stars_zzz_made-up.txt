@@ -32,6 +32,7 @@ star_names = {
     Adalkar
     Adamula
     Adarcher
+    Adatar
     Adavizir
     Adelha
     Adevar
@@ -128,6 +129,7 @@ star_names = {
     Akolya
     Akos
     Akrantor
+    Akrepsis
     Akrilot
     Akritz
     Akromobis
@@ -400,6 +402,7 @@ star_names = {
     Arkupsaf
     Arleya
     Arlinaque
+    Arlins
     Armagnolle
     Armalamme
     Armalogan
@@ -470,6 +473,7 @@ star_names = {
     Astartes
     Astatia
     Astenga
+    Astico
     Astraxia
     Asttegat
     Atagatan
@@ -482,12 +486,14 @@ star_names = {
     Atepinsk
     Atgit
     Atheronia
+    Atillo
     Atkrubic
     Atrengus
     Atrika
     Atruza
     Atunchiya
     Atybus
+    Atylos
     Atyngere
     Atyns
     Atzakar
@@ -577,6 +583,7 @@ star_names = {
     Bakhonios
     Bakra
     Balankada
+    Balarga
     Balayath
     Balbis
     Balce
@@ -647,6 +654,7 @@ star_names = {
     Batoza
     Batranika
     Batunga
+    Bavalaga
     Bawgal
     Baxter
     Bayendava
@@ -1083,6 +1091,7 @@ star_names = {
     Caldus
     Calessa
     Caletta
+    Calisandro
     Callard
     Calmura
     Caloberth
@@ -1518,6 +1527,7 @@ star_names = {
     Delwin
     Demadyama
     Demasiyah
+    Demenix
     Demerra
     Demiral
     Dennig
@@ -1559,6 +1569,7 @@ star_names = {
     Deventhrope
     Deviansk
     Devilon
+    Devix
     Devrothuro
     Devyna
     Dewley
@@ -1925,6 +1936,7 @@ star_names = {
     Epelonga
     Epheios
     Ephkiph
+    Ephrandis
     Ephtelurgo
     Ephtengor
     Epikindo
@@ -1954,6 +1966,7 @@ star_names = {
     Ergorah
     Eriapo
     Erikhon
+    Erisia
     Erix
     Erjob
     Erkator
@@ -2051,6 +2064,7 @@ star_names = {
     Felizesh
     Felkath
     Felkrith
+    Feluria
     Felye
     Femurix
     Fenax
@@ -2105,6 +2119,7 @@ star_names = {
     Fomelle
     Fomond
     Fonix
+    Forgreth
     Forkiz
     Forsika
     Forstafi
@@ -2177,6 +2192,7 @@ star_names = {
     Gagautz
     Gajidh
     Gajjah
+    Gakhar
     Galabuth
     Galagius
     Galahod
@@ -2577,6 +2593,7 @@ star_names = {
     Hiktamb
     Hiktar
     Hildekar
+    Hilgo
     Hille
     Hilter
     Hilux
@@ -2787,6 +2804,7 @@ star_names = {
     Jarosh
     Jarros
     Jarwin
+    Jaska
     Jasorias
     Javra
     Jaxar
@@ -3568,6 +3586,7 @@ star_names = {
     Kombarta
     Kombos
     Komeone
+    Kometal
     Komias
     Komorozin
     Kompalit
@@ -3578,6 +3597,7 @@ star_names = {
     Kondabar
     Konditz
     Koneos
+    Koneta
     Konirov
     Konkar
     Konkedion
@@ -3877,6 +3897,7 @@ star_names = {
     Kyntrax
     Kyparos
     Kyphla
+    Kyphlos
     Kyphon
     Kyphotera
     Kyphra
@@ -3904,6 +3925,7 @@ star_names = {
     Lachutsk
     Lacoutie
     Lacoutsa
+    Lacriana
     Lacriem
     Ladraqou
     Laengus
@@ -4223,6 +4245,7 @@ star_names = {
     Lyrix
     Lysdara
     Lyshan
+    Lysicalus
     Lystra
     Lystrus
     Lyter
@@ -4264,6 +4287,7 @@ star_names = {
     Majgandith
     Majona
     Makadol
+    Makamo
     Makaphion
     Makaq
     Makaralis
@@ -4680,6 +4704,7 @@ star_names = {
     Molachun
     Molaste
     Molatuz
+    Molemos
     Molex
     Molgan
     Moliano
@@ -4737,6 +4762,7 @@ star_names = {
     Muhrveg
     Mukhevyr
     Muklung
+    Mukulmin
     Multicula
     Multzan
     Munchim
@@ -4838,6 +4864,7 @@ star_names = {
     Naema
     Nafalurga
     Naftariqui
+    Nagakal
     Nagamo
     Nagaresu
     Nahkend
@@ -5066,6 +5093,9 @@ star_names = {
     Noenda
     Noica
     Nokano
+    Nolcius
+    Nologo
+    Nolquis
     Nonix
     Nono
     Nonoy
@@ -5074,6 +5104,7 @@ star_names = {
     Norakala
     Norash
     Norell
+    Noricia
     Noriskald
     Noritz
     Norlost
@@ -5425,6 +5456,7 @@ star_names = {
     Pelgor
     Pelogo
     Peloria
+    Peloth
     Pemynne
     Pendinso
     Penelle
@@ -5494,6 +5526,7 @@ star_names = {
     Pfleggen
     Pflong
     Pfrotge
+    Phaeloros
     Phaes
     Phaescus
     Phaestia
@@ -6416,6 +6449,7 @@ star_names = {
     Seketah
     Sekinuye
     Sekkar
+    Seklanos
     Sekohl
     Sekron
     Sekuki
@@ -6672,6 +6706,7 @@ star_names = {
     Skorex
     Skorpis
     Skortsis
+    Skortza
     Skortzen
     Skortzis
     Skorz
@@ -6876,6 +6911,7 @@ star_names = {
     Strya
     Strybalops
     Strydd
+    Stunn
     Stus
     Stuvihn
     Styanos
@@ -7469,6 +7505,7 @@ star_names = {
     Ukiddi
     Ulcade
     Uljan
+    Ulnith
     Ulran
     Ultum
     Ulyan
@@ -7789,6 +7826,7 @@ star_names = {
     Xanos
     Xaphas
     Xarnax
+    Xedebus
     Xenpo
     Xibelkis
     Xibolnik
@@ -8068,6 +8106,7 @@ star_names = {
     Zarkin
     Zarnaloth
     Zarotul
+    Zarquin
     Zartema
     Zarvah
     Zarvatix
@@ -8099,6 +8138,7 @@ star_names = {
     Zebysh
     Zechidan
     Zedkar
+    Zedona
     Zegchina
     Zeghe
     Zeko

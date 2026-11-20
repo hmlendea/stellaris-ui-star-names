@@ -6,6 +6,7 @@
 stellaris-ui-star-names/
 ├── .github/
 │   └── workflows/
+│       ├── build.yml               # Continuous integration build
 │       ├── github-release.yml      # GitHub Release asset automation
 │       ├── nexus-mods-release.yml  # Nexus Mods release automation
 │       └── steam-workshop-release.yml  # Steam Workshop release automation
@@ -69,7 +70,9 @@ stellaris-ui-star-names/
 │               ├── ui_stars_zzz_others.txt
 │               └── ui_stars_zzz_places.txt
 ├── ui-star-names.mod               # Mod descriptor for Steam Workshop
-├── count-additions.sh              # Name counting utility script
+├── scripts/                        # Build and utility scripts
+│   ├── count-additions.sh          # Name counting utility script
+│   └── generate-mod.py             # Mod generation script
 ├── ARCHITECTURE.md                 # System architecture documentation
 ├── CODE_OF_CONDUCT.md              # Community conduct standards
 ├── CONTRIBUTING.md                 # Contribution guidelines
@@ -112,13 +115,15 @@ Special naming:
 
 ### Release Automation (`.github/workflows/`)
 
-- **`steam-workshop-release.yml`**: Triggers on version tags (`v*.*.*`) or manual dispatch. Updates the `version` field in both descriptors, builds the release archive (`ui-star-names/` and `ui-star-names.mod`), unzips it, and uploads to Steam Workshop using `hmlendea/steam-workshop-update` action.
-- **`nexus-mods-release.yml`**: Triggers on version tags or manual dispatch. Updates the `version` field in both descriptors, builds the release archive and uploads it to Nexus Mods using `Nexus-Mods/upload-action`.
-- **`github-release.yml`**: Triggers on release publication. Updates the `version` field in both descriptors, builds `ui-star-names_<version>.zip`, and attaches it to the release using `softprops/action-gh-release`.
+- **`build.yml`**: Triggers on pushes and pull requests to `master`. Generates the complete mod with `scripts/generate-mod.py`, failing the build when generation fails.
+- **`steam-workshop-release.yml`**: Triggers on version tags (`v*.*.*`) or manual dispatch. Generates the mod with `scripts/generate-mod.py` using the release version and uploads the generated mod directory to Steam Workshop using the `hmlendea/steam-workshop-update` action.
+- **`nexus-mods-release.yml`**: Triggers on version tags or manual dispatch. Generates the mod with `scripts/generate-mod.py` using the release version, builds the release archive from the generated output, and uploads it to Nexus Mods using `Nexus-Mods/upload-action`.
+- **`github-release.yml`**: Triggers on release publication. Generates the mod with `scripts/generate-mod.py` using the release version, builds `ui-star-names_<version>.zip` from the generated output, and attaches it to the release using `softprops/action-gh-release`.
 
 ### Utility Scripts
 
-- **`count-additions.sh`**: Bash script that counts unique names across all list files by category. Used for release notes.
+- **`scripts/count-additions.sh`**: Bash script that counts unique names across all source list files by category. Used for release notes.
+- **`scripts/generate-mod.py`**: Python script that generates the complete distributable mod under `out/stellaris/` from the name lists in `src/names/`. Accepts the version number as its only argument.
 
 ### Root Documentation
 

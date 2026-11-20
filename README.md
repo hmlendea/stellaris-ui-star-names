@@ -1,5 +1,6 @@
 [![Donate](https://img.shields.io/badge/-%E2%99%A5%20Donate-%23ff69b4)](https://hmlendea.go.ro/funding)
 [![Latest Release](https://img.shields.io/github/v/release/hmlendea/stellaris-ui-star-names)](https://github.com/hmlendea/stellaris-ui-star-names/releases/latest)
+[![Build Status](https://github.com/hmlendea/stellaris-ui-star-names/actions/workflows/build.yml/badge.svg)](https://github.com/hmlendea/stellaris-ui-star-names/actions/workflows/build.yml)
 [![License](https://img.shields.io/github/license/hmlendea/stellaris-ui-star-names)](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/LICENSE)
 
 # Stellaris - Universum Infinitum - Star Names
@@ -87,7 +88,13 @@ Copy or symlink `ui-star-names/` and `ui-star-names.mod` inside your Stellaris' 
 
 ### Build
 
-No build step is required. Edit the `.txt` name list files under `ui-star-names/common/random_names/base/` directly.
+The distributable mod is generated from the name lists in `src/names/` by running the generation script with the desired version number:
+
+```bash
+python3 scripts/generate-mod.py 1.0.0
+```
+
+The complete mod is written to `out/stellaris/`, containing `ui-star-names/` (with `descriptor.mod`, `thumbnail.png`, and the aggregated name list) and `ui-star-names.mod`.
 
 ### Run
 
@@ -98,16 +105,17 @@ Enable the mod in the Stellaris launcher and start a new game.
 Run the name count script to detect accidental removals or additions of name entries:
 
 ```bash
-./count-additions.sh
+./scripts/count-additions.sh
 ```
 
 ## ⚙️ GitHub Actions
 
 | Workflow | Purpose | What it does |
 |----------|---------|--------------|
-| [ Steam Workshop ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/steam-workshop-release.yml) | Publish releases to the Steam Workshop | Triggers on version tags or manual dispatch, updates the mod version, builds the release archive containing `ui-star-names/` and `ui-star-names.mod`, then uploads it with the `hmlendea/steam-workshop-update` action |
-| [ Nexus Mods ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/nexus-mods-release.yml) | Publish releases to Nexus Mods | Triggers on version tags or manual dispatch, updates the mod version, builds the release archive containing `ui-star-names/` and `ui-star-names.mod`, then uploads it with the `Nexus-Mods/upload-action` action |
-| [ GitHub Release ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/github-release.yml) | Publish the release archive to GitHub Releases | Triggers on release publication, updates the mod version, builds `ui-star-names_<version>.zip` containing `ui-star-names/` and `ui-star-names.mod`, and uploads it with `softprops/action-gh-release` |
+| [ CI ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/build.yml) | Build the mod | Triggers on pushes and pull requests to `master`, generates the complete mod from the source name lists in `src/names/`, and fails if generation does not succeed |
+| [ Steam Workshop ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/steam-workshop-release.yml) | Publish releases to the Steam Workshop | Triggers on version tags or manual dispatch, generates the mod with `scripts/generate-mod.py` using the release version, then uploads it with the `hmlendea/steam-workshop-update` action |
+| [ Nexus Mods ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/nexus-mods-release.yml) | Publish releases to Nexus Mods | Triggers on version tags or manual dispatch, generates the mod with `scripts/generate-mod.py` using the release version, builds the release archive, then uploads it with the `Nexus-Mods/upload-action` action |
+| [ GitHub Release ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/github-release.yml) | Publish the release archive to GitHub Releases | Triggers on release publication, generates the mod with `scripts/generate-mod.py` using the release version, builds `ui-star-names_<version>.zip`, and uploads it with `softprops/action-gh-release` |
 
 ## 🗂️ Project Structure
 
@@ -122,7 +130,7 @@ Run the name count script to detect accidental removals or additions of name ent
 
 ## 🏗️ Architecture
 
-Stellaris - Universum Infinitum - Star Names is a pure data mod consisting of static name list files in Clausewitz script format. The Stellaris game engine loads these files during galaxy generation and randomly selects names for stars, nebulas, asteroids, and black holes. There is no executable code, build step, or runtime.
+Stellaris - Universum Infinitum - Star Names is a data mod that ships static name list files in Clausewitz script format. The Stellaris game engine loads these files during galaxy generation and randomly selects names for stars, nebulas, asteroids, and black holes. The mod has no runtime of its own; the repository contains only the source name lists, the generation script that aggregates them into the distributable mod, and the release automation that publishes it.
 
 See the [Architecture Documentation](./ARCHITECTURE.md) for the system context, principal components, runtime flows, ownership boundaries, dependencies, constraints, and extension points.
 

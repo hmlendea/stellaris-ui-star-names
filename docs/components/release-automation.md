@@ -2,9 +2,17 @@
 
 ## Overview
 
-The release automation component consists of three GitHub Actions workflows that automate publishing the mod to Steam Workshop, Nexus Mods, and GitHub Releases when a version tag is pushed or a release is published. Each workflow builds the release archive itself from the checked-out repository, so publishing never depends on a pre-existing release asset.
+The release automation component consists of four GitHub Actions workflows: a continuous integration workflow that builds the mod on every change to `master`, and three release workflows that automate publishing the mod to Steam Workshop, Nexus Mods, and GitHub Releases when a version tag is pushed or a release is published. Every workflow generates the mod from source with `scripts/generate-mod.py`, so publishing never depends on committed build output or a pre-existing release asset.
 
 ## Workflows
+
+### Build (`.github/workflows/build.yml`)
+
+**Trigger**: Push or pull request targeting `master`
+
+**Steps**:
+1. Check out the repository
+2. Generate the complete mod with `scripts/generate-mod.py`
 
 ### Steam Workshop (`.github/workflows/steam-workshop-release.yml`)
 
@@ -12,10 +20,8 @@ The release automation component consists of three GitHub Actions workflows that
 
 **Steps**:
 1. Checkout the requested tag
-2. Update the `version` field in `ui-star-names.mod` and `ui-star-names/descriptor.mod`
-3. Build the release archive `release.zip` containing `ui-star-names/` and `ui-star-names.mod`
-4. Unzip to `release/` directory
-5. Upload to Steam Workshop using `hmlendea/steam-workshop-update@latest`
+2. Generate the mod with `scripts/generate-mod.py` using the release version
+3. Upload the generated mod directory `out/stellaris/ui-star-names/` to Steam Workshop using `hmlendea/steam-workshop-update@latest`
 
 **Required Secrets**:
 - `STEAM_USERNAME`
@@ -25,7 +31,7 @@ The release automation component consists of three GitHub Actions workflows that
 **Configuration**:
 - `appid`: 281990 (Stellaris)
 - `itemid`: 2040215185 (Workshop item ID)
-- `path`: `release/ui-star-names/`
+- `path`: `out/stellaris/ui-star-names/`
 - `changenote`: Links to GitHub release page
 
 ### Nexus Mods (`.github/workflows/nexus-mods-release.yml`)
@@ -34,8 +40,8 @@ The release automation component consists of three GitHub Actions workflows that
 
 **Steps**:
 1. Checkout the requested tag
-2. Update the `version` field in `ui-star-names.mod` and `ui-star-names/descriptor.mod`
-3. Build the release archive `release.zip` containing `ui-star-names/` and `ui-star-names.mod`
+2. Generate the mod with `scripts/generate-mod.py` using the release version
+3. Build the release archive `release.zip` from the generated `out/stellaris/` output
 4. Upload to Nexus Mods using `Nexus-Mods/upload-action@v1.0.0-beta.11`
 
 **Required Secrets**:
@@ -58,8 +64,8 @@ The release automation component consists of three GitHub Actions workflows that
 **Steps**:
 1. Checkout repository
 2. Extract the version from the GitHub release tag
-3. Update the `version` field in `ui-star-names.mod` and `ui-star-names/descriptor.mod`
-4. Build `ui-star-names_<version>.zip` containing `ui-star-names/` and `ui-star-names.mod`
+3. Generate the mod with `scripts/generate-mod.py` using the release version
+4. Build `ui-star-names_<version>.zip` from the generated `out/stellaris/` output
 5. Publish it with `softprops/action-gh-release@v2`
 
 **Required Permissions**:
@@ -72,21 +78,22 @@ The release body is left exactly as the maintainer wrote it; no checksum is comp
 
 ## Release Archive
 
-Each workflow builds its archive locally from the repository contents. No GitHub release asset is downloaded.
+Each workflow generates the mod with `scripts/generate-mod.py` and builds its archive locally from the generated `out/stellaris/` directory. No GitHub release asset is downloaded.
 
 **Archive Contents**:
 ```
 ui-star-names_<version>.zip
 ├── ui-star-names/
 │   ├── descriptor.mod
+│   ├── thumbnail.png
 │   └── common/
 │       └── random_names/
 │           └── base/
-│               └── *.txt
+│               └── universum_infinitum.txt
 └── ui-star-names.mod
 ```
 
-The Steam and Nexus workflows build the same contents as `release.zip`; the Nexus workflow uploads it under the display name `ui-star-names.zip`, while the GitHub Release workflow publishes it as `ui-star-names_<version>.zip`.
+The Nexus and GitHub Release workflows build the same contents; the Nexus workflow uploads it as `release.zip` under the display name `ui-star-names.zip`, while the GitHub Release workflow publishes it as `ui-star-names_<version>.zip`. The Steam workflow uploads the generated `out/stellaris/ui-star-names/` directory rather than an archive.
 
 ## Dependencies
 
@@ -110,7 +117,7 @@ The Steam and Nexus workflows build the same contents as `release.zip`; the Nexu
 
 1. All changes merged to `master`
 2. `supported_version` updated in both descriptor files
-3. `./count-additions.sh` run and output recorded for release notes
+3. `./scripts/count-additions.sh` run and output recorded for release notes
 4. Local test install successful
 
 ### Release Process

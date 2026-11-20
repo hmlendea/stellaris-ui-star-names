@@ -50,7 +50,7 @@ git push origin v1.2.3
 
 - [ ] All changes merged to `master`
 - [ ] `supported_version` updated in both descriptor files
-- [ ] `./count-additions.sh` run, output recorded
+- [ ] `./scripts/count-additions.sh` run, output recorded
 - [ ] Local test install successful
 - [ ] No uncommitted changes
 - [ ] `master` branch up to date with origin

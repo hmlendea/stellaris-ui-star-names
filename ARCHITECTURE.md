@@ -51,7 +51,7 @@ The principal external boundaries are:
 
 **Data-only mod / Resource pack**
 
-The repository implements a pure data-provider pattern. All functionality is declarative: text files conforming to Stellaris' name list format are placed in the expected directory structure. The game engine provides all logic for parsing, selecting, and applying names. There are no scripts, no build step, no runtime, and no dependencies beyond the game itself.
+The repository implements a data-provider pattern. All mod functionality is declarative: text files conforming to Stellaris' name list format are placed in the expected directory structure, and the game engine provides all logic for parsing, selecting, and applying names. The repository additionally contains a generation script that aggregates the source name lists into the distributable mod, and release automation that publishes the generated output; the mod itself has no runtime and no dependencies beyond the game.
 
 ```mermaid
 flowchart TB
@@ -148,19 +148,23 @@ Boundary rules:
 ### Release Automation
 
 Paths:
+- `.github/workflows/build.yml`
 - `.github/workflows/steam-workshop-release.yml`
 - `.github/workflows/nexus-mods-release.yml`
 - `.github/workflows/github-release.yml`
-- `count-additions.sh`
+- `scripts/count-additions.sh`
+- `scripts/generate-mod.py`
 
 Responsibilities:
+- Build the mod from the source name lists on every push and pull request to `master`
 - Automate packaging and publishing to Steam Workshop, Nexus Mods, and GitHub Releases on version tag push
-- `count-additions.sh`: Utility script to count unique names across all list files for release notes
+- Generate the complete distributable mod under `out/stellaris/` from `src/names/`
+- `scripts/count-additions.sh`: Utility script to count unique names across all source list files for release notes
 
 Boundary rules:
-- Workflows trigger on Git tags matching `v*.*.*`, while the GitHub Release workflow triggers on release publication
-- Each workflow builds the release archive itself from the checked-out repository
-- Release archive contents: the `ui-star-names/` directory and `ui-star-names.mod`
+- The build workflow triggers on pushes and pull requests to `master`; release workflows trigger on Git tags matching `v*.*.*`, while the GitHub Release workflow triggers on release publication
+- Each workflow generates the mod itself with `scripts/generate-mod.py` from the checked-out repository
+- Release content: the `ui-star-names/` directory and `ui-star-names.mod`
 - Steam workflow uses `hmlendea/steam-workshop-update` action with stored credentials
 - Nexus workflow uploads the archive via the Nexus Mods API
 - GitHub Release workflow uploads `ui-star-names_<version>.zip` with `softprops/action-gh-release`
@@ -223,7 +227,7 @@ The mod has no code dependencies. The only architectural rules concern file plac
 flowchart TB
     Repo[Repository Root] --> ModDir[ui-star-names/]
     Repo --> Workflows[.github/workflows/]
-    Repo --> Scripts[count-additions.sh]
+    Repo --> Scripts[scripts/]
     ModDir --> Descriptor[descriptor.mod]
     ModDir --> Common[common/]
     Common --> RandomNames[random_names/]
@@ -277,12 +281,12 @@ No automated test suite exists. Verification is manual:
 1. **Installation test:** Install mod via Steam Workshop, Nexus Mods, or manual ZIP extraction; verify it appears in Stellaris launcher
 2. **Load test:** Enable mod, start new game; verify no launcher errors or game crashes
 3. **Content test:** Observe generated galaxy; verify custom names appear for stars, nebulas, asteroids, black holes
-4. **Count verification:** Run `count-additions.sh` to confirm name counts match expectations
+4. **Count verification:** Run `scripts/count-additions.sh` to confirm name counts match expectations
 
 Execute the principal manual verification with:
 ```bash
 # Count unique names in all list files
-./count-additions.sh
+./scripts/count-additions.sh
 ```
 
 Material coverage gaps:
@@ -313,10 +317,12 @@ Material coverage gaps:
 | Asteroid prefix lists | `ui-star-names/common/random_names/base/ui_asteroid-prefixes*.txt` |
 | Asteroid postfix lists | `ui-star-names/common/random_names/base/ui_asteroid-postfixes*.txt` |
 | Black hole name lists | `ui-star-names/common/random_names/base/ui_black-holes_*.txt` |
+| Build workflow | `.github/workflows/build.yml` |
 | Steam Workshop workflow | `.github/workflows/steam-workshop-release.yml` |
 | Nexus Mods workflow | `.github/workflows/nexus-mods-release.yml` |
 | GitHub Release workflow | `.github/workflows/github-release.yml` |
-| Name counting script | `count-additions.sh` |
+| Name counting script | `scripts/count-additions.sh` |
+| Mod generation script | `scripts/generate-mod.py` |
 | Release archive (generated) | `ui-star-names_<version>.zip` |
 | Workflow archive (generated) | `release.zip` |
 

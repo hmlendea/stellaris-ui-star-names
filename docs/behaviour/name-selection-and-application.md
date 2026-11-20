@@ -178,4 +178,4 @@ If multiple mods add name lists for same category:
 No automated tests exist. Behaviour verified by:
 - Visual inspection in-game
 - Save file examination
-- `count-additions.sh` for entry counts
+- `scripts/count-additions.sh` for entry counts

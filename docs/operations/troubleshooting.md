@@ -101,7 +101,7 @@ This document provides troubleshooting guidance for common issues encountered du
 
 ## Development & Verification Issues
 
-### `./count-additions.sh` Returns Wrong Count
+### `./scripts/count-additions.sh` Returns Wrong Count
 
 **Symptoms**: Count script returns 0 or unexpected number
 
@@ -218,7 +218,7 @@ cp ui-star-names/descriptor.mod ui-star-names.mod
 
 ```bash
 # Count total entries across all files
-./count-additions.sh
+./scripts/count-additions.sh
 
 # Find all parse errors in Stellaris log (Linux)
 grep -i 'random_names' ~/.local/share/Paradox\ Interactive/Stellaris/logs/error.log

@@ -145,7 +145,7 @@ asteroid_postfix = {
 
 ## Verification
 
-- Run `./count-additions.sh` to count unique entries per category
+- Run `./scripts/count-additions.sh` to count unique entries per category
 - Install mod and start new game to verify names appear
 - Check launcher for load errors
 

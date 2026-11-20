@@ -89,7 +89,7 @@ asteroid_postfix = {
 
 ```bash
 # Count entries per category
-./count-additions.sh
+./scripts/count-additions.sh
 
 # Output example:
 # Stars: 2847
@@ -148,7 +148,7 @@ Examples:
    - **What**: Brief summary of changes
    - **Why**: Rationale / issue reference
    - **Testing**: How verified (count script, in-game, etc.)
-   - **Entry counts**: Before/after from `count-additions.sh`
+   - **Entry counts**: Before/after from `scripts/count-additions.sh`
 
 4. Labels: Auto-assigned from branch name or add manually
 
@@ -168,7 +168,7 @@ Maintainer checks:
 - [ ] Entries are quoted strings (stars/nebulas/black holes)
 - [ ] No obvious duplicates within file
 - [ ] Source attribution clear (filename + optional comment)
-- [ ] `count-additions.sh` output reasonable
+- [ ] `scripts/count-additions.sh` output reasonable
 
 #### Review Outcomes
 
@@ -229,7 +229,7 @@ Maintainer checks:
 
 | Tool | Purpose |
 |------|---------|
-| `./count-additions.sh` | Count unique entries per category |
+| `./scripts/count-additions.sh` | Count unique entries per category |
 | Text editor | Edit `.txt` files (VS Code, Notepad++, etc.) |
 | Stellaris launcher | Test mod in-game |
 | Git/GitHub | Version control and PR workflow |
@@ -240,7 +240,7 @@ Maintainer checks:
 - [ ] Read CONTRIBUTING.md
 - [ ] Read this document
 - [ ] Fork repository
-- [ ] Run `./count-additions.sh` to see baseline
+- [ ] Run `./scripts/count-additions.sh` to see baseline
 - [ ] Make a small test change (fix typo)
 - [ ] Submit first PR
 

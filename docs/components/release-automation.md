@@ -41,18 +41,20 @@ The two jobs run independently, so a failure in one game does not mask the statu
 **Trigger**: Push of Git tag matching `v*.*.*` OR manual workflow dispatch with tag input
 
 **Steps**:
-1. Checkout the requested tag
-2. Generate the mod with `scripts/generate-mod.py --version <version> --game stellaris` using the release version
-3. Build the release archive `release.zip` from the generated `out/stellaris/` output
-4. Upload to Nexus Mods using `Nexus-Mods/upload-action@v1.0.0-beta.11`
+1. Check out the requested tag
+2. Generate the Stellaris mod with `scripts/generate-mod.py --version <version> --game stellaris` using the release version
+3. Build the Stellaris `release.zip` from the generated `out/stellaris/` output
+4. Generate the Galactic Civilizations II star name data with `scripts/generate-mod.py --version <version> --game galciv2`
+5. Build the Galactic Civilizations II `release-galciv2.zip` from the generated `Data` and `Twilight` directories in `out/galciv2/`
+6. Upload both archives to Nexus Mods using `Nexus-Mods/upload-action@v1.0.0-beta.11`
 
 **Required Secrets**:
 - `NEXUSMODS_API_KEY`
 
 **Configuration**:
-- `file_id`: 920143 (Nexus Mods file ID)
-- `filename`: `release.zip`
-- `display_name`: `ui-star-names.zip`
+- `file_id`: 920143 (Stellaris) and 8432274 (Galactic Civilizations II) Nexus Mods file IDs
+- `filename`: `release.zip` (Stellaris) and `release-galciv2.zip` (Galactic Civilizations II)
+- `display_name`: `ui-star-names.zip` (Stellaris) and `ui-star-names-galciv2.zip` (Galactic Civilizations II)
 - `version`: Tag name (with `v` prefix stripped)
 - `description`: Links to GitHub release page
 - `category`: `main`
@@ -116,7 +118,7 @@ ui-star-names-galciv2_<version>.zip
 
 The Galactic Civilizations II archive is not a mod: the game reads star names only from its own data files before mods are loaded, so the archived files replace the game's shipped files. The `Twilight/Data/English/STARS.txt` file is an identical copy of `Data/English/STARS.txt`.
 
-The GitHub Release workflow builds both archives in separate jobs. The Nexus workflow builds the Stellaris archive under the local name `release.zip` with the display name `ui-star-names.zip`, while the Steam workflow uploads the generated `out/stellaris/ui-star-names/` directory rather than an archive.
+The GitHub Release workflow builds both archives in separate jobs. The Nexus workflow generates both games in its single `release` job and uploads one archive per game, with the display names `ui-star-names.zip` for Stellaris and `ui-star-names-galciv2.zip` for Galactic Civilizations II, while the Steam workflow uploads the generated `out/stellaris/ui-star-names/` directory rather than an archive.
 
 ## Dependencies
 
@@ -156,7 +158,7 @@ The GitHub Release workflow builds both archives in separate jobs. The Nexus wor
 3. GitHub Actions automatically:
    - Attaches `ui-star-names_<version>.zip` to the GitHub Release
    - Triggers Steam workflow, which builds and uploads the release archive
-   - Triggers Nexus workflow, which builds and uploads the release archive
+   - Triggers Nexus workflow, which builds and uploads the release archives for both games
 
 4. Monitor workflow runs for success/failure
 
@@ -181,6 +183,7 @@ The GitHub Release workflow builds both archives in separate jobs. The Nexus wor
 | GitHub Release upload fails | Missing `contents: write` permission, release unpublished | Verify workflow permissions; re-run after the release exists |
 | Archive build fails | `ui-star-names/` or `ui-star-names.mod` missing or renamed | Restore the expected paths in the repository; re-run the workflow |
 | Archive structure invalid | Mod directory renamed, files missing | Verify `ui-star-names/` structure in repository |
+| Galactic Civilizations II archive build fails | `Data/English/STARS.txt` or `Twilight/Data/English/STARS.txt` missing | Verify the GalCiv2 output of `scripts/generate-mod.py`; re-run the workflow |
 
 ## Known Issues
 
@@ -188,6 +191,7 @@ The GitHub Release workflow builds both archives in separate jobs. The Nexus wor
 - Workflows depend on third-party actions (`hmlendea/steam-workshop-update`, `Nexus-Mods/upload-action`, `softprops/action-gh-release`)
 - No automated verification of release archive contents
 - The mod `version` field is written into the checked-out descriptor files at release time; the committed descriptors carry no `version` line
+- Nexus Mods requires two separate mod pages, so the Stellaris and Galactic Civilizations II releases use different file identifiers
 - No rollback mechanism (must push new tag)
 - Secrets management: Steam 2FA seed must be kept current
 - Version tag format must be exactly `vX.Y.Z` (semantic versioning)
@@ -263,6 +267,7 @@ on:
         required: true
 jobs:
   release:
+    name: Release
     runs-on: ubuntu-latest
     env:
       VERSION: ${{ inputs.tag || github.ref_name }}
@@ -270,22 +275,20 @@ jobs:
     - uses: actions/checkout@v7
       with:
         ref: ${{ env.VERSION }}
-    - name: Update the mod version
+    - name: Generate the mod
       run: |
-        MOD_VERSION="${VERSION#v}"
-
-        for DESCRIPTOR in "ui-star-names.mod" "ui-star-names/descriptor.mod"
-        do
-          if grep -q '^version=' "${DESCRIPTOR}"; then
-            sed -i "s/^version=.*/version=\"${MOD_VERSION}\"/" "${DESCRIPTOR}"
-          else
-            printf 'version="%s"\n' "${MOD_VERSION}" | cat - "${DESCRIPTOR}" > "${DESCRIPTOR}.tmp"
-            mv "${DESCRIPTOR}.tmp" "${DESCRIPTOR}"
-          fi
-        done
+        python3 scripts/generate-mod.py --version "${VERSION#v}" --game stellaris
     - name: Build the release archive
       run: |
-        zip -r "release.zip" "ui-star-names/" "ui-star-names.mod"
+        cd out/stellaris
+        zip -r "${GITHUB_WORKSPACE}/release.zip" "ui-star-names/" "ui-star-names.mod"
+    - name: Generate the Galactic Civilizations II data
+      run: |
+        python3 scripts/generate-mod.py --version "${VERSION#v}" --game galciv2
+    - name: Build the Galactic Civilizations II release archive
+      run: |
+        cd out/galciv2
+        zip -r "${GITHUB_WORKSPACE}/release-galciv2.zip" "Data" "Twilight"
     - name: Upload
       uses: Nexus-Mods/upload-action@v1.0.0-beta.11
       with:
@@ -293,6 +296,18 @@ jobs:
         file_id: 920143
         filename: release.zip
         display_name: ui-star-names.zip
+        version: ${{env.VERSION}}
+        description: "Changelog: https://github.com/hmlendea/stellaris-ui-star-names/releases/${{env.VERSION}}"
+        category: main
+        archive_existing_version: true
+        update_mod_version: true
+    - name: Upload the Galactic Civilizations II release
+      uses: Nexus-Mods/upload-action@v1.0.0-beta.11
+      with:
+        api_key: ${{ secrets.NEXUSMODS_API_KEY }}
+        file_id: 8432274
+        filename: release-galciv2.zip
+        display_name: ui-star-names-galciv2.zip
         version: ${{env.VERSION}}
         description: "Changelog: https://github.com/hmlendea/stellaris-ui-star-names/releases/${{env.VERSION}}"
         category: main

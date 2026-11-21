@@ -3,7 +3,7 @@
 [![Build Status](https://github.com/hmlendea/stellaris-ui-star-names/actions/workflows/build.yml/badge.svg)](https://github.com/hmlendea/stellaris-ui-star-names/actions/workflows/build.yml)
 [![License](https://img.shields.io/github/license/hmlendea/stellaris-ui-star-names)](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/LICENSE)
 
-# Stellaris - Universum Infinitum - Star Names
+# Universum Infinitum - Star Names
 
 Mod for Stellaris that adds [thousands of new names](https://github.com/hmlendea/stellaris-ui-star-names/wiki/Additions) for stars, nebulas, asteroids, and black holes, drawn from science fiction, fantasy, games, and real astronomical catalogues.
 
@@ -124,7 +124,7 @@ Run the name count script to detect accidental removals or additions of name ent
 |----------|---------|--------------|
 | [ CI ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/build.yml) | Build the content | Triggers on pushes and pull requests to `master`, builds the Stellaris mod and the Galactic Civilizations II star name data in separate jobs from the source name lists in `src/names/`, and fails if either generation does not succeed |
 | [ Steam Workshop ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/steam-workshop-release.yml) | Publish releases to the Steam Workshop | Triggers on version tags or manual dispatch, generates the Stellaris mod with `scripts/generate-mod.py --version <version> --game stellaris` using the release version, then uploads it with the `hmlendea/steam-workshop-update` action |
-| [ Nexus Mods ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/nexus-mods-release.yml) | Publish releases to Nexus Mods | Triggers on version tags or manual dispatch, generates the Stellaris mod with `scripts/generate-mod.py --version <version> --game stellaris` using the release version, builds the release archive, then uploads it with the `Nexus-Mods/upload-action` action |
+| [ Nexus Mods ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/nexus-mods-release.yml) | Publish releases to Nexus Mods | Triggers on version tags or manual dispatch, generates the Stellaris mod and the Galactic Civilizations II star name data using the release version, builds and uploads one release archive per game with the `Nexus-Mods/upload-action` action |
 | [ GitHub Release ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/github-release.yml) | Publish the release archives to GitHub Releases | Triggers on release publication or manual dispatch, generates the Stellaris mod and the Galactic Civilizations II star name data in separate jobs using the release version, builds `ui-star-names_<version>.zip` and `ui-star-names-galciv2_<version>.zip`, and uploads them with `softprops/action-gh-release` |
 
 ## 🗂️ Project Structure

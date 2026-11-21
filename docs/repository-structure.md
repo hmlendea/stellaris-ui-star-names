@@ -117,7 +117,7 @@ Special naming:
 
 - **`build.yml`**: Triggers on pushes and pull requests to `master`. Builds the Galactic Civilizations II star name data in the `galciv2` job and the Stellaris mod in the `stellaris` job, failing the build when either generation fails.
 - **`steam-workshop-release.yml`**: Triggers on version tags (`v*.*.*`) or manual dispatch. Generates the Stellaris mod with `scripts/generate-mod.py --version <version> --game stellaris` using the release version and uploads the generated mod directory to Steam Workshop using the `hmlendea/steam-workshop-update` action.
-- **`nexus-mods-release.yml`**: Triggers on version tags or manual dispatch. Generates the Stellaris mod with `scripts/generate-mod.py --version <version> --game stellaris` using the release version, builds the release archive from the generated output, and uploads it to Nexus Mods using `Nexus-Mods/upload-action`.
+- **`nexus-mods-release.yml`**: Triggers on version tags or manual dispatch. Generates the Stellaris mod and the Galactic Civilizations II star name data with `scripts/generate-mod.py` in its single `release` job using the release version, builds one release archive per game from the generated output, and uploads both to Nexus Mods using `Nexus-Mods/upload-action`.
 - **`github-release.yml`**: Triggers on release publication or manual dispatch. Generates the Galactic Civilizations II star name data in the `galciv2` job and the Stellaris mod in the `stellaris` job using the release version, builds `ui-star-names-galciv2_<version>.zip` and `ui-star-names_<version>.zip` from the generated output, and attaches both to the release using `softprops/action-gh-release`.
 
 ### Utility Scripts

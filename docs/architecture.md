@@ -56,13 +56,13 @@ The root `ARCHITECTURE.md` provides the authoritative system-level architecture.
 - Build both game variants on every push and pull request to `master`, one job per game
 - Automate packaging and publishing on version tag push (`v*.*.*`) and release publication
 - Steam workflow: Updates the mod version, builds the release archive, extracts it, uploads to Steam Workshop
-- Nexus workflow: Updates the mod version, builds the release archive, uploads to Nexus Mods via API
-- GitHub Release workflow: Updates the mod version, builds `ui-star-names_<version>.zip` and `ui-star-names-galciv2_<version>.zip` in one job per game, and attaches both to the published release
+- Nexus workflow: Builds and uploads one release archive per game to Nexus Mods via API from its single `release` job
+- GitHub Release workflow: Builds `ui-star-names_<version>.zip` and `ui-star-names-galciv2_<version>.zip` in one job per game, and attaches both to the published release
 
 **Boundary Rules**:
 - Tag-triggered workflows match `v*.*.*`; the GitHub Release workflow triggers on the `published` release event or manual dispatch
 - Each workflow builds the release archive itself from the checked-out repository
-- The build and GitHub Release workflows generate both game variants; the Steam Workshop and Nexus Mods workflows still generate only the Stellaris variant
+- The build, Nexus Mods, and GitHub Release workflows generate both game variants; the Steam Workshop workflow still generates only the Stellaris variant
 - Stellaris release archive contents: the `ui-star-names/` directory and `ui-star-names.mod`
 - Galactic Civilizations II release archive contents: the `Data/English/STARS.txt` and `Twilight/Data/English/STARS.txt` star name data files, which replace the game's shipped files rather than being installed as a mod
 - GitHub release asset naming convention: `ui-star-names_<version>.zip` and `ui-star-names-galciv2_<version>.zip`

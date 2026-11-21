@@ -164,7 +164,7 @@ Responsibilities:
 Boundary rules:
 - The build workflow triggers on pushes and pull requests to `master` and runs one job per game; release workflows trigger on Git tags matching `v*.*.*`, while the GitHub Release workflow triggers on release publication or manual dispatch
 - Each workflow generates the mod itself with `scripts/generate-mod.py` from the checked-out repository
-- The build and GitHub Release workflows generate both games, one job per game; the Steam Workshop and Nexus Mods workflows currently generate only the Stellaris mod with `--game stellaris`
+- The build and GitHub Release workflows generate both games, one job per game; the Steam Workshop workflow currently generates only the Stellaris mod with `--game stellaris`, while the Nexus Mods workflow generates both games in its single `release` job
 - Release content: the `ui-star-names/` directory and `ui-star-names.mod`
 - Steam workflow uses `hmlendea/steam-workshop-update` action with stored credentials
 - Nexus workflow uploads the archive via the Nexus Mods API

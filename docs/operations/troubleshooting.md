@@ -151,7 +151,7 @@ Remove duplicates manually or with script.
 | Cause | Error Log | Solution |
 |-------|-----------|----------|
 | Invalid API key | `401 Unauthorized` | Regenerate API key on Nexus Mods, update secret |
-| File ID mismatch | `404 File not found` | Verify `file_id` (920143) matches Nexus page |
+| File ID mismatch | `404 File not found` | Verify `file_id` (920143 for Stellaris, 8432274 for Galactic Civilizations II) matches the Nexus page |
 | Tag format wrong | `Version parse error` | Tag must be `vX.Y.Z` |
 
 ### GitHub Release Upload Fails

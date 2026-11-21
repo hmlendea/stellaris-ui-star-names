@@ -30,10 +30,10 @@ git push origin v1.2.3
 1. Tag push triggers the Steam and Nexus workflows
 2. Publishing the GitHub Release triggers the GitHub Release workflow, which attaches `ui-star-names_<version>.zip` to the release
 3. Each workflow checks out the tagged commit
-4. Each workflow updates the `version` field in both descriptors
-5. Each workflow builds the release archive (`ui-star-names/` and `ui-star-names.mod`)
-6. Steam workflow uploads the extracted contents to the Workshop
-7. Nexus workflow uploads the archive to Nexus
+4. Each workflow generates its content with `scripts/generate-mod.py` using the release version
+5. Each workflow builds its release archive from the generated output
+6. Steam workflow uploads the generated mod directory to the Workshop
+7. Nexus workflow uploads one archive per game to Nexus
 
 ### Manual (Paradox Mods)
 

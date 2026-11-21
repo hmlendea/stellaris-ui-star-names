@@ -50,6 +50,7 @@ Enable the mod in the Stellaris launcher and start a new game. The additional na
 ## ⚠️ Known Limitations
 
 - Names are selected during galaxy generation, so they apply only to newly generated galaxies and do not rename celestial bodies in existing saved games.
+- Galactic Civilizations II does not support overriding star names through a mod, so its archive is a drop-in replacement for the game's shipped `Data/English/STARS.txt` rather than a mod that can be enabled in the game.
 
 ## 📦 Installation
 
@@ -60,8 +61,14 @@ Enable the mod in the Stellaris launcher and start a new game. The additional na
 
 ### Manual Installation
 
-1. Download the [latest release](https://github.com/hmlendea/stellaris-ui-star-names/releases).
-2. Extract the contents into your game's mod directory.
+For Stellaris, download the [latest release](https://github.com/hmlendea/stellaris-ui-star-names/releases), extract `ui-star-names/` and `ui-star-names.mod` into your game's mod directory, and enable the mod in the launcher.
+
+For Galactic Civilizations II, download the [latest release](https://github.com/hmlendea/stellaris-ui-star-names/releases) and replace the game's shipped star name files with the archived ones. Galactic Civilizations II does not support overriding star names through a mod, so the game's own data files must be replaced:
+
+1. Back up the existing `Data/English/STARS.txt` and `Twilight/Data/English/STARS.txt` files inside your game's installation directory.
+2. Copy the archived `Data/English/STARS.txt` and `Twilight/Data/English/STARS.txt` over them.
+
+Because Dark Avatar ships its own star name list in `DarkAvatar/Data/English/STARS.txt`, replace that file as well when playing the Dark Avatar executable. New names apply only to newly generated galaxies.
 
 ## 🧩 Compatibility
 
@@ -88,13 +95,16 @@ Copy or symlink `ui-star-names/` and `ui-star-names.mod` inside your Stellaris' 
 
 ### Build
 
-The distributable mod is generated from the name lists in `src/names/` by running the generation script with the desired version number:
+The distributable mod is generated from the name lists in `src/names/` by running the generation script with the desired version number and the target game:
 
 ```bash
-python3 scripts/generate-mod.py 1.0.0
+python3 scripts/generate-mod.py --version 1.0.0 --game stellaris
+python3 scripts/generate-mod.py --version 1.0.0 --game galciv2
 ```
 
-The complete mod is written to `out/stellaris/`, containing `ui-star-names/` (with `descriptor.mod`, `thumbnail.png`, and the aggregated name list) and `ui-star-names.mod`.
+The `--version` and `--game` arguments are mandatory, and `--game` accepts `stellaris` or `galciv2`, case-insensitively.
+
+For `stellaris`, the complete mod is written to `out/stellaris/`, containing `ui-star-names/` (with `descriptor.mod`, `thumbnail.png`, and the aggregated name list) and `ui-star-names.mod`. For `galciv2`, only the star name data files are written, to `out/galciv2/Data/English/STARS.txt` and `out/galciv2/Twilight/Data/English/STARS.txt` (a copy of the former), with one star name per line in the Windows-1252 encoding and CRLF line endings expected by the game; these files are meant to replace the game's shipped star name files rather than to be installed as a mod.
 
 ### Run
 
@@ -112,10 +122,10 @@ Run the name count script to detect accidental removals or additions of name ent
 
 | Workflow | Purpose | What it does |
 |----------|---------|--------------|
-| [ CI ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/build.yml) | Build the mod | Triggers on pushes and pull requests to `master`, generates the complete mod from the source name lists in `src/names/`, and fails if generation does not succeed |
-| [ Steam Workshop ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/steam-workshop-release.yml) | Publish releases to the Steam Workshop | Triggers on version tags or manual dispatch, generates the mod with `scripts/generate-mod.py` using the release version, then uploads it with the `hmlendea/steam-workshop-update` action |
-| [ Nexus Mods ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/nexus-mods-release.yml) | Publish releases to Nexus Mods | Triggers on version tags or manual dispatch, generates the mod with `scripts/generate-mod.py` using the release version, builds the release archive, then uploads it with the `Nexus-Mods/upload-action` action |
-| [ GitHub Release ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/github-release.yml) | Publish the release archive to GitHub Releases | Triggers on release publication, generates the mod with `scripts/generate-mod.py` using the release version, builds `ui-star-names_<version>.zip`, and uploads it with `softprops/action-gh-release` |
+| [ CI ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/build.yml) | Build the content | Triggers on pushes and pull requests to `master`, builds the Stellaris mod and the Galactic Civilizations II star name data in separate jobs from the source name lists in `src/names/`, and fails if either generation does not succeed |
+| [ Steam Workshop ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/steam-workshop-release.yml) | Publish releases to the Steam Workshop | Triggers on version tags or manual dispatch, generates the Stellaris mod with `scripts/generate-mod.py --version <version> --game stellaris` using the release version, then uploads it with the `hmlendea/steam-workshop-update` action |
+| [ Nexus Mods ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/nexus-mods-release.yml) | Publish releases to Nexus Mods | Triggers on version tags or manual dispatch, generates the Stellaris mod with `scripts/generate-mod.py --version <version> --game stellaris` using the release version, builds the release archive, then uploads it with the `Nexus-Mods/upload-action` action |
+| [ GitHub Release ](https://github.com/hmlendea/stellaris-ui-star-names/blob/master/.github/workflows/github-release.yml) | Publish the release archives to GitHub Releases | Triggers on release publication or manual dispatch, generates the Stellaris mod and the Galactic Civilizations II star name data in separate jobs using the release version, builds `ui-star-names_<version>.zip` and `ui-star-names-galciv2_<version>.zip`, and uploads them with `softprops/action-gh-release` |
 
 ## 🗂️ Project Structure
 

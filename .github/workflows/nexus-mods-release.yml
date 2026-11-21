@@ -25,7 +25,7 @@ jobs:
 
     - name: Generate the mod
       run: |
-        python3 scripts/generate-mod.py "${VERSION#v}"
+        python3 scripts/generate-mod.py --version "${VERSION#v}" --game stellaris
 
     - name: Build the release archive
       run: |

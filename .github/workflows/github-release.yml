@@ -3,30 +3,84 @@ name: GitHub Release
 on:
   release:
     types: [ published ]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to release'
+        required: true
 
 permissions:
   contents: write
 
 jobs:
-  release:
-    name: Build and publish
+  galciv2:
+    name: Build and publish for Galactic Civilizations II
     runs-on: ubuntu-latest
+
+    env:
+      VERSION: ${{ inputs.tag || github.event.release.tag_name }}
+      GAME: galciv2
 
     steps:
     - name: Check out the repository
       uses: actions/checkout@v7
+      with:
+        ref: ${{ env.VERSION }}
 
     - name: Extract the version from the GitHub tag
       id: version
       run: |
-        VERSION="${{ github.event.release.tag_name }}"
         VERSION="${VERSION#v}"
         echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
 
     - name: Generate the mod
       shell: bash
       run: |
-        python3 scripts/generate-mod.py "${{ steps.version.outputs.version }}"
+        python3 scripts/generate-mod.py --version "${{ steps.version.outputs.version }}" --game "${GAME}"
+
+    - name: Build the release archive
+      id: package
+      shell: bash
+      run: |
+        ARCHIVE_NAME="ui-star-names-galciv2_${{ steps.version.outputs.version }}.zip"
+
+        cd "out/${GAME}"
+        zip -r "${GITHUB_WORKSPACE}/${ARCHIVE_NAME}" "Data" "Twilight"
+
+        echo "archive_name=${ARCHIVE_NAME}" >> "$GITHUB_OUTPUT"
+
+    - name: Publish the release asset
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ env.VERSION }}
+        files: ${{ steps.package.outputs.archive_name }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  stellaris:
+    name: Build and publish for Stellaris
+    runs-on: ubuntu-latest
+
+    env:
+      VERSION: ${{ inputs.tag || github.event.release.tag_name }}
+      GAME: stellaris
+
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v7
+      with:
+        ref: ${{ env.VERSION }}
+
+    - name: Extract the version from the GitHub tag
+      id: version
+      run: |
+        VERSION="${VERSION#v}"
+        echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+
+    - name: Generate the mod
+      shell: bash
+      run: |
+        python3 scripts/generate-mod.py --version "${{ steps.version.outputs.version }}" --game "${GAME}"
 
     - name: Build the release archive
       id: package
@@ -34,7 +88,7 @@ jobs:
       run: |
         ARCHIVE_NAME="ui-star-names_${{ steps.version.outputs.version }}.zip"
 
-        cd out/stellaris
+        cd "out/${GAME}"
         zip -r "${GITHUB_WORKSPACE}/${ARCHIVE_NAME}" "ui-star-names/" "ui-star-names.mod"
 
         echo "archive_name=${ARCHIVE_NAME}" >> "$GITHUB_OUTPUT"
@@ -42,6 +96,7 @@ jobs:
     - name: Publish the release asset
       uses: softprops/action-gh-release@v2
       with:
+        tag_name: ${{ env.VERSION }}
         files: ${{ steps.package.outputs.archive_name }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

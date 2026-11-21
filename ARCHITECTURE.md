@@ -156,19 +156,20 @@ Paths:
 - `scripts/generate-mod.py`
 
 Responsibilities:
-- Build the mod from the source name lists on every push and pull request to `master`
+- Build the Stellaris mod and the Galactic Civilizations II star name data from the source name lists on every push and pull request to `master`
 - Automate packaging and publishing to Steam Workshop, Nexus Mods, and GitHub Releases on version tag push
-- Generate the complete distributable mod under `out/stellaris/` from `src/names/`
+- Generate the complete distributable mod under `out/stellaris/` from `src/names/`, or the Galactic Civilizations II star name data file under `out/galciv2/Data/English/STARS.txt` from the star name lists, according to the `--game` argument
 - `scripts/count-additions.sh`: Utility script to count unique names across all source list files for release notes
 
 Boundary rules:
-- The build workflow triggers on pushes and pull requests to `master`; release workflows trigger on Git tags matching `v*.*.*`, while the GitHub Release workflow triggers on release publication
+- The build workflow triggers on pushes and pull requests to `master` and runs one job per game; release workflows trigger on Git tags matching `v*.*.*`, while the GitHub Release workflow triggers on release publication or manual dispatch
 - Each workflow generates the mod itself with `scripts/generate-mod.py` from the checked-out repository
+- The build and GitHub Release workflows generate both games, one job per game; the Steam Workshop workflow currently generates only the Stellaris mod with `--game stellaris`, while the Nexus Mods workflow generates both games in its single `release` job
 - Release content: the `ui-star-names/` directory and `ui-star-names.mod`
 - Steam workflow uses `hmlendea/steam-workshop-update` action with stored credentials
 - Nexus workflow uploads the archive via the Nexus Mods API
-- GitHub Release workflow uploads `ui-star-names_<version>.zip` with `softprops/action-gh-release`
-- GitHub release asset naming convention: `ui-star-names_<version>.zip`
+- GitHub Release workflow uploads `ui-star-names_<version>.zip` and `ui-star-names-galciv2_<version>.zip` with `softprops/action-gh-release`
+- GitHub release asset naming convention: `ui-star-names_<version>.zip` for Stellaris and `ui-star-names-galciv2_<version>.zip` for Galactic Civilizations II
 
 ## 💾 Data Architecture
 
@@ -324,6 +325,7 @@ Material coverage gaps:
 | Name counting script | `scripts/count-additions.sh` |
 | Mod generation script | `scripts/generate-mod.py` |
 | Release archive (generated) | `ui-star-names_<version>.zip` |
+| Galactic Civilizations II release archive (generated) | `ui-star-names-galciv2_<version>.zip` |
 | Workflow archive (generated) | `release.zip` |
 
 ## 📚 Related Documentation

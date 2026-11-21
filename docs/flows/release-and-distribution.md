@@ -19,8 +19,9 @@ sequenceDiagram
     Dev->>GitHub: Create & push tag vX.Y.Z
     Dev->>GitHub: Publish GitHub Release
     GitHub->>Actions: Trigger release workflows
-    Actions->>Actions: Build release archive from repository
+    Actions->>Actions: Build release archives from repository
     Actions->>GitHub: Attach ui-star-names_<version>.zip
+    Actions->>GitHub: Attach ui-star-names-galciv2_<version>.zip
     Actions->>Steam: Upload via steam-workshop-update
     Actions->>Nexus: Upload via Nexus-Mods/upload-action
     Dev->>Paradox: Manual upload archive
@@ -62,12 +63,12 @@ git push origin vX.Y.Z
 1. Publishing the GitHub Release triggers the GitHub Release workflow
 2. Pushing a `v*.*.*` tag triggers the Steam and Nexus workflows
 3. Each workflow checks out the tagged commit
-4. Each workflow updates the `version` field in `ui-star-names.mod` and `ui-star-names/descriptor.mod`
-5. Each workflow builds the release archive itself from the repository contents
-6. The GitHub Release workflow publishes it as `ui-star-names_<version>.zip`; the Steam and Nexus workflows use the local name `release.zip`
-7. GitHub release asset naming convention: `ui-star-names_<version>.zip` (e.g., `ui-star-names_1.2.3.zip`)
+4. Each workflow generates its content with `scripts/generate-mod.py` using the release version
+5. Each workflow builds the release archive itself from the generated output
+6. The GitHub Release workflow builds `ui-star-names-galciv2_<version>.zip` in its `galciv2` job and `ui-star-names_<version>.zip` in its `stellaris` job; the Steam workflow uploads the mod directory, while the Nexus workflow builds and uploads one archive per game within its single `release` job
+7. GitHub release asset naming convention: `ui-star-names_<version>.zip` and `ui-star-names-galciv2_<version>.zip` (for example `ui-star-names_1.2.3.zip` and `ui-star-names-galciv2_1.2.3.zip`)
 
-**Archive Structure**:
+**Stellaris archive structure**:
 ```
 ui-star-names_<version>.zip
 ├── ui-star-names/
@@ -77,6 +78,18 @@ ui-star-names_<version>.zip
 │           └── base/
 │               └── *.txt
 └── ui-star-names.mod
+```
+
+**Galactic Civilizations II archive structure**:
+```
+ui-star-names-galciv2_<version>.zip
+├── Data/
+│   └── English/
+│       └── STARS.txt
+└── Twilight/
+    └── Data/
+        └── English/
+            └── STARS.txt
 ```
 
 ### 5. Steam Workshop Workflow (`.github/workflows/steam-workshop-release.yml`)
@@ -107,16 +120,25 @@ ui-star-names_<version>.zip
 
 **Trigger**: Tag push `v*.*.*` OR manual dispatch with tag input
 
-**Execution**:
+**Execution**: The single `release` job builds and uploads one archive per game sequentially:
+
 1. Checkout the requested tag
 2. Determine version: `${{ inputs.tag || github.ref_name }}`
-3. Update the `version` field in both descriptors
-4. Build the release archive:
+3. Generate the Stellaris mod with `--game stellaris`
+4. Build the Stellaris release archive:
    ```bash
-   zip -r "release.zip" "ui-star-names/" "ui-star-names.mod"
+   cd out/stellaris
+   zip -r "${GITHUB_WORKSPACE}/release.zip" "ui-star-names/" "ui-star-names.mod"
    ```
-5. Upload using `Nexus-Mods/upload-action@v1.0.0-beta.11`:
-   - `file_id`: 920143
+5. Generate the Galactic Civilizations II star name data with `--game galciv2`
+6. Build the Galactic Civilizations II release archive:
+   ```bash
+   cd out/galciv2
+   zip -r "${GITHUB_WORKSPACE}/release-galciv2.zip" "Data" "Twilight"
+   ```
+7. Upload both using `Nexus-Mods/upload-action@v1.0.0-beta.11`:
+   - Stellaris: `file_id`: 920143, `filename`: `release.zip`, `display_name`: `ui-star-names.zip`
+   - Galactic Civilizations II: `file_id`: 8432274, `filename`: `release-galciv2.zip`, `display_name`: `ui-star-names-galciv2.zip`
    - `version`: Tag without `v` prefix
    - `description`: Link to GitHub release
    - `archive_existing_version`: true
@@ -128,9 +150,18 @@ ui-star-names_<version>.zip
 
 ### 7. GitHub Release Workflow (`.github/workflows/github-release.yml`)
 
-**Trigger**: GitHub Release publication
+**Trigger**: GitHub Release publication or manual dispatch
 
-**Execution**:
+**Execution**: The workflow runs two independent jobs, one per game, so both variants can be generated and published in parallel:
+
+`galciv2` job ("Build and publish for Galactic Civilizations II"):
+1. Checkout repository at the release tag
+2. Extract the version from the tag
+3. Generate the Galactic Civilizations II star name data with `--game galciv2`
+4. Build `ui-star-names-galciv2_<version>.zip`
+5. Upload using `softprops/action-gh-release@v2`
+
+`stellaris` job ("Build and publish for Stellaris"):
 1. Checkout repository at the release tag
 2. Extract the version from the tag
 3. Update the `version` field in both descriptors
@@ -155,7 +186,7 @@ ui-star-names_<version>.zip
 
 | Platform | Check |
 |----------|-------|
-| GitHub | Release exists with the attached archive |
+| GitHub | Release exists with both attached archives |
 | Steam Workshop | Version updated, changenote visible |
 | Nexus Mods | Version updated, file downloadable |
 | Paradox Mods | Version updated, approved |

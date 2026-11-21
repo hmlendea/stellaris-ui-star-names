@@ -27,11 +27,11 @@ The repository contains:
 | Nexus Mods workflow | `.github/workflows/nexus-mods-release.yml` | Automates packaging and publishing to Nexus Mods on version tag push |
 | GitHub Release workflow | `.github/workflows/github-release.yml` | Builds and attaches the release archive to a published GitHub Release |
 | Name counting script | `scripts/count-additions.sh` | Utility to count unique names across all list files for release notes |
-| Mod generation script | `scripts/generate-mod.py` | Generates the distributable mod under `out/stellaris/` from `src/names/`, taking the version number as its only argument |
+| Mod generation script | `scripts/generate-mod.py` | Generates the distributable Stellaris mod under `out/stellaris/` or the Galactic Civilizations II star name data file under `out/galciv2/Data/English/STARS.txt` from `src/names/`, taking the version number and the game through the mandatory `--version` and `--game` options (`stellaris` or `galciv2`, case-insensitive) |
 
 ## Repository Type
 
-This is a **data-driven** repository for a game mod. The distributable mod is generated from the source name lists in `src/names/` by `scripts/generate-mod.py`, which writes the complete mod to `out/stellaris/`. The packaged release is a ZIP archive containing the `ui-star-names/` directory and `ui-star-names.mod`, produced by each release workflow.
+This is a **data-driven** repository for a game mod. The distributable Stellaris mod is generated from the source name lists in `src/names/` by `scripts/generate-mod.py`, which writes the complete Stellaris mod to `out/stellaris/` or the Galactic Civilizations II star name data file to `out/galciv2/Data/English/STARS.txt` depending on the `--game` option. The packaged Stellaris release is a ZIP archive containing the `ui-star-names/` directory and `ui-star-names.mod`; the Galactic Civilizations II release is a ZIP archive containing only `Data/English/STARS.txt`, which replaces the game's shipped star name file because the game does not support overriding star names through a mod.
 
 ## Target Audience
 

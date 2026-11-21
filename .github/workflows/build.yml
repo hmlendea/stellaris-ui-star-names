@@ -7,8 +7,19 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-    name: Build
+  galciv2:
+    name: Build for Galactic Civilizations II
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v7
+
+    - name: Build the data
+      run: |
+        python3 scripts/generate-mod.py --version '0.0.0' --game galciv2
+
+  stellaris:
+    name: Build for Stellaris
     runs-on: ubuntu-latest
 
     steps:
@@ -16,4 +27,4 @@ jobs:
 
     - name: Build the mod
       run: |
-        python3 scripts/generate-mod.py '0.0.0'
+        python3 scripts/generate-mod.py --version '0.0.0' --game stellaris

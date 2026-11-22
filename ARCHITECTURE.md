@@ -1,6 +1,6 @@
 # Stellaris - Universum Infinitum - Star Names Architecture
 
-This document describes the current architecture of the Stellaris - Universum Infinitum - Star Names mod, a data-only modification for the game Stellaris that adds thousands of new names for stars, nebulas, asteroids, and black holes.
+This document describes the current architecture of the Universum Infinitum - Star Names project, a data-only set of modifications for the games Stellaris, Galactic Civilizations II, and Galactic Civilizations III that adds thousands of new star names, and for Stellaris additionally adds nebula, asteroid, and black hole names.
 
 ## 📑 Table of Contents
 
@@ -22,11 +22,11 @@ This document describes the current architecture of the Stellaris - Universum In
 
 ## 🎯 Purpose
 
-This mod extends Stellaris galaxy generation by providing additional name lists for celestial bodies. The architecture is purely data-driven: the mod consists of static text files that the Stellaris game engine reads during galaxy generation. There is no executable code, runtime, or independent process. The document audience includes mod maintainers, contributors, and users who wish to understand the mod structure and contribution workflow.
+This project extends galaxy generation in Stellaris, Galactic Civilizations II, and Galactic Civilizations III by providing additional name data. The architecture is purely data-driven: it consists of static text and XML files that each game engine reads during galaxy generation. There is no executable code, runtime, or independent process. The document audience includes mod maintainers, contributors, and users who wish to understand the project structure and contribution workflow.
 
 ## 🌐 System Context
 
-The mod operates entirely within the Stellaris game engine's mod loading and galaxy generation systems.
+The project operates entirely within the mod loading and galaxy generation systems of Stellaris, Galactic Civilizations II, and Galactic Civilizations III.
 
 ```mermaid
 flowchart LR
@@ -34,24 +34,24 @@ flowchart LR
     User -->|Installs mod| Nexus[Nexus Mods]
     User -->|Installs mod| Paradox[Paradox Mods]
     User -->|Installs mod| GitHub[GitHub Releases]
-    Steam -->|Loads mod| Stellaris[Stellaris Game Engine]
-    Nexus -->|Loads mod| Stellaris
-    Paradox -->|Loads mod| Stellaris
-    GitHub -->|Loads mod| Stellaris
-    Stellaris -->|Reads name lists| ModFiles[Mod Name List Files]
+    Steam -->|Loads mod| Games[Game Engines]
+    Nexus -->|Loads mod| Games
+    Paradox -->|Loads mod| Games
+    GitHub -->|Loads mod| Games
+    Games -->|Reads name data| ModFiles[Name Data Files]
     ModFiles -->|Generates| Galaxy[Galaxy with Custom Names]
 ```
 
 The principal external boundaries are:
-- **Stellaris Game Engine:** Loads the mod descriptor, reads name list files during galaxy generation, applies names to generated celestial bodies. The mod has no control over when or how the engine uses the data.
-- **Distribution Platforms (Steam Workshop, Nexus Mods, Paradox Mods, GitHub Releases):** Host and deliver the packaged mod files to users. The mod maintainers publish releases to these platforms via automated workflows.
-- **GitHub Repository:** Source of truth for name list files, mod descriptors, and release automation. Contributors submit changes via pull requests.
+- **Game Engines (Stellaris, Galactic Civilizations II, Galactic Civilizations III):** Stellaris loads the mod descriptor and reads name list files during galaxy generation, applying names to generated celestial bodies; Galactic Civilizations II reads its own star name file before mods are loaded; Galactic Civilizations III reads a star name string table through a mod that replaces the vanilla file. The project has no control over when or how an engine uses the data.
+- **Distribution Platforms (Steam Workshop, Nexus Mods, Paradox Mods, GitHub Releases):** Host and deliver the packaged content to users. The maintainers publish releases to these platforms via automated workflows.
+- **GitHub Repository:** Source of truth for name sources, mod descriptors, and release automation. Contributors submit changes via pull requests.
 
 ## 🏗️ Architectural Style
 
 **Data-only mod / Resource pack**
 
-The repository implements a data-provider pattern. All mod functionality is declarative: text files conforming to Stellaris' name list format are placed in the expected directory structure, and the game engine provides all logic for parsing, selecting, and applying names. The repository additionally contains a generation script that aggregates the source name lists into the distributable mod, and release automation that publishes the generated output; the mod itself has no runtime and no dependencies beyond the game.
+The repository implements a data-provider pattern. All functionality is declarative: text and XML files conforming to each game's expected format are placed in the expected directory structure, and each game engine provides all logic for parsing, selecting, and applying names. The repository additionally contains a generation script that aggregates the source name lists into the distributable content for each game, and release automation that publishes the generated output; the content itself has no runtime and no dependencies beyond the games.
 
 ```mermaid
 flowchart TB
@@ -76,42 +76,59 @@ flowchart TB
 ```
 
 The principal architecture boundaries are:
-- **Mod Root (`ui-star-names/`):** Top-level container recognised by the game launcher. Owns `descriptor.mod` and `common/` directory.
-- **Name List Directory (`common/random_names/base/`):** Flat directory containing all name list files. Each file is independent and follows Stellaris' `name_list` format.
-- **Distribution Descriptors (`ui-star-names.mod`, `descriptor.mod`):** Metadata files consumed by distribution platforms and the game launcher.
+- **Stellaris Mod Root (`ui-star-names/`):** Top-level container recognised by the game launcher. Owns `descriptor.mod` and the `common/` directory.
+- **Stellaris Name List Directory (`common/random_names/base/`):** Flat directory containing all name list files. Each file is independent and follows Stellaris' `name_list` format.
+- **Stellaris Distribution Descriptors (`ui-star-names.mod`, `descriptor.mod`):** Metadata files consumed by distribution platforms and the game launcher.
+- **Galactic Civilizations II Data File (`out/galciv2/Data/English/STARS.txt`):** Star name file that replaces the game's shipped file, since the game does not load star names from a mod.
+- **Galactic Civilizations III Mod (`out/galciv3/ui-star-names/`):** Mod folder containing `Text/StarNamesText.xml` plus the mandatory `ParticleScriptDefs`, `Core`, and `Game` folders the game requires every mod to provide; the `Text/StarNamesText.xml` file replaces the game's shipped star name string table when the folder is placed in the game's `Mods` directory.
 
 ## 🔄 Runtime Flow
 
-The mod has no independent runtime. The execution flow is entirely within the Stellaris game engine:
+The content has no independent runtime. The execution flow is entirely within each game engine:
 
 ```mermaid
 sequenceDiagram
     participant User
-    participant Launcher as Stellaris Launcher
-    participant Engine as Stellaris Game Engine
-    participant Mod as Mod Files
+    participant Launcher as Game Launcher
+    participant Engine as Game Engine
+    participant Data as Content Files
 
     User->>Launcher: Enable mod
     Launcher->>Engine: Load enabled mods
-    Engine->>Mod: Read descriptor.mod
-    Engine->>Mod: Scan common/random_names/base/
-    Engine->>Mod: Parse each name_list block
+    Engine->>Data: Read descriptor.mod (Stellaris) or mod data file
+    Engine->>Data: Scan name data
+    Engine->>Data: Parse name definitions
     User->>Engine: Start new game
     Engine->>Engine: Generate galaxy
-    Engine->>Mod: Select names from loaded lists
+    Engine->>Data: Select names from loaded data
     Engine->>User: Display galaxy with custom names
 ```
 
 The principal runtime sequence is:
-1. User enables the mod in the Stellaris launcher
-2. Launcher reads `descriptor.mod` and registers the mod path
-3. Game engine loads the mod on game start
-4. Engine scans `common/random_names/base/` for `.txt` files
-5. Engine parses each file as a `name_list` definition
-6. During galaxy generation, engine randomly selects names from loaded lists
-7. Generated celestial bodies receive names from the mod's lists
+1. User enables the mod in the game launcher (Stellaris and Galactic Civilizations III) or replaces the shipped data file (Galactic Civilizations II)
+2. For Stellaris and Galactic Civilizations III, the launcher or game registers the mod path
+3. The game engine loads the mod or reads the data file on game start
+4. The engine scans the name data: `common/random_names/base/` for Stellaris, `Text/StarNamesText.xml` for Galactic Civilizations III, or `Data/English/STARS.txt` for Galactic Civilizations II
+5. The engine parses each file as name definitions
+6. During galaxy generation, the engine randomly selects names from the loaded data
+7. Generated celestial bodies receive names from the project's data
 
 ## 🗂️ Architectural Areas
+
+### Galactic Civilizations Data
+
+Paths:
+- `out/galciv2/Data/English/STARS.txt`
+- `out/galciv3/ui-star-names/Text/StarNamesText.xml`
+
+Responsibilities:
+- Provide the star name data file that replaces the Galactic Civilizations II shipped file
+- Provide the star name string table that the Galactic Civilizations III mod replaces
+
+Boundary rules:
+- The Galactic Civilizations II file uses one star name per line, the Windows-1252 encoding, and CRLF line endings
+- The Galactic Civilizations III file is a `StringTableList` conforming to `StringTable.xsd`, with contiguous `RANDOM_STAR_NAME_<index>` labels, the UTF-8 encoding, and CRLF line endings
+- Both files are generated from the same source star names
 
 ### Name List Data
 
@@ -156,20 +173,20 @@ Paths:
 - `scripts/generate-mod.py`
 
 Responsibilities:
-- Build the Stellaris mod and the Galactic Civilizations II star name data from the source name lists on every push and pull request to `master`
+- Build the Stellaris mod and the Galactic Civilizations II and III star name data from the source name lists on every push and pull request to `master`
 - Automate packaging and publishing to Steam Workshop, Nexus Mods, and GitHub Releases on version tag push
-- Generate the complete distributable mod under `out/stellaris/` from `src/names/`, or the Galactic Civilizations II star name data file under `out/galciv2/Data/English/STARS.txt` from the star name lists, according to the `--game` argument
+- Generate the complete distributable mod under `out/stellaris/` from `src/names/`, or the Galactic Civilizations II star name data file under `out/galciv2/Data/English/STARS.txt`, or the Galactic Civilizations III star name data file under `out/galciv3/ui-star-names/Text/StarNamesText.xml`, from the star name lists, according to the `--game` argument
 - `scripts/count-additions.sh`: Utility script to count unique names across all source list files for release notes
 
 Boundary rules:
 - The build workflow triggers on pushes and pull requests to `master` and runs one job per game; release workflows trigger on Git tags matching `v*.*.*`, while the GitHub Release workflow triggers on release publication or manual dispatch
 - Each workflow generates the mod itself with `scripts/generate-mod.py` from the checked-out repository
-- The build and GitHub Release workflows generate both games, one job per game; the Steam Workshop workflow currently generates only the Stellaris mod with `--game stellaris`, while the Nexus Mods workflow generates both games in its single `release` job
+- The build and GitHub Release workflows generate all three games, one job per game; the Steam Workshop workflow currently generates only the Stellaris mod with `--game stellaris`, while the Nexus Mods workflow generates the Stellaris and Galactic Civilizations II content in its single `release` job
 - Release content: the `ui-star-names/` directory and `ui-star-names.mod`
 - Steam workflow uses `hmlendea/steam-workshop-update` action with stored credentials
 - Nexus workflow uploads the archive via the Nexus Mods API
-- GitHub Release workflow uploads `ui-star-names_<version>.zip` and `ui-star-names-galciv2_<version>.zip` with `softprops/action-gh-release`
-- GitHub release asset naming convention: `ui-star-names_<version>.zip` for Stellaris and `ui-star-names-galciv2_<version>.zip` for Galactic Civilizations II
+- GitHub Release workflow uploads `ui-star-names_<version>.zip`, `ui-star-names-galciv2_<version>.zip`, and `ui-star-names-galciv3_<version>.zip` with `softprops/action-gh-release`
+- GitHub release asset naming convention: `ui-star-names_<version>.zip` for Stellaris, `ui-star-names-galciv2_<version>.zip` for Galactic Civilizations II, and `ui-star-names-galciv3_<version>.zip` for Galactic Civilizations III
 
 ## 💾 Data Architecture
 
@@ -189,6 +206,8 @@ flowchart LR
 | `ui_asteroid-prefixes.txt` | Mod maintainers | Plain text, Clausewitz `name_list` blocks with `prefix` entries | Static; updated via pull requests; loaded at game start |
 | `ui_asteroid-postfixes.txt` | Mod maintainers | Plain text, Clausewitz `name_list` blocks with `suffix` entries | Static; updated via pull requests; loaded at game start |
 | `ui_black-holes_*.txt` | Mod maintainers | Plain text, Clausewitz `name_list` blocks with `name` entries | Static; updated via pull requests; loaded at game start |
+| `Data/English/STARS.txt` | Mod maintainers | Plain text, one star name per line, Windows-1252 encoding, CRLF line endings | Static; updated via pull requests; replaces the game's shipped file |
+| `Text/StarNamesText.xml` | Mod maintainers | XML `StringTableList` with `RANDOM_STAR_NAME_<index>` labels, UTF-8 encoding, CRLF line endings | Static; updated via pull requests; loaded through the mod at game start |
 
 Each name list file follows this structure:
 ```
@@ -208,21 +227,24 @@ Asteroid prefixes/suffixes use `prefix = "..."` and `suffix = "..."` instead of 
 |--------------------------|-----------|----------|-------|-------------------|
 | Stellaris Mod Descriptor | Outbound | `descriptor.mod` with `name`, `path`, `tags`, `supported_version` | Mod maintainers | Mod not listed in launcher if invalid |
 | Stellaris Name List Format | Outbound | Clausewitz script `name_list` blocks with `category`, `name`/`prefix`/`suffix` | Mod maintainers | Names not used if syntax invalid |
-| Workflow release packaging | Internal | ZIP archive containing `ui-star-names/` and `ui-star-names.mod`, built from the repository | GitHub Actions workflow | Release fails; manual upload required |
+| Galactic Civilizations II Star Name File | Outbound | Plain-text `STARS.txt`, one name per line, Windows-1252 encoding, CRLF line endings | Mod maintainers | Vanilla names used if the file is not replaced or does not parse |
+| Galactic Civilizations III Star Name String Table | Outbound | XML `StringTableList` with `RANDOM_STAR_NAME_<index>` labels conforming to `StringTable.xsd`, UTF-8 encoding, CRLF line endings | Mod maintainers | Game crashes if the XML does not validate; vanilla names used if the mod is not enabled |
+| Workflow release packaging | Internal | ZIP archives containing each game's content, built from the repository | GitHub Actions workflow | Release fails; manual upload required |
 | Steam Workshop API | Outbound | ZIP archive with `ui-star-names/` and `ui-star-names.mod` | GitHub Actions workflow | Release fails; manual upload required |
 | Nexus Mods API | Outbound | ZIP archive uploaded via API with version metadata | GitHub Actions workflow | Release fails; manual upload required |
-| GitHub Releases | Outbound | `ui-star-names_<version>.zip` archive attached to the published release | GitHub Actions workflow | Users cannot download from GitHub |
+| GitHub Releases | Outbound | `ui-star-names_<version>.zip`, `ui-star-names-galciv2_<version>.zip`, and `ui-star-names-galciv3_<version>.zip` archives attached to the published release | GitHub Actions workflow | Users cannot download from GitHub |
 
 ## 🧭 Dependency Direction and Rules
 
-The mod has no code dependencies. The only architectural rules concern file placement and format:
+The content has no code dependencies. The only architectural rules concern file placement and format:
 
 - **Permitted:** Name list files in `ui-star-names/common/random_names/base/` with `.txt` extension
-- **Permitted:** Mod descriptor files at `ui-star-names.mod` and `ui-star-names/descriptor.mod`
+- **Permitted:** Stellaris mod descriptor files at `ui-star-names.mod` and `ui-star-names/descriptor.mod`
+- **Permitted:** Generated Galactic Civilizations II data files under `out/galciv2/` and Galactic Civilizations III mod files under `out/galciv3/`
 - **Permitted:** GitHub Actions workflows in `.github/workflows/`
 - **Prohibited:** Executable code, scripts that run at game time, DLLs, or any binary assets
 - **Prohibited:** Subdirectories under `base/` (the game engine expects a flat list of files)
-- **Prohibited:** Modifying Stellaris game files directly (mod must be self-contained)
+- **Prohibited:** Modifying game files directly in the repository (content must be self-contained and generated)
 
 ```mermaid
 flowchart TB
@@ -240,7 +262,9 @@ flowchart TB
 
 | Dependency | Responsibility | Integration Boundary | Architectural Consequence |
 |------------|----------------|----------------------|---------------------------|
-| Stellaris Game Engine (v4.5.*) | Parses name lists, generates galaxy, applies names | Mod descriptor and name list files | Mod only works with compatible game version; breaking changes in name list format would require mod updates |
+| Stellaris Game Engine (v4.5.*) | Parses name lists, generates galaxy, applies names | Mod descriptor and name list files | Content only works with a compatible game version; breaking changes in name list format would require content updates |
+| Galactic Civilizations II Game Engine | Reads star names from its own `Data/English/STARS.txt` before mods are loaded, generates galaxy | Replaced star name file | Names only apply when the shipped file is replaced; the game does not load star names from a mod |
+| Galactic Civilizations III Game Engine | Reads star names from `Text/StarNamesText.xml` through a mod, generates galaxy | Mod folder containing the replaced star name table | The XML must validate against `StringTable.xsd` or the game crashes; names only apply to newly generated galaxies |
 | Steam Workshop | Distribution platform | GitHub Actions workflow + release ZIP | Requires Steam credentials in repository secrets; workflow must match Steam's upload API |
 | Nexus Mods | Distribution platform | GitHub Actions workflow + release ZIP | Requires Nexus API key in repository secrets; workflow must match Nexus upload API |
 | Paradox Mods | Distribution platform | Manual upload by maintainers | No automation; maintainers must manually publish each release |
@@ -251,37 +275,39 @@ flowchart TB
 | Concern | Current Design | Architectural Consequence |
 |---------|----------------|---------------------------|
 | Process topology | No processes; static files loaded by game engine | Zero operational overhead; no servers, daemons, or background tasks |
-| Deployment unit | ZIP archive containing `ui-star-names/` and `ui-star-names.mod` | Single artefact deployed to all platforms; version tagged in Git; built by each workflow at release time |
+| Deployment unit | ZIP archives containing each game's content | One artefact per game deployed to its platforms; version tagged in Git; built by each workflow at release time |
 | Persistent state | None | No migration, backup, or state management needed |
-| Filesystem requirements | Mod directory placed in Stellaris `mod/` folder | User or launcher handles placement; mod is self-contained |
+| Filesystem requirements | Stellaris mod directory placed in the game's `mod/` folder; Galactic Civilizations II files replace the game's shipped files; the Galactic Civilizations III mod folder is placed in the game's `Mods` directory | User or launcher handles placement; the content is self-contained |
 | Scaling assumptions | N/A (single-user, client-side) | No scaling concerns |
-| Startup/shutdown | Game engine loads on launch, unloads on exit | No mod-specific startup or shutdown logic |
+| Startup/shutdown | Game engine loads on launch, unloads on exit | No content-specific startup or shutdown logic |
 | Operator-visible outputs | Names appear in generated galaxy | No logs, metrics, or health endpoints |
 
 Release process:
 1. Maintainer creates and pushes a Git tag `vX.Y.Z`
 2. Maintainer publishes a GitHub Release for the tag
-3. GitHub Release workflow triggers, builds `ui-star-names_<version>.zip`, and attaches it to the release
-4. Steam Workshop workflow triggers, builds the release archive from the repository, and uploads to Steam
-5. Nexus Mods workflow triggers, builds the release archive from the repository, and uploads to Nexus
-6. Maintainer manually uploads the archive to Paradox Mods
+3. GitHub Release workflow triggers, builds `ui-star-names_<version>.zip`, `ui-star-names-galciv2_<version>.zip`, and `ui-star-names-galciv3_<version>.zip`, and attaches them to the release
+4. Steam Workshop workflow triggers, builds the Stellaris release archive from the repository, and uploads it to Steam
+5. Nexus Mods workflow triggers, builds the Stellaris and Galactic Civilizations II archives from the repository, and uploads them to Nexus
+6. Maintainer manually uploads the Stellaris archive to Paradox Mods
 
 ## 🛡️ Compatibility Contracts
 
 | Contract | Owner | Invariant | Verification | Change Policy |
 |----------|-------|-----------|--------------|---------------|
 | Stellaris `supported_version` | Mod maintainers | `descriptor.mod` `supported_version` matches target game version | Manual verification on game update | Update on each major/minor Stellaris release |
-| Name list format | Mod maintainers | All `.txt` files parse as valid Clausewitz `name_list` blocks | Game loads mod without errors | Preserve format; only add/remove name entries |
-| Release archive structure | GitHub Actions | ZIP contains `ui-star-names/` (with `descriptor.mod` and `common/`) and `ui-star-names.mod` | Workflow validation; manual test install | Maintain directory structure; do not rename top-level folder or archive entries |
+| Stellaris name list format | Mod maintainers | All `.txt` files parse as valid Clausewitz `name_list` blocks | Game loads mod without errors | Preserve format; only add/remove name entries |
+| Galactic Civilizations II star name file | Mod maintainers | `STARS.txt` uses one name per line, the Windows-1252 encoding, and CRLF line endings | Game reads the replaced file without issue | Preserve format; only add/remove name entries |
+| Galactic Civilizations III star name string table | Mod maintainers | `StarNamesText.xml` validates against `StringTable.xsd` with contiguous `RANDOM_STAR_NAME_<index>` labels | Game loads the mod without crashing | Preserve format and label scheme; only add/remove name entries |
+| Release archive structure | GitHub Actions | The Stellaris ZIP contains `ui-star-names/` (with `descriptor.mod` and `common/`) and `ui-star-names.mod`; the GalCiv2 ZIP contains `Data/` and `Twilight/`; the GalCiv3 ZIP contains `ui-star-names/` with `Text/StarNamesText.xml` and the mandatory `ParticleScriptDefs`, `Core`, and `Game` folders | Workflow validation; manual test install | Maintain directory structure; do not rename top-level folders or archive entries |
 | Mod name and path | Mod maintainers | `ui-star-names.mod` and `descriptor.mod` have identical `name` and `path` | Manual review | Change only if mod identity changes |
 
 ## ✅ Testing and Verification
 
 No automated test suite exists. Verification is manual:
 
-1. **Installation test:** Install mod via Steam Workshop, Nexus Mods, or manual ZIP extraction; verify it appears in Stellaris launcher
-2. **Load test:** Enable mod, start new game; verify no launcher errors or game crashes
-3. **Content test:** Observe generated galaxy; verify custom names appear for stars, nebulas, asteroids, black holes
+1. **Installation test:** Install the Stellaris mod via Steam Workshop, Nexus Mods, or manual ZIP extraction and verify it appears in the Stellaris launcher; place the Galactic Civilizations III mod folder in the game's `Mods` directory; replace the Galactic Civilizations II data files
+2. **Load test:** Enable the mod (or replace the files), start a new game; verify no launcher errors or game crashes
+3. **Content test:** Observe the generated galaxy; verify the project's names appear for stars (and, for Stellaris, nebulas, asteroids, and black holes)
 4. **Count verification:** Run `scripts/count-additions.sh` to confirm name counts match expectations
 
 Execute the principal manual verification with:
@@ -291,19 +317,20 @@ Execute the principal manual verification with:
 ```
 
 Material coverage gaps:
-- No syntax validation for Clausewitz script format
+- No syntax validation for the Clausewitz script format or the Galactic Civilizations III XML
 - No automated check for duplicate names across files
-- No verification that `supported_version` matches current Stellaris version
-- No integration test for Steam/Nexus upload workflows (require secrets)
+- No verification that `supported_version` matches the current Stellaris version
+- No integration test for the Steam and Nexus upload workflows (they require secrets)
 
 ## ⚠️ Design Constraints
 
-- **Game version coupling:** The mod's `supported_version` (`4.5.*`) ties it to a specific Stellaris version range. Major game updates may require mod updates.
-- **Format rigidity:** Name list files must conform exactly to Stellaris' expected Clausewitz script syntax. The mod cannot extend or modify the format.
-- **Flat file structure:** The game engine expects all name list files directly in `common/random_names/base/` with no subdirectories. This limits organisational options.
-- **No runtime logic:** The mod cannot implement conditional naming, weighted selection, or context-aware names. All names have equal probability.
+- **Game version coupling:** The Stellaris `supported_version` (`4.5.*`) ties that content to a specific Stellaris version range. Major game updates may require content updates.
+- **Format rigidity:** Name list files must conform exactly to Stellaris' expected Clausewitz script syntax, the Galactic Civilizations II file to its plain-text format, and the Galactic Civilizations III file to the `StringTable.xsd` schema. The project cannot extend or modify these formats.
+- **Flat file structure:** The Stellaris engine expects all name list files directly in `common/random_names/base/` with no subdirectories. This limits organisational options.
+- **Fixed star names:** In Galactic Civilizations III, the mod replaces only the random star names; fixed homeworld star systems keep their own names.
+- **No runtime logic:** The project cannot implement conditional naming, weighted selection, or context-aware names. All names have equal probability.
 - **Distribution platform dependencies:** Automated publishing requires maintaining GitHub Actions workflows and secrets for Steam and Nexus Mods. Paradox Mods requires manual upload.
-- **No localisation support:** Names are provided in English only. The mod does not use Stellaris' localisation system.
+- **No localisation support:** Names are provided in English only. The content does not use Stellaris' localisation system.
 
 ## 🗺️ Source Map
 
@@ -318,6 +345,8 @@ Material coverage gaps:
 | Asteroid prefix lists | `ui-star-names/common/random_names/base/ui_asteroid-prefixes*.txt` |
 | Asteroid postfix lists | `ui-star-names/common/random_names/base/ui_asteroid-postfixes*.txt` |
 | Black hole name lists | `ui-star-names/common/random_names/base/ui_black-holes_*.txt` |
+| Galactic Civilizations II star name file (generated) | `out/galciv2/Data/English/STARS.txt` |
+| Galactic Civilizations III star name string table (generated) | `out/galciv3/ui-star-names/Text/StarNamesText.xml` |
 | Build workflow | `.github/workflows/build.yml` |
 | Steam Workshop workflow | `.github/workflows/steam-workshop-release.yml` |
 | Nexus Mods workflow | `.github/workflows/nexus-mods-release.yml` |
@@ -326,6 +355,7 @@ Material coverage gaps:
 | Mod generation script | `scripts/generate-mod.py` |
 | Release archive (generated) | `ui-star-names_<version>.zip` |
 | Galactic Civilizations II release archive (generated) | `ui-star-names-galciv2_<version>.zip` |
+| Galactic Civilizations III release archive (generated) | `ui-star-names-galciv3_<version>.zip` |
 | Workflow archive (generated) | `release.zip` |
 
 ## 📚 Related Documentation

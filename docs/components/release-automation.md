@@ -2,7 +2,7 @@
 
 ## Overview
 
-The release automation component consists of four GitHub Actions workflows: a continuous integration workflow that builds both game variants on every change to `master`, and three release workflows that automate publishing the mod to Steam Workshop, Nexus Mods, and GitHub Releases when a version tag is pushed or a release is published. Every workflow generates the mod from source with `scripts/generate-mod.py`, so publishing never depends on committed build output or a pre-existing release asset.
+The release automation component consists of four GitHub Actions workflows: a continuous integration workflow that builds all three game variants on every change to `master`, and three release workflows that automate publishing the mod to Steam Workshop, Nexus Mods, and GitHub Releases when a version tag is pushed or a release is published. Every workflow generates the mod from source with `scripts/generate-mod.py`, so publishing never depends on committed build output or a pre-existing release asset.
 
 ## Workflows
 
@@ -12,9 +12,10 @@ The release automation component consists of four GitHub Actions workflows: a co
 
 **Jobs**:
 1. `galciv2` ("Build for Galactic Civilizations II"): checks out the repository and generates the Galactic Civilizations II star name data with `scripts/generate-mod.py --version <version> --game galciv2`
-2. `stellaris` ("Build for Stellaris"): checks out the repository and generates the Stellaris mod with `scripts/generate-mod.py --version <version> --game stellaris`
+2. `galciv3` ("Build for Galactic Civilizations III"): checks out the repository and generates the Galactic Civilizations III star name data with `scripts/generate-mod.py --version <version> --game galciv3`
+3. `stellaris` ("Build for Stellaris"): checks out the repository and generates the Stellaris mod with `scripts/generate-mod.py --version <version> --game stellaris`
 
-The two jobs run independently, so a failure in one game does not mask the status of the other.
+The three jobs run independently, so a failure in one game does not mask the status of the others.
 
 ### Steam Workshop (`.github/workflows/steam-workshop-release.yml`)
 
@@ -72,7 +73,13 @@ The two jobs run independently, so a failure in one game does not mask the statu
    3. Generate the star name data with `scripts/generate-mod.py --version <version> --game galciv2` using the release version
    4. Build `ui-star-names-galciv2_<version>.zip` from the generated `Data` directory in `out/galciv2/`
    5. Publish it with `softprops/action-gh-release@v2`
-2. `stellaris` ("Build and publish for Stellaris"):
+2. `galciv3` ("Build and publish for Galactic Civilizations III"):
+   1. Check out the repository at the release tag
+   2. Extract the version from the GitHub release tag
+   3. Generate the star name data with `scripts/generate-mod.py --version <version> --game galciv3` using the release version
+   4. Build `ui-star-names-galciv3_<version>.zip` from the generated `ui-star-names` directory in `out/galciv3/`
+   5. Publish it with `softprops/action-gh-release@v2`
+3. `stellaris` ("Build and publish for Stellaris"):
    1. Check out the repository at the release tag
    2. Extract the version from the GitHub release tag
    3. Generate the mod with `scripts/generate-mod.py --version <version> --game stellaris` using the release version
@@ -116,9 +123,20 @@ ui-star-names-galciv2_<version>.zip
             └── STARS.txt
 ```
 
-The Galactic Civilizations II archive is not a mod: the game reads star names only from its own data files before mods are loaded, so the archived files replace the game's shipped files. The `Twilight/Data/English/STARS.txt` file is an identical copy of `Data/English/STARS.txt`.
+**Galactic Civilizations III archive contents** (`ui-star-names-galciv3_<version>.zip`):
+```
+ui-star-names-galciv3_<version>.zip
+└── ui-star-names/
+    ├── ParticleScriptDefs/
+    ├── Text/
+    │   └── StarNamesText.xml
+    ├── Core/
+    └── Game/
+```
 
-The GitHub Release workflow builds both archives in separate jobs. The Nexus workflow generates both games in its single `release` job and uploads one archive per game, with the display names `ui-star-names.zip` for Stellaris and `ui-star-names-galciv2.zip` for Galactic Civilizations II, while the Steam workflow uploads the generated `out/stellaris/ui-star-names/` directory rather than an archive.
+The Galactic Civilizations II archive is not a mod: the game reads star names only from its own data files before mods are loaded, so the archived files replace the game's shipped files. The `Twilight/Data/English/STARS.txt` file is an identical copy of `Data/English/STARS.txt`. The Galactic Civilizations III archive is a mod: its `ui-star-names/` folder replaces the game's `Text/StarNamesText.xml` and is placed in the game's `Mods` directory, and it also contains the mandatory `ParticleScriptDefs`, `Core`, and `Game` folders the game requires every mod to provide.
+
+The GitHub Release workflow builds all three archives in separate jobs. The Nexus workflow generates two games in its single `release` job and uploads one archive per game, with the display names `ui-star-names.zip` for Stellaris and `ui-star-names-galciv2.zip` for Galactic Civilizations II, while the Steam workflow uploads the generated `out/stellaris/ui-star-names/` directory rather than an archive.
 
 ## Dependencies
 
@@ -158,7 +176,7 @@ The GitHub Release workflow builds both archives in separate jobs. The Nexus wor
 3. GitHub Actions automatically:
    - Attaches `ui-star-names_<version>.zip` to the GitHub Release
    - Triggers Steam workflow, which builds and uploads the release archive
-   - Triggers Nexus workflow, which builds and uploads the release archives for both games
+   - Triggers Nexus workflow, which builds and uploads the release archives for the Stellaris and Galactic Civilizations II content
 
 4. Monitor workflow runs for success/failure
 

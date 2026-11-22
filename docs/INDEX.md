@@ -2,7 +2,7 @@
 
 ## Repository Summary
 
-This repository contains the name list sources for a data mod for the game Stellaris that adds thousands of new names for stars, nebulas, asteroids, and black holes. The mod data consists of static text files in Clausewitz script format that the Stellaris game engine reads during galaxy generation; the repository also contains the generation script that aggregates those sources into the distributable mod and the release automation that publishes it.
+This repository contains the name list sources for data mods for the games Stellaris, Galactic Civilizations II, and Galactic Civilizations III that add thousands of new star names, and, for Stellaris, nebula, asteroid, and black hole names. The Stellaris content consists of static text files in Clausewitz script format that the Stellaris game engine reads during galaxy generation; the Galactic Civilizations II content is a star name text file that replaces the game's shipped file, and the Galactic Civilizations III content is an XML star name string table that a mod replaces. The repository also contains the generation script that aggregates those sources into the distributable content and the release automation that publishes it.
 
 ## Root Document Map
 

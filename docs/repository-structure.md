@@ -115,15 +115,15 @@ Special naming:
 
 ### Release Automation (`.github/workflows/`)
 
-- **`build.yml`**: Triggers on pushes and pull requests to `master`. Builds the Galactic Civilizations II star name data in the `galciv2` job and the Stellaris mod in the `stellaris` job, failing the build when either generation fails.
+- **`build.yml`**: Triggers on pushes and pull requests to `master`. Builds the Galactic Civilizations II and III star name data in the `galciv2` and `galciv3` jobs and the Stellaris mod in the `stellaris` job, failing the build when any generation fails.
 - **`steam-workshop-release.yml`**: Triggers on version tags (`v*.*.*`) or manual dispatch. Generates the Stellaris mod with `scripts/generate-mod.py --version <version> --game stellaris` using the release version and uploads the generated mod directory to Steam Workshop using the `hmlendea/steam-workshop-update` action.
 - **`nexus-mods-release.yml`**: Triggers on version tags or manual dispatch. Generates the Stellaris mod and the Galactic Civilizations II star name data with `scripts/generate-mod.py` in its single `release` job using the release version, builds one release archive per game from the generated output, and uploads both to Nexus Mods using `Nexus-Mods/upload-action`.
-- **`github-release.yml`**: Triggers on release publication or manual dispatch. Generates the Galactic Civilizations II star name data in the `galciv2` job and the Stellaris mod in the `stellaris` job using the release version, builds `ui-star-names-galciv2_<version>.zip` and `ui-star-names_<version>.zip` from the generated output, and attaches both to the release using `softprops/action-gh-release`.
+- **`github-release.yml`**: Triggers on release publication or manual dispatch. Generates the Galactic Civilizations II and III star name data in the `galciv2` and `galciv3` jobs and the Stellaris mod in the `stellaris` job using the release version, builds `ui-star-names-galciv2_<version>.zip`, `ui-star-names-galciv3_<version>.zip`, and `ui-star-names_<version>.zip` from the generated output, and attaches all three to the release using `softprops/action-gh-release`.
 
 ### Utility Scripts
 
 - **`scripts/count-additions.sh`**: Bash script that counts unique names across all source list files by category. Used for release notes.
-- **`scripts/generate-mod.py`**: Python script that generates the complete distributable Stellaris mod under `out/stellaris/` or the Galactic Civilizations II star name data file under `out/galciv2/Data/English/STARS.txt` from the name lists in `src/names/`. Accepts the version number and the target game through the mandatory `--version` and `--game` options (`stellaris` or `galciv2`, case-insensitive).
+- **`scripts/generate-mod.py`**: Python script that generates the complete distributable Stellaris mod under `out/stellaris/`, the Galactic Civilizations II star name data file under `out/galciv2/Data/English/STARS.txt`, or the Galactic Civilizations III star name data file under `out/galciv3/ui-star-names/Text/StarNamesText.xml` from the name lists in `src/names/`. Accepts the version number and the target game through the mandatory `--version` and `--game` options (`stellaris`, `galciv2`, or `galciv3`, case-insensitive).
 
 ### Root Documentation
 
@@ -147,8 +147,8 @@ All policy and overview documents reside at repository root per GitHub conventio
 | Asteroid postfix lists | 1 |
 | Black hole name lists | 3 |
 | **Total name list files** | **54** |
-| Workflow files | 2 |
+| Workflow files | 4 |
 | Descriptor files | 2 |
-| Utility scripts | 1 |
+| Utility scripts | 2 |
 | Root documentation | 8 |
-| **Total repository files** | **~67** |
+| **Total repository files** | **~70** |

@@ -13,7 +13,7 @@ This document describes the deployment process for the Universum Infinitum: Star
 | Paradox Mods | Manual upload | None | Paradox launcher users |
 | GitHub Releases | GitHub Actions | Full | Direct download, mod managers |
 
-Each release workflow builds the archive itself from the checked-out repository; no previously published release asset is downloaded. The GitHub Release workflow attaches `ui-star-names_<version>.zip` to the published release.
+Each release workflow builds the archive itself from the checked-out repository; no previously published release asset is downloaded. The GitHub Release workflow attaches `ui-star-names_<version>.zip`, `ui-star-names-galciv2_<version>.zip`, and `ui-star-names-galciv3_<version>.zip` to the published release.
 
 ## Deployment Triggers
 
@@ -28,12 +28,13 @@ git push origin v1.2.3
 
 **Sequence**:
 1. Tag push triggers the Steam and Nexus workflows
-2. Publishing the GitHub Release triggers the GitHub Release workflow, which attaches `ui-star-names_<version>.zip` to the release
+2. Publishing the GitHub Release triggers the GitHub Release workflow, which attaches `ui-star-names_<version>.zip`, `ui-star-names-galciv2_<version>.zip`, and `ui-star-names-galciv3_<version>.zip` to the release
 3. Each workflow checks out the tagged commit
 4. Each workflow generates its content with `scripts/generate-mod.py` using the release version
 5. Each workflow builds its release archive from the generated output
-6. Steam workflow uploads the generated mod directory to the Workshop
-7. Nexus workflow uploads one archive per game to Nexus
+6. Steam workflow uploads the generated Stellaris mod directory to the Workshop
+7. Nexus workflow uploads one archive per game (Stellaris and Galactic Civilizations II) to Nexus
+8. GitHub Release workflow uploads the Stellaris, Galactic Civilizations II, and Galactic Civilizations III archives to the release
 
 ### Manual (Paradox Mods)
 
@@ -75,7 +76,7 @@ git push origin vX.Y.Z
 
 1. Go to `https://github.com/hmlendea/stellaris-ui-star-names/releases`
 2. Confirm new release `vX.Y.Z` exists
-3. Confirm asset `ui-star-names_X.Y.Z.zip` is attached to the release
+3. Confirm the assets `ui-star-names_X.Y.Z.zip`, `ui-star-names-galciv2_X.Y.Z.zip`, and `ui-star-names-galciv3_X.Y.Z.zip` are attached to the release
 
 ### 3. Monitor Automated Workflows
 
@@ -100,7 +101,7 @@ git push origin vX.Y.Z
 
 | Platform | Check |
 |----------|-------|
-| GitHub | Release visible with attached archive and checksum |
+| GitHub | Release visible with all three attached archives |
 | Steam Workshop | Version updated, changenote visible |
 | Nexus Mods | Version updated, file downloadable |
 | Paradox Mods | Version updated, approved |

@@ -18,6 +18,17 @@ jobs:
       run: |
         python3 scripts/generate-mod.py --version '0.0.0' --game galciv2
 
+  galciv3:
+    name: Build for Galactic Civilizations III
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v7
+
+    - name: Build the data
+      run: |
+        python3 scripts/generate-mod.py --version '0.0.0' --game galciv3
+
   stellaris:
     name: Build for Stellaris
     runs-on: ubuntu-latest

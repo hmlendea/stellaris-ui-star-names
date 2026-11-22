@@ -2,7 +2,7 @@
 
 ## Overview
 
-The mod's data model consists entirely of name list definitions in Clausewitz script format. There are no runtime objects, databases, or persistent state managed by the mod. The Stellaris game engine owns all parsing, storage, and selection logic.
+The Stellaris content's data model consists entirely of name list definitions in Clausewitz script format. The Galactic Civilizations II content is a flat list of star names in a Windows-1252 encoded text file, and the Galactic Civilizations III content is an XML string table of `RANDOM_STAR_NAME_<index>` entries. There are no runtime objects, databases, or persistent state managed by the project. Each game engine owns all parsing, storage, and selection logic for the files it consumes.
 
 ## Domain Entities
 
@@ -284,4 +284,34 @@ name_list = {
     name = "M87*"
     name = "TON 618"
 }
+```
+
+### Galactic Civilizations II Star Name File
+
+A plain-text file (`STARS.txt`) with one star name per line, encoded in Windows-1252 with CRLF line endings. The game reads the file from its own data directory before mods are loaded, so the file replaces the shipped one.
+
+```
+Alpha Centauri
+Betelgeuse
+Sol
+```
+
+### Galactic Civilizations III Star Name String Table
+
+An XML file (`Text/StarNamesText.xml`) conforming to the game's `StringTable.xsd` schema, encoded in UTF-8 with CRLF line endings. Each entry pairs a contiguous `RANDOM_STAR_NAME_<index>` label with the star name; a file named exactly `StarNamesText.xml` replaces the vanilla file, whereas any other name appends entries.
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<StringTableList
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="../../Schema/Lib/StringTable.xsd">
+  <StringTable>
+    <Label>RANDOM_STAR_NAME_0</Label>
+    <String>Alpha Centauri</String>
+  </StringTable>
+  <StringTable>
+    <Label>RANDOM_STAR_NAME_1</Label>
+    <String>Betelgeuse</String>
+  </StringTable>
+</StringTableList>
 ```

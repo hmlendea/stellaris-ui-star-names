@@ -122,7 +122,7 @@ uses: hmlendea/steam-workshop-update@latest
 with:
   appid: 281990              # Stellaris App ID
   itemid: 2040215185         # Workshop item ID (from remote_file_id)
-  path: "release/ui-star-names/"  # Mod content directory
+  path: "out/stellaris/ui-star-names/"  # Mod content directory
   changenote: "..."          # BBCode changelog
 env:
   STEAM_USERNAME: ${{secrets.STEAM_USERNAME}}

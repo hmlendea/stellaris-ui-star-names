@@ -55,17 +55,18 @@ The root `ARCHITECTURE.md` provides the authoritative system-level architecture.
 **Responsibilities**:
 - Build both game variants on every push and pull request to `master`, one job per game
 - Automate packaging and publishing on version tag push (`v*.*.*`) and release publication
-- Steam workflow: Updates the mod version, builds the release archive, extracts it, uploads to Steam Workshop
+- Steam workflow: Generates the Galactic Civilizations III mod and the Stellaris mod in separate jobs and uploads each to its Steam Workshop item
 - Nexus workflow: Builds and uploads one release archive per game to Nexus Mods via API from its single `release` job
-- GitHub Release workflow: Builds `ui-star-names_<version>.zip` and `ui-star-names-galciv2_<version>.zip` in one job per game, and attaches both to the published release
+- GitHub Release workflow: Builds `ui-star-names_<version>.zip`, `ui-star-names-galciv2_<version>.zip`, and `ui-star-names-galciv3_<version>.zip` in one job per game, and attaches all three to the published release
 
 **Boundary Rules**:
 - Tag-triggered workflows match `v*.*.*`; the GitHub Release workflow triggers on the `published` release event or manual dispatch
 - Each workflow builds the release archive itself from the checked-out repository
-- The build, Nexus Mods, and GitHub Release workflows generate both game variants; the Steam Workshop workflow still generates only the Stellaris variant
+- The build, Nexus Mods, and GitHub Release workflows generate both game variants; the Steam Workshop workflow generates the Galactic Civilizations III and Stellaris variants in separate jobs
 - Stellaris release archive contents: the `ui-star-names/` directory and `ui-star-names.mod`
 - Galactic Civilizations II release archive contents: the `Data/English/STARS.txt` and `Twilight/Data/English/STARS.txt` star name data files, which replace the game's shipped files rather than being installed as a mod
-- GitHub release asset naming convention: `ui-star-names_<version>.zip` and `ui-star-names-galciv2_<version>.zip`
+- Galactic Civilizations III release archive contents: the `ui-star-names/` mod folder with `Text/StarNamesText.xml` and the mandatory `ParticleScriptDefs`, `Core`, and `Game` folders, which replaces the game's shipped file as a mod placed in the game's `Mods` directory
+- GitHub release asset naming convention: `ui-star-names_<version>.zip`, `ui-star-names-galciv2_<version>.zip`, and `ui-star-names-galciv3_<version>.zip`
 - Steam workflow requires secrets: `STEAM_USERNAME`, `STEAM_PASSWORD`, `STEAM_2FA_SEED`
 - Nexus workflow requires secret: `NEXUSMODS_API_KEY`
 - Paradox Mods requires manual upload (no automation)
@@ -78,7 +79,7 @@ The root `ARCHITECTURE.md` provides the authoritative system-level architecture.
 
 **Responsibilities**:
 - Count unique names across all list files by category
-- Generate the complete distributable mod under `out/stellaris/`, or the Galactic Civilizations II star name data file under `out/galciv2/Data/English/STARS.txt`, according to the `--game` argument
+- Generate the complete distributable mod under `out/stellaris/`, or the Galactic Civilizations II star name data file under `out/galciv2/Data/English/STARS.txt`, or the Galactic Civilizations III star name data file under `out/galciv3/ui-star-names/Text/StarNamesText.xml`, according to the `--game` argument
 - Output used for release notes and verification
 
 **Boundary Rules**:
@@ -197,9 +198,9 @@ Two descriptor files exist because:
 
 They must remain identical in `name` and `path` fields.
 
-### No Build Step
+### No Compilation Step
 
-The mod is pure data. The "build" is simply creating a ZIP archive containing the `ui-star-names/` directory and `ui-star-names.mod`. Each release workflow builds this archive itself from the checked-out repository, so publishing no longer depends on a pre-existing GitHub release asset.
+The content is pure data. The only build step is the generation script `scripts/generate-mod.py`, which aggregates the source name lists in `src/names/` into each game's content, and the packaging step that creates the release archives. Each release workflow generates and builds its archives itself from the checked-out repository, so publishing never depends on a pre-existing GitHub release asset.
 
 ### Category Field in Name Lists
 

@@ -97,6 +97,27 @@ This document provides troubleshooting guidance for common issues encountered du
 2. Check line number indicated
 3. Verify braces balanced and all strings quoted
 
+### Galactic Civilizations III Still Uses Vanilla Names
+
+**Symptoms**: A new Galactic Civilizations III galaxy is generated with vanilla star names
+
+**Causes & Solutions**:
+
+| Cause | Verification | Solution |
+|-------|--------------|----------|
+| Mod folder misplaced | `ui-star-names/` is not directly in the `Mods` directory | Move the `ui-star-names/` folder into `%USERPROFILE%\Documents\My Games\GalCiv3\Mods` (or `GC3Crusade\Mods` for the expansions) |
+| Mods disabled | Mods are off in the game options or `Prefs.ini` | Enable mods in the game options, or set `EnableMods=1` in `Prefs.ini`, then restart the game |
+| Invalid XML | The game crashes or logs an error at launch | Validate `Text/StarNamesText.xml` against `StringTable.xsd`; the game crashes when an XML file does not validate |
+| Existing galaxy | The galaxy was generated before the mod was enabled | Start a new galaxy |
+
+### Galactic Civilizations III Mod Not Applied
+
+**Symptoms**: The `Text/StarNamesText.xml` labels are ignored or the game reports duplicate entries
+
+**Cause**: The file name does not match the game's file; only a file named exactly `StarNamesText.xml` replaces the vanilla file, whereas any other name appends its entries
+
+**Solution**: Place the star name string table at `ui-star-names/Text/StarNamesText.xml` so that the game replaces the vanilla file, and keep the `RANDOM_STAR_NAME_<index>` label naming with contiguous indices.
+
 ---
 
 ## Development & Verification Issues
@@ -151,7 +172,7 @@ Remove duplicates manually or with script.
 | Cause | Error Log | Solution |
 |-------|-----------|----------|
 | Invalid API key | `401 Unauthorized` | Regenerate API key on Nexus Mods, update secret |
-| File ID mismatch | `404 File not found` | Verify `file_id` (920143 for Stellaris, 8432274 for Galactic Civilizations II) matches the Nexus page |
+| File ID mismatch | `404 File not found` | Verify `file_id` (920143 for Stellaris, 8432274 for Galactic Civilizations II, 8444367 for Galactic Civilizations III) matches the Nexus page |
 | Tag format wrong | `Version parse error` | Tag must be `vX.Y.Z` |
 
 ### GitHub Release Upload Fails
@@ -163,7 +184,7 @@ Remove duplicates manually or with script.
 | Cause | Error Log | Solution |
 |-------|-----------|----------|
 | Missing permissions | `Resource not accessible by integration` | Ensure the workflow declares `permissions: contents: write` |
-| Archive build fails | `zip: ... No such file or directory` | Verify `ui-star-names/` and `ui-star-names.mod` exist at repository root |
+| Archive build fails | `zip: ... No such file or directory` | Verify `ui-star-names/` and `ui-star-names.mod` exist at repository root, and that the GalCiv2 `Data`/`Twilight` and GalCiv3 `ui-star-names` output directories were generated |
 
 ### Paradox Mods Upload Rejected
 

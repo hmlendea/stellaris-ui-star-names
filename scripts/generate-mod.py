@@ -31,7 +31,20 @@ GALCIV2_NEWLINE = '\r\n'
 GALCIV2_STARS_FILE_RELATIVE_PATH = Path('Data') / 'English' / 'STARS.txt'
 GALCIV2_TWILIGHT_STARS_FILE_RELATIVE_PATH = Path('Twilight') / GALCIV2_STARS_FILE_RELATIVE_PATH
 
-SUPPORTED_GAMES = (STELLARIS_GAME, GALCIV2_GAME)
+GALCIV3_GAME = 'galciv3'
+GALCIV3_FILE_ENCODING = 'utf-8'
+GALCIV3_NEWLINE = '\r\n'
+GALCIV3_STARS_FILE_RELATIVE_PATH = Path('Text') / 'StarNamesText.xml'
+GALCIV3_STAR_NAME_LABEL_PREFIX = 'RANDOM_STAR_NAME_'
+GALCIV3_REQUIRED_DIRECTORIES = ('ParticleScriptDefs', 'Text', 'Core', 'Game')
+
+# The game hashes each label with the 32-bit FNV-1a algorithm over UTF-16 and
+# rejects the load when two labels collide. The label RANDOM_STAR_NAME_35997
+# collides with the vanilla label Haven_TerranIndustrialSpecialization3_Name,
+# so index 35997 is reserved and skipped when assigning label indices.
+GALCIV3_RESERVED_STAR_NAME_INDICES = frozenset((35997,))
+
+SUPPORTED_GAMES = (GALCIV2_GAME, GALCIV3_GAME, STELLARIS_GAME)
 
 STARS_CATEGORY_DIRECTORY = 'stars'
 
@@ -39,6 +52,9 @@ STELLARIS_OUTPUT_DIRECTORY = OUTPUT_DIRECTORY / STELLARIS_GAME
 STELLARIS_MOD_DIRECTORY = STELLARIS_OUTPUT_DIRECTORY / MOD_IDENTIFIER
 
 GALCIV2_OUTPUT_DIRECTORY = OUTPUT_DIRECTORY / GALCIV2_GAME
+
+GALCIV3_OUTPUT_DIRECTORY = OUTPUT_DIRECTORY / GALCIV3_GAME
+GALCIV3_MOD_DIRECTORY = GALCIV3_OUTPUT_DIRECTORY / MOD_IDENTIFIER
 
 CATEGORY_BLOCKS = (
     (STARS_CATEGORY_DIRECTORY, 'star_names'),
@@ -140,6 +156,41 @@ def render_stellaris_descriptor(version):
 def render_galciv2_stars_file(entries):
     return ''.join(f'{entry}{GALCIV2_NEWLINE}' for entry in entries)
 
+
+def escape_xml_text(text):
+    return text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+
+
+def galciv3_star_name_index(ordinal):
+    index = ordinal
+
+    for reserved_index in sorted(GALCIV3_RESERVED_STAR_NAME_INDICES):
+        if reserved_index <= index:
+            index += 1
+
+    return index
+
+
+def render_galciv3_stars_file(entries):
+    lines = [
+        '<?xml version="1.0" encoding="utf-8"?>',
+        '<StringTableList',
+        'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"',
+        'xsi:noNamespaceSchemaLocation="../../Schema/Lib/StringTable.xsd">',
+    ]
+
+    for ordinal, entry in enumerate(entries):
+        index = galciv3_star_name_index(ordinal)
+
+        lines.append('  <StringTable>')
+        lines.append(f'    <Label>{GALCIV3_STAR_NAME_LABEL_PREFIX}{index}</Label>')
+        lines.append(f'    <String>{escape_xml_text(entry)}</String>')
+        lines.append('  </StringTable>')
+
+    lines.append('</StringTableList>')
+
+    return GALCIV3_NEWLINE.join(lines) + GALCIV3_NEWLINE
+
 # --- Writing ---
 
 def write_text_file(file_path, text):
@@ -149,6 +200,10 @@ def write_text_file(file_path, text):
 
 def write_galciv2_text_file(file_path, text):
     file_path.write_bytes(text.encode(GALCIV2_FILE_ENCODING))
+
+
+def write_galciv3_text_file(file_path, text):
+    file_path.write_bytes(text.encode(GALCIV3_FILE_ENCODING))
 
 # --- Generation ---
 
@@ -195,6 +250,19 @@ def generate_galciv2_data():
 
     return stars_file_path, len(entries)
 
+
+def generate_galciv3_data():
+    stars_file_path = GALCIV3_MOD_DIRECTORY / GALCIV3_STARS_FILE_RELATIVE_PATH
+
+    entries = collect_star_names()
+
+    for required_directory in GALCIV3_REQUIRED_DIRECTORIES:
+        (GALCIV3_MOD_DIRECTORY / required_directory).mkdir(parents=True, exist_ok=True)
+
+    write_galciv3_text_file(stars_file_path, render_galciv3_stars_file(entries))
+
+    return stars_file_path, len(entries)
+
 # --- Entry point ---
 
 def normalise_game(game):
@@ -229,6 +297,8 @@ def main():
             generated_path, name_count = generate_stellaris_mod(arguments.version)
         elif arguments.game == GALCIV2_GAME:
             generated_path, name_count = generate_galciv2_data()
+        elif arguments.game == GALCIV3_GAME:
+            generated_path, name_count = generate_galciv3_data()
         else:
             raise ValueError(f'Unsupported game: {arguments.game}')
     except (OSError, KeyError, ValueError) as exception:

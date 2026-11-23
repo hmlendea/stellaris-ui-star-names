@@ -57,6 +57,50 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  galciv3:
+    name: Build and publish for Galactic Civilizations III
+    runs-on: ubuntu-latest
+
+    env:
+      VERSION: ${{ inputs.tag || github.event.release.tag_name }}
+      GAME: galciv3
+
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v7
+      with:
+        ref: ${{ env.VERSION }}
+
+    - name: Extract the version from the GitHub tag
+      id: version
+      run: |
+        VERSION="${VERSION#v}"
+        echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+
+    - name: Generate the mod
+      shell: bash
+      run: |
+        python3 scripts/generate-mod.py --version "${{ steps.version.outputs.version }}" --game "${GAME}"
+
+    - name: Build the release archive
+      id: package
+      shell: bash
+      run: |
+        ARCHIVE_NAME="ui-star-names-galciv3_${{ steps.version.outputs.version }}.zip"
+
+        cd "out/${GAME}"
+        zip -r "${GITHUB_WORKSPACE}/${ARCHIVE_NAME}" "ui-star-names"
+
+        echo "archive_name=${ARCHIVE_NAME}" >> "$GITHUB_OUTPUT"
+
+    - name: Publish the release asset
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ env.VERSION }}
+        files: ${{ steps.package.outputs.archive_name }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   stellaris:
     name: Build and publish for Stellaris
     runs-on: ubuntu-latest

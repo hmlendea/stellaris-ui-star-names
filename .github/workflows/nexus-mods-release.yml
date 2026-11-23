@@ -23,15 +23,6 @@ jobs:
       with:
         ref: ${{ env.VERSION }}
 
-    - name: Generate the mod
-      run: |
-        python3 scripts/generate-mod.py --version "${VERSION#v}" --game stellaris
-
-    - name: Build the release archive
-      run: |
-        cd out/stellaris
-        zip -r "${GITHUB_WORKSPACE}/release.zip" "ui-star-names/" "ui-star-names.mod"
-
     - name: Generate the Galactic Civilizations II data
       run: |
         python3 scripts/generate-mod.py --version "${VERSION#v}" --game galciv2
@@ -41,19 +32,6 @@ jobs:
         cd out/galciv2
         zip -r "${GITHUB_WORKSPACE}/release-galciv2.zip" "Data" "Twilight"
 
-    - name: Upload
-      uses: Nexus-Mods/upload-action@v1.0.0-beta.11
-      with:
-        api_key: ${{ secrets.NEXUSMODS_API_KEY }}
-        file_id: 920143
-        filename: release.zip
-        display_name: ui-star-names.zip
-        version: ${{env.VERSION}}
-        description: "Changelog: https://github.com/hmlendea/stellaris-ui-star-names/releases/${{env.VERSION}}"
-        category: main
-        archive_existing_version: true
-        update_mod_version: true
-
     - name: Upload the Galactic Civilizations II release
       uses: Nexus-Mods/upload-action@v1.0.0-beta.11
       with:
@@ -61,6 +39,50 @@ jobs:
         file_id: 8432274
         filename: release-galciv2.zip
         display_name: ui-star-names-galciv2.zip
+        version: ${{env.VERSION}}
+        description: "Changelog: https://github.com/hmlendea/stellaris-ui-star-names/releases/${{env.VERSION}}"
+        category: main
+        archive_existing_version: true
+        update_mod_version: true
+
+    - name: Generate the Galactic Civilizations III mod
+      run: |
+        python3 scripts/generate-mod.py --version "${VERSION#v}" --game galciv3
+
+    - name: Build the Galactic Civilizations III release archive
+      run: |
+        cd out/galciv3
+        zip -r "${GITHUB_WORKSPACE}/release-galciv3.zip" "ui-star-names"
+
+    - name: Upload the Galactic Civilizations III release
+      uses: Nexus-Mods/upload-action@v1.0.0-beta.11
+      with:
+        api_key: ${{ secrets.NEXUSMODS_API_KEY }}
+        file_id: 8444367
+        filename: release-galciv3.zip
+        display_name: ui-star-names-galciv3.zip
+        version: ${{env.VERSION}}
+        description: "Changelog: https://github.com/hmlendea/stellaris-ui-star-names/releases/${{env.VERSION}}"
+        category: main
+        archive_existing_version: true
+        update_mod_version: true
+
+    - name: Generate the Stellaris mod
+      run: |
+        python3 scripts/generate-mod.py --version "${VERSION#v}" --game stellaris
+
+    - name: Build the Stellaris release archive
+      run: |
+        cd out/stellaris
+        zip -r "${GITHUB_WORKSPACE}/release.zip" "ui-star-names/" "ui-star-names.mod"
+
+    - name: Upload the Stellaris release
+      uses: Nexus-Mods/upload-action@v1.0.0-beta.11
+      with:
+        api_key: ${{ secrets.NEXUSMODS_API_KEY }}
+        file_id: 920143
+        filename: release.zip
+        display_name: ui-star-names.zip
         version: ${{env.VERSION}}
         description: "Changelog: https://github.com/hmlendea/stellaris-ui-star-names/releases/${{env.VERSION}}"
         category: main

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This repository hosts the name list sources for the Stellaris - Universum Infinitum - Star Names mod, a data modification for the game Stellaris that adds thousands of new names for stars, nebulas, asteroids, and black holes. The mod is distributed via Steam Workshop, Nexus Mods, Paradox Mods, and GitHub Releases.
+This repository hosts the name sources for the Universum Infinitum - Star Names project, a set of data modifications for the games Stellaris, Galactic Civilizations II, and Galactic Civilizations III that add thousands of new star names, and, for Stellaris, additional nebula, asteroid, and black hole names. The content is distributed via Steam Workshop, Nexus Mods, Paradox Mods, and GitHub Releases.
 
 ## Scope
 
@@ -23,15 +23,15 @@ The repository contains:
 | Mod descriptor (Steam) | `ui-star-names.mod` | Used by Steam Workshop upload workflow; references the mod directory |
 | Name list directory | `ui-star-names/common/random_names/base/` | Flat directory containing all name list files |
 | Build workflow | `.github/workflows/build.yml` | Generates the complete mod from the source name lists on every push and pull request to `master` |
-| Steam Workshop workflow | `.github/workflows/steam-workshop-release.yml` | Automates packaging and publishing to Steam Workshop on version tag push |
+| Steam Workshop workflow | `.github/workflows/steam-workshop-release.yml` | Automates packaging and publishing the Stellaris and Galactic Civilizations III mods to Steam Workshop on version tag push |
 | Nexus Mods workflow | `.github/workflows/nexus-mods-release.yml` | Automates packaging and publishing to Nexus Mods on version tag push |
 | GitHub Release workflow | `.github/workflows/github-release.yml` | Builds and attaches the release archive to a published GitHub Release |
 | Name counting script | `scripts/count-additions.sh` | Utility to count unique names across all list files for release notes |
-| Mod generation script | `scripts/generate-mod.py` | Generates the distributable Stellaris mod under `out/stellaris/` or the Galactic Civilizations II star name data file under `out/galciv2/Data/English/STARS.txt` from `src/names/`, taking the version number and the game through the mandatory `--version` and `--game` options (`stellaris` or `galciv2`, case-insensitive) |
+| Mod generation script | `scripts/generate-mod.py` | Generates the distributable Stellaris mod under `out/stellaris/`, the Galactic Civilizations II star name data file under `out/galciv2/Data/English/STARS.txt`, or the Galactic Civilizations III star name data file under `out/galciv3/ui-star-names/Text/StarNamesText.xml` from `src/names/`, taking the version number and the game through the mandatory `--version` and `--game` options (`stellaris`, `galciv2`, or `galciv3`, case-insensitive) |
 
 ## Repository Type
 
-This is a **data-driven** repository for a game mod. The distributable Stellaris mod is generated from the source name lists in `src/names/` by `scripts/generate-mod.py`, which writes the complete Stellaris mod to `out/stellaris/` or the Galactic Civilizations II star name data file to `out/galciv2/Data/English/STARS.txt` depending on the `--game` option. The packaged Stellaris release is a ZIP archive containing the `ui-star-names/` directory and `ui-star-names.mod`; the Galactic Civilizations II release is a ZIP archive containing only `Data/English/STARS.txt`, which replaces the game's shipped star name file because the game does not support overriding star names through a mod.
+This is a **data-driven** repository for a game mod. The distributable Stellaris mod is generated from the source name lists in `src/names/` by `scripts/generate-mod.py`, which writes the complete Stellaris mod to `out/stellaris/`, the Galactic Civilizations II star name data file to `out/galciv2/Data/English/STARS.txt`, or the Galactic Civilizations III star name data file to `out/galciv3/ui-star-names/Text/StarNamesText.xml`, depending on the `--game` option. The packaged Stellaris release is a ZIP archive containing the `ui-star-names/` directory and `ui-star-names.mod`; the Galactic Civilizations II release is a ZIP archive containing only `Data/English/STARS.txt`, which replaces the game's shipped star name file because the game does not support overriding star names through a mod; the Galactic Civilizations III release is a ZIP archive containing the `ui-star-names/` mod folder, which replaces the game's star name file through a mod placed in the game's `Mods` directory.
 
 ## Target Audience
 
@@ -42,4 +42,4 @@ This is a **data-driven** repository for a game mod. The distributable Stellaris
 
 ## Value Proposition
 
-The mod extends Stellaris galaxy generation by providing additional name lists drawn from science fiction, fantasy, games, and real astronomical catalogues. It requires no configuration, no dependencies beyond the base game, and works automatically when enabled in the launcher.
+The project extends galaxy generation in Galactic Civilizations II, Galactic Civilizations III, and Stellaris by providing additional star names drawn from science fiction, fantasy, games, and real astronomical catalogues. It requires no configuration, no dependencies beyond the respective games, and works automatically. For Stellaris it is enabled in the launcher, for Galactic Civilizations III as a mod in the game's `Mods` directory, and for Galactic Civilizations II by replacing the game's shipped star name files.

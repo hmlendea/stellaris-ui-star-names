@@ -75,6 +75,8 @@ Black holes: ~75
 4. Observe star/nebula/black hole/asteroid names
 5. Verify mod names appear (not just vanilla)
 
+For Galactic Civilizations II, replace the game's `Data/English/STARS.txt` and `Twilight/Data/English/STARS.txt` with the generated files and start a new game; for Galactic Civilizations III, place the generated `ui-star-names/` folder in the game's `Mods` directory, enable mods, and start a new galaxy. Verify that the generated star names replace the vanilla names in both games, while fixed homeworld star systems keep their own names in Galactic Civilizations III.
+
 **Test Matrix**:
 
 | Scenario | Expected |
@@ -83,6 +85,8 @@ Black holes: ~75
 | Existing save, mod enabled | Save names unchanged |
 | Mod disabled, new game | Vanilla names only |
 | Multiple mods enabled | Combined name pool |
+| Galactic Civilizations II, replaced files | Mod names visible in new galaxies |
+| Galactic Civilizations III, mod folder in `Mods`, mods enabled | Mod names visible in new galaxies; homeworld stars unchanged |
 
 **Frequency**: Before each release
 
@@ -108,10 +112,12 @@ Black holes: ~75
 
 **Checks**:
 - [ ] Workflow packaging step completes without errors
-- [ ] Archive contains `ui-star-names/` directory
-- [ ] Archive contains `ui-star-names.mod`
-- [ ] Contains `descriptor.mod`
-- [ ] Contains `common/random_names/base/*.txt`
+- [ ] Stellaris archive (`ui-star-names_<version>.zip`) contains `ui-star-names/` with `ui-star-names.mod`
+- [ ] Stellaris archive contains `descriptor.mod`
+- [ ] Stellaris archive contains `common/random_names/base/*.txt`
+- [ ] Galactic Civilizations II archive (`ui-star-names-galciv2_<version>.zip`) contains `Data/English/STARS.txt` and `Twilight/Data/English/STARS.txt`
+- [ ] Galactic Civilizations III archive (`ui-star-names-galciv3_<version>.zip`) contains `ui-star-names/Text/StarNamesText.xml`, well-formed XML with `RANDOM_STAR_NAME_<index>` labels that validates against `StringTable.xsd`
+- [ ] Galactic Civilizations III archive contains the mandatory `ParticleScriptDefs`, `Core`, and `Game` folders
 - [ ] No extra files (`.git`, `.github`, `docs/`, etc.)
 - [ ] Extracts cleanly
 

@@ -13,7 +13,7 @@ This document describes the deployment process for the Universum Infinitum: Star
 | Paradox Mods | Manual upload | None | Paradox launcher users |
 | GitHub Releases | GitHub Actions | Full | Direct download, mod managers |
 
-Each release workflow builds the archive itself from the checked-out repository; no previously published release asset is downloaded. The GitHub Release workflow attaches `ui-star-names_<version>.zip`, `ui-star-names-galciv2_<version>.zip`, and `ui-star-names-galciv3_<version>.zip` to the published release.
+Each release workflow builds the archive itself from the checked-out repository; no previously published release asset is downloaded. The GitHub Release workflow attaches `ui-star-names_stellaris_<version>.zip`, `ui-star-names_galciv2_<version>.zip`, and `ui-star-names_galciv3_<version>.zip` to the published release.
 
 ## Deployment Triggers
 
@@ -28,7 +28,7 @@ git push origin v1.2.3
 
 **Sequence**:
 1. Tag push triggers the Steam and Nexus workflows
-2. Publishing the GitHub Release triggers the GitHub Release workflow, which attaches `ui-star-names_<version>.zip`, `ui-star-names-galciv2_<version>.zip`, and `ui-star-names-galciv3_<version>.zip` to the release
+2. Publishing the GitHub Release triggers the GitHub Release workflow, which attaches `ui-star-names_stellaris_<version>.zip`, `ui-star-names_galciv2_<version>.zip`, and `ui-star-names_galciv3_<version>.zip` to the release
 3. Each workflow checks out the tagged commit
 4. Each workflow generates its content with `scripts/generate-mod.py` using the release version
 5. Each workflow builds its release archive from the generated output
@@ -41,7 +41,7 @@ git push origin v1.2.3
 **Trigger**: Maintainer action after automated deployments succeed
 
 **Procedure**:
-1. Download the release archive from GitHub, or build it locally with `zip -r ui-star-names_<version>.zip ui-star-names ui-star-names.mod`
+1. Download the release archive from GitHub, or build it locally with `zip -r ui-star-names_stellaris_<version>.zip ui-star-names ui-star-names.mod`
 2. Log in to `https://mods.paradoxplaza.com/mods/`
 3. Navigate to mod page
 4. Upload new version
@@ -76,7 +76,7 @@ git push origin vX.Y.Z
 
 1. Go to `https://github.com/hmlendea/stellaris-ui-star-names/releases`
 2. Confirm new release `vX.Y.Z` exists
-3. Confirm the assets `ui-star-names_X.Y.Z.zip`, `ui-star-names-galciv2_X.Y.Z.zip`, and `ui-star-names-galciv3_X.Y.Z.zip` are attached to the release
+3. Confirm the assets `ui-star-names_stellaris_X.Y.Z.zip`, `ui-star-names_galciv2_X.Y.Z.zip`, and `ui-star-names_galciv3_X.Y.Z.zip` are attached to the release
 
 ### 3. Monitor Automated Workflows
 

@@ -14,7 +14,9 @@ Mods for Galactic Civilizations II, Galactic Civilizations III, and Stellaris th
 - [Known Limitations](#-known-limitations)
 - [Installation](#-installation)
   - [Galactic Civilizations II](#galactic-civilizations-ii)
+    - [Manual Instructions](#manual-instructions)
   - [Galactic Civilizations III](#galactic-civilizations-iii)
+    - [Manual Instructions](#manual-instructions-1)
   - [Stellaris](#stellaris)
 - [Compatibility](#-compatibility)
 - [Privacy and Data](#-privacy-and-data)
@@ -62,10 +64,19 @@ For Galactic Civilizations II, replace the game's star name data files as descri
 [![Obtain it from Nexus Mods](https://raw.githubusercontent.com/hmlendea/readme-assets/master/badges/stores/nexus.png)](https://www.nexusmods.com/galacticcivilizations2/mods/2)
 [![Obtain it from GitHub](https://raw.githubusercontent.com/hmlendea/readme-assets/master/badges/stores/github.png)](https://github.com/hmlendea/stellaris-ui-star-names/releases)
 
-Download the [latest release](https://github.com/hmlendea/stellaris-ui-star-names/releases) and replace the game's shipped star name files with the archived ones. Galactic Civilizations II does not support overriding star names through a mod, so the game's own data files must be replaced:
+Galactic Civilizations II does not support overriding star names through a mod, so the archived star name files replace the game's shipped files.
 
-1. Back up the existing `Data/English/STARS.txt` and `Twilight/Data/English/STARS.txt` files inside your game's installation directory.
+#### Manual Instructions
+
+**Linux**
+
+1. Back up `Data/English/STARS.txt` and `Twilight/Data/English/STARS.txt` inside your game's installation directory (`~/.steam/steam/steamapps/common/Galactic Civilizations II - Ultimate Edition/`).
 2. Copy the archived `Data/English/STARS.txt` and `Twilight/Data/English/STARS.txt` over them.
+
+**Windows**
+
+1. Back up `Data\English\STARS.txt` and `Twilight\Data\English\STARS.txt` inside your game's installation directory (`%ProgramFiles(x86)%\Steam\steamapps\common\Galactic Civilizations II - Ultimate Edition\`).
+2. Copy the archived `Data\English\STARS.txt` and `Twilight\Data\English\STARS.txt` over them.
 
 Because Dark Avatar ships its own star name list in `DarkAvatar/Data/English/STARS.txt`, replace that file as well when playing the Dark Avatar executable. New names apply only to newly generated galaxies.
 
@@ -73,10 +84,20 @@ Because Dark Avatar ships its own star name list in `DarkAvatar/Data/English/STA
 
 [![Obtain it from GitHub](https://raw.githubusercontent.com/hmlendea/readme-assets/master/badges/stores/github.png)](https://github.com/hmlendea/stellaris-ui-star-names/releases)
 
-Download the [latest release](https://github.com/hmlendea/stellaris-ui-star-names/releases), extract the `ui-star-names/` folder into your game's `Mods` directory (`%USERPROFILE%\Documents\My Games\GalCiv3\Mods` for the base game, or `%USERPROFILE%\Documents\My Games\GC3Crusade\Mods` for the Crusade and Intrigue expansions), and enable mods in the game. Unlike Galactic Civilizations II, Galactic Civilizations III supports overriding its star name file through a mod:
+Galactic Civilizations III supports overriding its star name file through a mod, so the archived `ui-star-names/` folder is installed into the game's `Mods` directory.
 
-1. Extract the `ui-star-names/` folder into the `Mods` directory. It contains `Text/StarNamesText.xml` plus the mandatory `ParticleScriptDefs`, `Core`, and `Game` folders that the game requires every mod to provide.
-2. Enable mods in the game options, or set `EnableMods=1` in `Prefs.ini`, and restart the game.
+#### Manual Instructions
+
+**Linux**
+
+1. Extract the `ui-star-names/` folder into `~/.steam/steam/steamapps/compatdata/226860/pfx/drive_c/users/steamuser/Documents/My Games/GalCiv3/Mods` (or the corresponding `GC3Crusade` directory for the Crusade and Intrigue expansions). The path is inside the game's Proton prefix, not the Steam installation directory.
+2. Enable mods in the game options, or set `EnableMods=1` in `Prefs.ini`, then restart the game.
+3. Start a new galaxy; the mod's star names replace the vanilla names.
+
+**Windows**
+
+1. Extract the `ui-star-names/` folder into `%USERPROFILE%\Documents\My Games\GalCiv3\Mods` (or `%USERPROFILE%\Documents\My Games\GC3Crusade\Mods` for the Crusade and Intrigue expansions). The folder contains `Text/StarNamesText.xml` plus the mandatory `ParticleScriptDefs`, `Core`, and `Game` folders the game requires every mod to provide.
+2. Enable mods in the game options, or set `EnableMods=1` in `Prefs.ini`, then restart the game.
 3. Start a new galaxy; the mod's star names replace the vanilla names.
 
 The mod replaces the game's `Text/StarNamesText.xml`, which holds the random star names as `RANDOM_STAR_NAME_<index>` entries, while fixed homeworld star systems keep their own names. New names apply only to newly generated galaxies.

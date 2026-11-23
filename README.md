@@ -83,6 +83,7 @@ Because Dark Avatar ships its own star name list in `DarkAvatar/Data/English/STA
 ### Galactic Civilizations III
 
 [![Obtain it from Nexus Mods](https://raw.githubusercontent.com/hmlendea/readme-assets/master/badges/stores/nexus.png)](https://www.nexusmods.com/galacticcivilizations3/mods/173)
+[![Obtain it from Steam Workshop](https://raw.githubusercontent.com/hmlendea/readme-assets/master/badges/stores/steam-workshop.png)](https://steamcommunity.com/sharedfiles/filedetails/?id=3844651637)
 [![Obtain it from GitHub](https://raw.githubusercontent.com/hmlendea/readme-assets/master/badges/stores/github.png)](https://github.com/hmlendea/stellaris-ui-star-names/releases)
 
 Galactic Civilizations III supports overriding its star name file through a mod, so the archived `ui-star-names/` folder is installed into the game's `Mods` directory.

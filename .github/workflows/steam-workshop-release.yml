@@ -11,8 +11,36 @@ on:
         required: true
 
 jobs:
-  release:
-    name: Release
+  galciv3:
+    name: Upload the mod to Steam Workshop for Galactic Civilizations III
+    runs-on: ubuntu-latest
+
+    env:
+      VERSION: ${{ inputs.tag || github.ref_name }}
+
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        ref: ${{ env.VERSION }}
+
+    - name: Generate the mod
+      run: |
+        python3 scripts/generate-mod.py --version "${VERSION#v}" --game galciv3
+
+    - name: Upload to Steam Workshop
+      uses: hmlendea/steam-workshop-update@latest
+      with:
+        appid: 226860
+        itemid: 3844651637
+        path: "out/galciv3/ui-star-names/"
+        changenote: "[url=https://github.com/hmlendea/stellaris-ui-star-names/releases/tag/${{env.VERSION}}]Version ${{env.VERSION}}[/url]"
+      env:
+        STEAM_USERNAME: ${{secrets.STEAM_USERNAME}}
+        STEAM_PASSWORD: ${{secrets.STEAM_PASSWORD}}
+        STEAM_2FASEED: ${{secrets.STEAM_2FA_SEED}}
+
+  stellaris:
+    name: Upload the mod to Steam Workshop for Stellaris
     runs-on: ubuntu-latest
 
     env:

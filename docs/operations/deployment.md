@@ -32,7 +32,7 @@ git push origin v1.2.3
 3. Each workflow checks out the tagged commit
 4. Each workflow generates its content with `scripts/generate-mod.py` using the release version
 5. Each workflow builds its release archive from the generated output
-6. Steam workflow uploads the generated Stellaris mod directory to the Workshop
+6. Steam workflow uploads the generated Galactic Civilizations III and Stellaris mod directories to their respective Workshop items
 7. Nexus workflow uploads one archive per game (Stellaris, Galactic Civilizations II, and Galactic Civilizations III) to Nexus
 8. GitHub Release workflow uploads the Stellaris, Galactic Civilizations II, and Galactic Civilizations III archives to the release
 

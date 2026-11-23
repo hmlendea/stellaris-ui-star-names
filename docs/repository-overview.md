@@ -23,7 +23,7 @@ The repository contains:
 | Mod descriptor (Steam) | `ui-star-names.mod` | Used by Steam Workshop upload workflow; references the mod directory |
 | Name list directory | `ui-star-names/common/random_names/base/` | Flat directory containing all name list files |
 | Build workflow | `.github/workflows/build.yml` | Generates the complete mod from the source name lists on every push and pull request to `master` |
-| Steam Workshop workflow | `.github/workflows/steam-workshop-release.yml` | Automates packaging and publishing to Steam Workshop on version tag push |
+| Steam Workshop workflow | `.github/workflows/steam-workshop-release.yml` | Automates packaging and publishing the Stellaris and Galactic Civilizations III mods to Steam Workshop on version tag push |
 | Nexus Mods workflow | `.github/workflows/nexus-mods-release.yml` | Automates packaging and publishing to Nexus Mods on version tag push |
 | GitHub Release workflow | `.github/workflows/github-release.yml` | Builds and attaches the release archive to a published GitHub Release |
 | Name counting script | `scripts/count-additions.sh` | Utility to count unique names across all list files for release notes |

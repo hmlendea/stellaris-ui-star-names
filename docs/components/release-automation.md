@@ -23,8 +23,8 @@ The three jobs run independently, so a failure in one game does not mask the sta
 
 **Steps**:
 1. Checkout the requested tag
-2. Generate the mod with `scripts/generate-mod.py --version <version> --game stellaris` using the release version
-3. Upload the generated mod directory `out/stellaris/ui-star-names/` to Steam Workshop using `hmlendea/steam-workshop-update@latest`
+2. `galciv3` job: generate the Galactic Civilizations III mod with `scripts/generate-mod.py --version <version> --game galciv3` and upload the generated mod directory `out/galciv3/ui-star-names/` to Steam Workshop using `hmlendea/steam-workshop-update@latest`
+3. `stellaris` job: generate the Stellaris mod with `scripts/generate-mod.py --version <version> --game stellaris` and upload the generated mod directory `out/stellaris/ui-star-names/` to Steam Workshop using `hmlendea/steam-workshop-update@latest`
 
 **Required Secrets**:
 - `STEAM_USERNAME`
@@ -32,9 +32,8 @@ The three jobs run independently, so a failure in one game does not mask the sta
 - `STEAM_2FA_SEED`
 
 **Configuration**:
-- `appid`: 281990 (Stellaris)
-- `itemid`: 2040215185 (Workshop item ID)
-- `path`: `out/stellaris/ui-star-names/`
+- Galactic Civilizations III: `appid` 226860, `itemid` 3844651637, `path` `out/galciv3/ui-star-names/`
+- Stellaris: `appid` 281990, `itemid` 2040215185, `path` `out/stellaris/ui-star-names/`
 - `changenote`: Links to GitHub release page
 
 ### Nexus Mods (`.github/workflows/nexus-mods-release.yml`)
@@ -232,7 +231,7 @@ on:
         description: 'Tag to release'
         required: true
 jobs:
-  release:
+  galciv3:
     runs-on: ubuntu-latest
     env:
       VERSION: ${{ inputs.tag || github.ref_name }}
@@ -240,31 +239,38 @@ jobs:
     - uses: actions/checkout@v7
       with:
         ref: ${{ env.VERSION }}
-    - name: Update the mod version
+    - name: Generate the mod
       run: |
-        MOD_VERSION="${VERSION#v}"
+        python3 scripts/generate-mod.py --version "${VERSION#v}" --game galciv3
+    - name: Upload to Steam Workshop
+      uses: hmlendea/steam-workshop-update@latest
+      with:
+        appid: 226860
+        itemid: 3844651637
+        path: "out/galciv3/ui-star-names/"
+        changenote: "[url=https://github.com/hmlendea/stellaris-ui-star-names/releases/tag/${{env.VERSION}}]Version ${{env.VERSION}}[/url]"
+      env:
+        STEAM_USERNAME: ${{secrets.STEAM_USERNAME}}
+        STEAM_PASSWORD: ${{secrets.STEAM_PASSWORD}}
+        STEAM_2FASEED: ${{secrets.STEAM_2FA_SEED}}
 
-        for DESCRIPTOR in "ui-star-names.mod" "ui-star-names/descriptor.mod"
-        do
-          if grep -q '^version=' "${DESCRIPTOR}"; then
-            sed -i "s/^version=.*/version=\"${MOD_VERSION}\"/" "${DESCRIPTOR}"
-          else
-            printf 'version="%s"\n' "${MOD_VERSION}" | cat - "${DESCRIPTOR}" > "${DESCRIPTOR}.tmp"
-            mv "${DESCRIPTOR}.tmp" "${DESCRIPTOR}"
-          fi
-        done
-    - name: Build the release archive
+  stellaris:
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ inputs.tag || github.ref_name }}
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        ref: ${{ env.VERSION }}
+    - name: Generate the mod
       run: |
-        zip -r "release.zip" "ui-star-names/" "ui-star-names.mod"
-    - name: Extract the release archive
-      run: |
-        unzip "release.zip" -d "release/"
+        python3 scripts/generate-mod.py --version "${VERSION#v}" --game stellaris
     - name: Upload
       uses: hmlendea/steam-workshop-update@latest
       with:
         appid: 281990
         itemid: 2040215185
-        path: "release/ui-star-names/"
+        path: "out/stellaris/ui-star-names/"
         changenote: "[url=https://github.com/hmlendea/stellaris-ui-star-names/releases/tag/${{env.VERSION}}]Version ${{env.VERSION}}[/url]"
       env:
         STEAM_USERNAME: ${{secrets.STEAM_USERNAME}}

@@ -110,18 +110,18 @@ ui-star-names-galciv3_<version>.zip
 
 **Execution**:
 1. Checkout the requested tag
-2. Update the `version` field in both descriptors
-3. Build the release archive:
-   ```bash
-   zip -r "release.zip" "ui-star-names/" "ui-star-names.mod"
-   ```
-4. Unzip to `release/`
-5. Upload using `hmlendea/steam-workshop-update@latest`:
+2. Generate the mod from source: `python3 scripts/generate-mod.py --version "${VERSION#v}" --game galciv3` and `python3 scripts/generate-mod.py --version "${VERSION#v}" --game stellaris`
+3. Upload the generated Galactic Civilizations III mod directory `out/galciv3/ui-star-names/` using `hmlendea/steam-workshop-update@latest`:
+   - `appid`: 226860
+   - `itemid`: 3844651637
+   - `path`: `out/galciv3/ui-star-names/`
+   - `changenote`: BBCode link to GitHub release
+4. Upload the generated Stellaris mod directory `out/stellaris/ui-star-names/` using `hmlendea/steam-workshop-update@latest`:
    - `appid`: 281990
    - `itemid`: 2040215185
-   - `path`: `release/ui-star-names/`
+   - `path`: `out/stellaris/ui-star-names/`
    - `changenote`: BBCode link to GitHub release
-6. Steam Workshop page updated
+5. Steam Workshop pages updated
 
 **Secrets Required**:
 - `STEAM_USERNAME`

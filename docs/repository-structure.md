@@ -70,6 +70,8 @@ stellaris-ui-star-names/
 │               ├── ui_stars_zzz_others.txt
 │               └── ui_stars_zzz_places.txt
 ├── ui-star-names.mod               # Mod descriptor for Steam Workshop
+├── description/
+│   └── steam-workshop.bbcode       # Steam Workshop page body (BBCode)
 ├── scripts/                        # Build and utility scripts
 │   ├── count-additions.sh          # Name counting utility script
 │   └── generate-mod.py             # Mod generation script
@@ -113,10 +115,14 @@ Special naming:
 - **`ui-star-names.mod`**: Used by Steam Workshop upload workflow. Identical content to `ui-star-names/descriptor.mod` but at repository root for the workflow to reference.
 - **`ui-star-names/descriptor.mod`**: Read by the Stellaris game launcher.
 
+### Steam Workshop Page Body (`description/`)
+
+The `description/` directory sits outside the payload and is not delivered to any game. It holds `steam-workshop.bbcode`, the BBCode body pasted into the Steam Workshop item description. The publication workflows upload mod content only and do not manage that text.
+
 ### Release Automation (`.github/workflows/`)
 
 - **`build.yml`**: Triggers on pushes and pull requests to `master`. Builds the Galactic Civilizations II and III star name data in the `galciv2` and `galciv3` jobs and the Stellaris mod in the `stellaris` job, failing the build when any generation fails.
-- **`steam-workshop-release.yml`**: Triggers on version tags (`v*.*.*`) or manual dispatch. Generates the Stellaris mod with `scripts/generate-mod.py --version <version> --game stellaris` using the release version and uploads the generated mod directory to Steam Workshop using the `hmlendea/steam-workshop-update` action.
+- **`steam-workshop-release.yml`**: Triggers on version tags (`v*.*.*`) or manual dispatch. Generates the Galactic Civilizations III mod and the Stellaris mod in separate jobs with `scripts/generate-mod.py --version <version> --game galciv3` and `scripts/generate-mod.py --version <version> --game stellaris` using the release version, and uploads each generated mod directory to Steam Workshop using the `hmlendea/steam-workshop-update` action.
 - **`nexus-mods-release.yml`**: Triggers on version tags or manual dispatch. Generates the Stellaris mod and the Galactic Civilizations II star name data with `scripts/generate-mod.py` in its single `release` job using the release version, builds one release archive per game from the generated output, and uploads both to Nexus Mods using `Nexus-Mods/upload-action`.
 - **`github-release.yml`**: Triggers on release publication or manual dispatch. Generates the Galactic Civilizations II and III star name data in the `galciv2` and `galciv3` jobs and the Stellaris mod in the `stellaris` job using the release version, builds `ui-star-names-galciv2_<version>.zip`, `ui-star-names-galciv3_<version>.zip`, and `ui-star-names_<version>.zip` from the generated output, and attaches all three to the release using `softprops/action-gh-release`.
 

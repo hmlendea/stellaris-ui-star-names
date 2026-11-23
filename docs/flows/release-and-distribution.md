@@ -20,9 +20,9 @@ sequenceDiagram
     Dev->>GitHub: Publish GitHub Release
     GitHub->>Actions: Trigger release workflows
     Actions->>Actions: Build release archives from repository
-    Actions->>GitHub: Attach ui-star-names_<version>.zip
-    Actions->>GitHub: Attach ui-star-names-galciv2_<version>.zip
-    Actions->>GitHub: Attach ui-star-names-galciv3_<version>.zip
+    Actions->>GitHub: Attach ui-star-names_stellaris_<version>.zip
+    Actions->>GitHub: Attach ui-star-names_galciv2_<version>.zip
+    Actions->>GitHub: Attach ui-star-names_galciv3_<version>.zip
     Actions->>Steam: Upload via steam-workshop-update
     Actions->>Nexus: Upload via Nexus-Mods/upload-action
     Dev->>Paradox: Manual upload archive
@@ -66,12 +66,12 @@ git push origin vX.Y.Z
 3. Each workflow checks out the tagged commit
 4. Each workflow generates its content with `scripts/generate-mod.py` using the release version
 5. Each workflow builds the release archive itself from the generated output
-6. The GitHub Release workflow builds `ui-star-names-galciv2_<version>.zip` in its `galciv2` job, `ui-star-names-galciv3_<version>.zip` in its `galciv3` job, and `ui-star-names_<version>.zip` in its `stellaris` job; the Steam workflow uploads the mod directory, while the Nexus workflow builds and uploads one archive per game within its single `release` job
-7. GitHub release asset naming convention: `ui-star-names_<version>.zip`, `ui-star-names-galciv2_<version>.zip`, and `ui-star-names-galciv3_<version>.zip` (for example `ui-star-names_1.2.3.zip`, `ui-star-names-galciv2_1.2.3.zip`, and `ui-star-names-galciv3_1.2.3.zip`)
+6. The GitHub Release workflow builds `ui-star-names_galciv2_<version>.zip` in its `galciv2` job, `ui-star-names_galciv3_<version>.zip` in its `galciv3` job, and `ui-star-names_stellaris_<version>.zip` in its `stellaris` job; the Steam workflow uploads the mod directory, while the Nexus workflow builds and uploads one archive per game within its single `release` job
+7. GitHub release asset naming convention: `ui-star-names_<game>_<version>.zip`, where `<game>` is the lower-case game identifier (`stellaris`, `galciv2`, or `galciv3`), for example `ui-star-names_stellaris_1.2.3.zip`, `ui-star-names_galciv2_1.2.3.zip`, and `ui-star-names_galciv3_1.2.3.zip`
 
 **Stellaris archive structure**:
 ```
-ui-star-names_<version>.zip
+ui-star-names_stellaris_<version>.zip
 ├── ui-star-names/
 │   ├── descriptor.mod
 │   └── common/
@@ -83,7 +83,7 @@ ui-star-names_<version>.zip
 
 **Galactic Civilizations II archive structure**:
 ```
-ui-star-names-galciv2_<version>.zip
+ui-star-names_galciv2_<version>.zip
 ├── Data/
 │   └── English/
 │       └── STARS.txt
@@ -95,7 +95,7 @@ ui-star-names-galciv2_<version>.zip
 
 **Galactic Civilizations III archive structure**:
 ```
-ui-star-names-galciv3_<version>.zip
+ui-star-names_galciv3_<version>.zip
 └── ui-star-names/
     ├── ParticleScriptDefs/
     ├── Text/
@@ -177,21 +177,21 @@ ui-star-names-galciv3_<version>.zip
 1. Checkout repository at the release tag
 2. Extract the version from the tag
 3. Generate the Galactic Civilizations II star name data with `--game galciv2`
-4. Build `ui-star-names-galciv2_<version>.zip`
+4. Build `ui-star-names_galciv2_<version>.zip`
 5. Upload using `softprops/action-gh-release@v2`
 
 `galciv3` job ("Build and publish for Galactic Civilizations III"):
 1. Checkout repository at the release tag
 2. Extract the version from the tag
 3. Generate the Galactic Civilizations III star name data with `--game galciv3`
-4. Build `ui-star-names-galciv3_<version>.zip`
+4. Build `ui-star-names_galciv3_<version>.zip`
 5. Upload using `softprops/action-gh-release@v2`
 
 `stellaris` job ("Build and publish for Stellaris"):
 1. Checkout repository at the release tag
 2. Extract the version from the tag
 3. Update the `version` field in both descriptors
-4. Build `ui-star-names_<version>.zip`
+4. Build `ui-star-names_stellaris_<version>.zip`
 5. Upload using `softprops/action-gh-release@v2`
 
 **Permissions Required**:
@@ -203,7 +203,7 @@ ui-star-names-galciv3_<version>.zip
 2. Log in with Paradox account
 3. Find "Universum Infinitum: Star Names"
 4. Click "Update" or "New Version"
-5. Upload the release archive (`ui-star-names_<version>.zip` or locally built `release.zip`)
+5. Upload the release archive (`ui-star-names_stellaris_<version>.zip` or locally built `release.zip`)
 6. Fill changelog
 7. Submit for review (if required)
 8. Publish
@@ -296,7 +296,7 @@ GitHub Actions build release archive
 
 ### Local Archive Construction (Manual Recovery)
 
-1. Build locally: `zip -r ui-star-names_<version>.zip ui-star-names ui-star-names.mod`
+1. Build locally: `zip -r ui-star-names_stellaris_<version>.zip ui-star-names ui-star-names.mod`
 2. Attach to the GitHub release or upload manually to the target platform
 
 ### Paradox Mods Rejection
@@ -308,7 +308,7 @@ GitHub Actions build release archive
 ## Invariants
 
 1. Tag format must be `vX.Y.Z` (semantic versioning)
-2. GitHub release asset name must match `ui-star-names_<version>.zip`
+2. GitHub release asset name must match `ui-star-names_<game>_<version>.zip`
 3. Both descriptor files must have identical `name` and `path`
 4. `supported_version` must match target Stellaris version
 5. All four platforms should receive same version simultaneously

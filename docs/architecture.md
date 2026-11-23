@@ -57,7 +57,7 @@ The root `ARCHITECTURE.md` provides the authoritative system-level architecture.
 - Automate packaging and publishing on version tag push (`v*.*.*`) and release publication
 - Steam workflow: Generates the Galactic Civilizations III mod and the Stellaris mod in separate jobs and uploads each to its Steam Workshop item
 - Nexus workflow: Builds and uploads one release archive per game to Nexus Mods via API from its single `release` job
-- GitHub Release workflow: Builds `ui-star-names_<version>.zip`, `ui-star-names-galciv2_<version>.zip`, and `ui-star-names-galciv3_<version>.zip` in one job per game, and attaches all three to the published release
+- GitHub Release workflow: Builds `ui-star-names_stellaris_<version>.zip`, `ui-star-names_galciv2_<version>.zip`, and `ui-star-names_galciv3_<version>.zip` in one job per game, and attaches all three to the published release
 
 **Boundary Rules**:
 - Tag-triggered workflows match `v*.*.*`; the GitHub Release workflow triggers on the `published` release event or manual dispatch
@@ -66,7 +66,7 @@ The root `ARCHITECTURE.md` provides the authoritative system-level architecture.
 - Stellaris release archive contents: the `ui-star-names/` directory and `ui-star-names.mod`
 - Galactic Civilizations II release archive contents: the `Data/English/STARS.txt` and `Twilight/Data/English/STARS.txt` star name data files, which replace the game's shipped files rather than being installed as a mod
 - Galactic Civilizations III release archive contents: the `ui-star-names/` mod folder with `Text/StarNamesText.xml` and the mandatory `ParticleScriptDefs`, `Core`, and `Game` folders, which replaces the game's shipped file as a mod placed in the game's `Mods` directory
-- GitHub release asset naming convention: `ui-star-names_<version>.zip`, `ui-star-names-galciv2_<version>.zip`, and `ui-star-names-galciv3_<version>.zip`
+- GitHub release asset naming convention: `ui-star-names_<game>_<version>.zip`, where `<game>` is the lower-case game identifier (`stellaris`, `galciv2`, or `galciv3`)
 - Steam workflow requires secrets: `STEAM_USERNAME`, `STEAM_PASSWORD`, `STEAM_2FA_SEED`
 - Nexus workflow requires secret: `NEXUSMODS_API_KEY`
 - Paradox Mods requires manual upload (no automation)
@@ -290,4 +290,4 @@ Not currently implemented. Would require:
 | GitHub Release workflow | `.github/workflows/github-release.yml` | GitHub Release asset automation |
 | Count script | `scripts/count-additions.sh` | Name counting utility |
 | Mod generation script | `scripts/generate-mod.py` | Mod generation utility |
-| Release archive (generated) | `ui-star-names_<version>.zip` | Archive attached to the GitHub Release |
+| Release archive (generated) | `ui-star-names_<game>_<version>.zip` | Archive attached to the GitHub Release |

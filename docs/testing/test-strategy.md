@@ -112,11 +112,11 @@ For Galactic Civilizations II, replace the game's `Data/English/STARS.txt` and `
 
 **Checks**:
 - [ ] Workflow packaging step completes without errors
-- [ ] Stellaris archive (`ui-star-names_<version>.zip`) contains `ui-star-names/` with `ui-star-names.mod`
+- [ ] Stellaris archive (`ui-star-names_stellaris_<version>.zip`) contains `ui-star-names/` with `ui-star-names.mod`
 - [ ] Stellaris archive contains `descriptor.mod`
 - [ ] Stellaris archive contains `common/random_names/base/*.txt`
-- [ ] Galactic Civilizations II archive (`ui-star-names-galciv2_<version>.zip`) contains `Data/English/STARS.txt` and `Twilight/Data/English/STARS.txt`
-- [ ] Galactic Civilizations III archive (`ui-star-names-galciv3_<version>.zip`) contains `ui-star-names/Text/StarNamesText.xml`, well-formed XML with `RANDOM_STAR_NAME_<index>` labels that validates against `StringTable.xsd`
+- [ ] Galactic Civilizations II archive (`ui-star-names_galciv2_<version>.zip`) contains `Data/English/STARS.txt` and `Twilight/Data/English/STARS.txt`
+- [ ] Galactic Civilizations III archive (`ui-star-names_galciv3_<version>.zip`) contains `ui-star-names/Text/StarNamesText.xml`, well-formed XML with `RANDOM_STAR_NAME_<index>` labels that validates against `StringTable.xsd`
 - [ ] Galactic Civilizations III archive contains the mandatory `ParticleScriptDefs`, `Core`, and `Game` folders
 - [ ] No extra files (`.git`, `.github`, `docs/`, etc.)
 - [ ] Extracts cleanly

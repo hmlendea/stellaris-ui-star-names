@@ -185,8 +185,8 @@ Boundary rules:
 - Release content: the `ui-star-names/` directory and `ui-star-names.mod`
 - Steam workflow uses `hmlendea/steam-workshop-update` action with stored credentials
 - Nexus workflow uploads the archive via the Nexus Mods API
-- GitHub Release workflow uploads `ui-star-names_<version>.zip`, `ui-star-names-galciv2_<version>.zip`, and `ui-star-names-galciv3_<version>.zip` with `softprops/action-gh-release`
-- GitHub release asset naming convention: `ui-star-names_<version>.zip` for Stellaris, `ui-star-names-galciv2_<version>.zip` for Galactic Civilizations II, and `ui-star-names-galciv3_<version>.zip` for Galactic Civilizations III
+- GitHub Release workflow uploads `ui-star-names_stellaris_<version>.zip`, `ui-star-names_galciv2_<version>.zip`, and `ui-star-names_galciv3_<version>.zip` with `softprops/action-gh-release`
+- GitHub release asset naming convention: `ui-star-names_<game>_<version>.zip`, where `<game>` is the lower-case game identifier (`stellaris` for Stellaris, `galciv2` for Galactic Civilizations II, and `galciv3` for Galactic Civilizations III)
 
 ## 💾 Data Architecture
 
@@ -232,7 +232,7 @@ Asteroid prefixes/suffixes use `prefix = "..."` and `suffix = "..."` instead of 
 | Workflow release packaging | Internal | ZIP archives containing each game's content, built from the repository | GitHub Actions workflow | Release fails; manual upload required |
 | Steam Workshop API | Outbound | ZIP archive with `ui-star-names/` and `ui-star-names.mod` | GitHub Actions workflow | Release fails; manual upload required |
 | Nexus Mods API | Outbound | ZIP archive uploaded via API with version metadata | GitHub Actions workflow | Release fails; manual upload required |
-| GitHub Releases | Outbound | `ui-star-names_<version>.zip`, `ui-star-names-galciv2_<version>.zip`, and `ui-star-names-galciv3_<version>.zip` archives attached to the published release | GitHub Actions workflow | Users cannot download from GitHub |
+| GitHub Releases | Outbound | `ui-star-names_stellaris_<version>.zip`, `ui-star-names_galciv2_<version>.zip`, and `ui-star-names_galciv3_<version>.zip` archives attached to the published release | GitHub Actions workflow | Users cannot download from GitHub |
 
 ## 🧭 Dependency Direction and Rules
 
@@ -285,7 +285,7 @@ flowchart TB
 Release process:
 1. Maintainer creates and pushes a Git tag `vX.Y.Z`
 2. Maintainer publishes a GitHub Release for the tag
-3. GitHub Release workflow triggers, builds `ui-star-names_<version>.zip`, `ui-star-names-galciv2_<version>.zip`, and `ui-star-names-galciv3_<version>.zip`, and attaches them to the release
+3. GitHub Release workflow triggers, builds `ui-star-names_stellaris_<version>.zip`, `ui-star-names_galciv2_<version>.zip`, and `ui-star-names_galciv3_<version>.zip`, and attaches them to the release
 4. Steam Workshop workflow triggers, builds the Stellaris release archive from the repository, and uploads it to Steam
 5. Nexus Mods workflow triggers, builds the Stellaris, Galactic Civilizations II, and Galactic Civilizations III archives from the repository, and uploads them to Nexus
 6. Maintainer manually uploads the Stellaris archive to Paradox Mods
@@ -353,9 +353,9 @@ Material coverage gaps:
 | GitHub Release workflow | `.github/workflows/github-release.yml` |
 | Name counting script | `scripts/count-additions.sh` |
 | Mod generation script | `scripts/generate-mod.py` |
-| Release archive (generated) | `ui-star-names_<version>.zip` |
-| Galactic Civilizations II release archive (generated) | `ui-star-names-galciv2_<version>.zip` |
-| Galactic Civilizations III release archive (generated) | `ui-star-names-galciv3_<version>.zip` |
+| Stellaris release archive (generated) | `ui-star-names_stellaris_<version>.zip` |
+| Galactic Civilizations II release archive (generated) | `ui-star-names_galciv2_<version>.zip` |
+| Galactic Civilizations III release archive (generated) | `ui-star-names_galciv3_<version>.zip` |
 | Workflow archive (generated) | `release.zip` |
 
 ## 📚 Related Documentation

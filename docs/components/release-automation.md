@@ -72,19 +72,19 @@ The three jobs run independently, so a failure in one game does not mask the sta
    1. Check out the repository at the release tag
    2. Extract the version from the GitHub release tag
    3. Generate the star name data with `scripts/generate-mod.py --version <version> --game galciv2` using the release version
-   4. Build `ui-star-names-galciv2_<version>.zip` from the generated `Data` directory in `out/galciv2/`
+   4. Build `ui-star-names_galciv2_<version>.zip` from the generated `Data` directory in `out/galciv2/`
    5. Publish it with `softprops/action-gh-release@v2`
 2. `galciv3` ("Build and publish for Galactic Civilizations III"):
    1. Check out the repository at the release tag
    2. Extract the version from the GitHub release tag
    3. Generate the star name data with `scripts/generate-mod.py --version <version> --game galciv3` using the release version
-   4. Build `ui-star-names-galciv3_<version>.zip` from the generated `ui-star-names` directory in `out/galciv3/`
+   4. Build `ui-star-names_galciv3_<version>.zip` from the generated `ui-star-names` directory in `out/galciv3/`
    5. Publish it with `softprops/action-gh-release@v2`
 3. `stellaris` ("Build and publish for Stellaris"):
    1. Check out the repository at the release tag
    2. Extract the version from the GitHub release tag
    3. Generate the mod with `scripts/generate-mod.py --version <version> --game stellaris` using the release version
-   4. Build `ui-star-names_<version>.zip` from the generated `out/stellaris/` output
+   4. Build `ui-star-names_stellaris_<version>.zip` from the generated `out/stellaris/` output
    5. Publish it with `softprops/action-gh-release@v2`
 
 **Required Permissions**:
@@ -99,9 +99,9 @@ The release body is left exactly as the maintainer wrote it; no checksum is comp
 
 Each workflow generates the mod with `scripts/generate-mod.py` and builds its archive locally from the generated output directory. No GitHub release asset is downloaded.
 
-**Stellaris archive contents** (`ui-star-names_<version>.zip`):
+**Stellaris archive contents** (`ui-star-names_stellaris_<version>.zip`):
 ```
-ui-star-names_<version>.zip
+ui-star-names_stellaris_<version>.zip
 ├── ui-star-names/
 │   ├── descriptor.mod
 │   ├── thumbnail.png
@@ -112,9 +112,9 @@ ui-star-names_<version>.zip
 └── ui-star-names.mod
 ```
 
-**Galactic Civilizations II archive contents** (`ui-star-names-galciv2_<version>.zip`):
+**Galactic Civilizations II archive contents** (`ui-star-names_galciv2_<version>.zip`):
 ```
-ui-star-names-galciv2_<version>.zip
+ui-star-names_galciv2_<version>.zip
 ├── Data/
 │   └── English/
 │       └── STARS.txt
@@ -124,9 +124,9 @@ ui-star-names-galciv2_<version>.zip
             └── STARS.txt
 ```
 
-**Galactic Civilizations III archive contents** (`ui-star-names-galciv3_<version>.zip`):
+**Galactic Civilizations III archive contents** (`ui-star-names_galciv3_<version>.zip`):
 ```
-ui-star-names-galciv3_<version>.zip
+ui-star-names_galciv3_<version>.zip
 └── ui-star-names/
     ├── ParticleScriptDefs/
     ├── Text/
@@ -175,7 +175,7 @@ The GitHub Release workflow builds all three archives in separate jobs. The Nexu
 2. Publish a GitHub Release for the tag
 
 3. GitHub Actions automatically:
-   - Attaches `ui-star-names_<version>.zip` to the GitHub Release
+   - Attaches `ui-star-names_stellaris_<version>.zip`, `ui-star-names_galciv2_<version>.zip`, and `ui-star-names_galciv3_<version>.zip` to the GitHub Release
    - Triggers Steam workflow, which builds and uploads the release archive
    - Triggers Nexus workflow, which builds and uploads the release archives for the Stellaris, Galactic Civilizations II, and Galactic Civilizations III content
 
@@ -400,7 +400,7 @@ jobs:
       id: package
       shell: bash
       run: |
-        ARCHIVE_NAME="ui-star-names_${{ steps.version.outputs.version }}.zip"
+        ARCHIVE_NAME="ui-star-names_stellaris_${{ steps.version.outputs.version }}.zip"
 
         zip -r "${ARCHIVE_NAME}" "ui-star-names/" "ui-star-names.mod"
 

@@ -195,7 +195,7 @@ Remove duplicates manually or with script.
 **Solution**: The archive must contain the `ui-star-names/` folder at root, not its contents directly, alongside `ui-star-names.mod`:
 
 ```
-release.zip
+ui-star-names_stellaris_<version>.zip
 ├── ui-star-names/        ← Required wrapper folder
 │   ├── descriptor.mod
 │   └── common/

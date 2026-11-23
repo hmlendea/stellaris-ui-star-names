@@ -47,15 +47,17 @@ The three jobs run independently, so a failure in one game does not mask the sta
 3. Build the Stellaris `release.zip` from the generated `out/stellaris/` output
 4. Generate the Galactic Civilizations II star name data with `scripts/generate-mod.py --version <version> --game galciv2`
 5. Build the Galactic Civilizations II `release-galciv2.zip` from the generated `Data` and `Twilight` directories in `out/galciv2/`
-6. Upload both archives to Nexus Mods using `Nexus-Mods/upload-action@v1.0.0-beta.11`
+6. Generate the Galactic Civilizations III mod with `scripts/generate-mod.py --version <version> --game galciv3`
+7. Build the Galactic Civilizations III `release-galciv3.zip` from the generated `ui-star-names` directory in `out/galciv3/`
+8. Upload all three archives to Nexus Mods using `Nexus-Mods/upload-action@v1.0.0-beta.11`
 
 **Required Secrets**:
 - `NEXUSMODS_API_KEY`
 
 **Configuration**:
-- `file_id`: 920143 (Stellaris) and 8432274 (Galactic Civilizations II) Nexus Mods file IDs
-- `filename`: `release.zip` (Stellaris) and `release-galciv2.zip` (Galactic Civilizations II)
-- `display_name`: `ui-star-names.zip` (Stellaris) and `ui-star-names-galciv2.zip` (Galactic Civilizations II)
+- `file_id`: 920143 (Stellaris), 8432274 (Galactic Civilizations II), and 8444367 (Galactic Civilizations III) Nexus Mods file IDs
+- `filename`: `release.zip` (Stellaris), `release-galciv2.zip` (Galactic Civilizations II), and `release-galciv3.zip` (Galactic Civilizations III)
+- `display_name`: `ui-star-names.zip` (Stellaris), `ui-star-names-galciv2.zip` (Galactic Civilizations II), and `ui-star-names-galciv3.zip` (Galactic Civilizations III)
 - `version`: Tag name (with `v` prefix stripped)
 - `description`: Links to GitHub release page
 - `category`: `main`
@@ -136,7 +138,7 @@ ui-star-names-galciv3_<version>.zip
 
 The Galactic Civilizations II archive is not a mod: the game reads star names only from its own data files before mods are loaded, so the archived files replace the game's shipped files. The `Twilight/Data/English/STARS.txt` file is an identical copy of `Data/English/STARS.txt`. The Galactic Civilizations III archive is a mod: its `ui-star-names/` folder replaces the game's `Text/StarNamesText.xml` and is placed in the game's `Mods` directory, and it also contains the mandatory `ParticleScriptDefs`, `Core`, and `Game` folders the game requires every mod to provide.
 
-The GitHub Release workflow builds all three archives in separate jobs. The Nexus workflow generates two games in its single `release` job and uploads one archive per game, with the display names `ui-star-names.zip` for Stellaris and `ui-star-names-galciv2.zip` for Galactic Civilizations II, while the Steam workflow uploads the generated `out/stellaris/ui-star-names/` directory rather than an archive.
+The GitHub Release workflow builds all three archives in separate jobs. The Nexus workflow generates all three games in its single `release` job and uploads one archive per game, with the display names `ui-star-names.zip` for Stellaris, `ui-star-names-galciv2.zip` for Galactic Civilizations II, and `ui-star-names-galciv3.zip` for Galactic Civilizations III, while the Steam workflow uploads the generated `out/stellaris/ui-star-names/` directory rather than an archive.
 
 ## Dependencies
 
@@ -176,7 +178,7 @@ The GitHub Release workflow builds all three archives in separate jobs. The Nexu
 3. GitHub Actions automatically:
    - Attaches `ui-star-names_<version>.zip` to the GitHub Release
    - Triggers Steam workflow, which builds and uploads the release archive
-   - Triggers Nexus workflow, which builds and uploads the release archives for the Stellaris and Galactic Civilizations II content
+   - Triggers Nexus workflow, which builds and uploads the release archives for the Stellaris, Galactic Civilizations II, and Galactic Civilizations III content
 
 4. Monitor workflow runs for success/failure
 
@@ -209,7 +211,7 @@ The GitHub Release workflow builds all three archives in separate jobs. The Nexu
 - Workflows depend on third-party actions (`hmlendea/steam-workshop-update`, `Nexus-Mods/upload-action`, `softprops/action-gh-release`)
 - No automated verification of release archive contents
 - The mod `version` field is written into the checked-out descriptor files at release time; the committed descriptors carry no `version` line
-- Nexus Mods requires two separate mod pages, so the Stellaris and Galactic Civilizations II releases use different file identifiers
+- Nexus Mods requires separate mod pages per game, so the Stellaris, Galactic Civilizations II, and Galactic Civilizations III releases use different file identifiers
 - No rollback mechanism (must push new tag)
 - Secrets management: Steam 2FA seed must be kept current
 - Version tag format must be exactly `vX.Y.Z` (semantic versioning)
@@ -307,6 +309,13 @@ jobs:
       run: |
         cd out/galciv2
         zip -r "${GITHUB_WORKSPACE}/release-galciv2.zip" "Data" "Twilight"
+    - name: Generate the Galactic Civilizations III mod
+      run: |
+        python3 scripts/generate-mod.py --version "${VERSION#v}" --game galciv3
+    - name: Build the Galactic Civilizations III release archive
+      run: |
+        cd out/galciv3
+        zip -r "${GITHUB_WORKSPACE}/release-galciv3.zip" "ui-star-names"
     - name: Upload
       uses: Nexus-Mods/upload-action@v1.0.0-beta.11
       with:
@@ -326,6 +335,18 @@ jobs:
         file_id: 8432274
         filename: release-galciv2.zip
         display_name: ui-star-names-galciv2.zip
+        version: ${{env.VERSION}}
+        description: "Changelog: https://github.com/hmlendea/stellaris-ui-star-names/releases/${{env.VERSION}}"
+        category: main
+        archive_existing_version: true
+        update_mod_version: true
+    - name: Upload the Galactic Civilizations III release
+      uses: Nexus-Mods/upload-action@v1.0.0-beta.11
+      with:
+        api_key: ${{ secrets.NEXUSMODS_API_KEY }}
+        file_id: 8444367
+        filename: release-galciv3.zip
+        display_name: ui-star-names-galciv3.zip
         version: ${{env.VERSION}}
         description: "Changelog: https://github.com/hmlendea/stellaris-ui-star-names/releases/${{env.VERSION}}"
         category: main

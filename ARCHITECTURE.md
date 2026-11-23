@@ -181,7 +181,7 @@ Responsibilities:
 Boundary rules:
 - The build workflow triggers on pushes and pull requests to `master` and runs one job per game; release workflows trigger on Git tags matching `v*.*.*`, while the GitHub Release workflow triggers on release publication or manual dispatch
 - Each workflow generates the mod itself with `scripts/generate-mod.py` from the checked-out repository
-- The build and GitHub Release workflows generate all three games, one job per game; the Steam Workshop workflow currently generates only the Stellaris mod with `--game stellaris`, while the Nexus Mods workflow generates the Stellaris and Galactic Civilizations II content in its single `release` job
+- The build and GitHub Release workflows generate all three games, one job per game; the Steam Workshop workflow currently generates only the Stellaris mod with `--game stellaris`, while the Nexus Mods workflow generates all three games in its single `release` job
 - Release content: the `ui-star-names/` directory and `ui-star-names.mod`
 - Steam workflow uses `hmlendea/steam-workshop-update` action with stored credentials
 - Nexus workflow uploads the archive via the Nexus Mods API
@@ -287,7 +287,7 @@ Release process:
 2. Maintainer publishes a GitHub Release for the tag
 3. GitHub Release workflow triggers, builds `ui-star-names_<version>.zip`, `ui-star-names-galciv2_<version>.zip`, and `ui-star-names-galciv3_<version>.zip`, and attaches them to the release
 4. Steam Workshop workflow triggers, builds the Stellaris release archive from the repository, and uploads it to Steam
-5. Nexus Mods workflow triggers, builds the Stellaris and Galactic Civilizations II archives from the repository, and uploads them to Nexus
+5. Nexus Mods workflow triggers, builds the Stellaris, Galactic Civilizations II, and Galactic Civilizations III archives from the repository, and uploads them to Nexus
 6. Maintainer manually uploads the Stellaris archive to Paradox Mods
 
 ## 🛡️ Compatibility Contracts

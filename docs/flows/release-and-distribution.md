@@ -148,14 +148,21 @@ ui-star-names-galciv3_<version>.zip
    cd out/galciv2
    zip -r "${GITHUB_WORKSPACE}/release-galciv2.zip" "Data" "Twilight"
    ```
-7. Upload both using `Nexus-Mods/upload-action@v1.0.0-beta.11`:
+7. Generate the Galactic Civilizations III mod with `--game galciv3`
+8. Build the Galactic Civilizations III release archive:
+   ```bash
+   cd out/galciv3
+   zip -r "${GITHUB_WORKSPACE}/release-galciv3.zip" "ui-star-names"
+   ```
+9. Upload all three using `Nexus-Mods/upload-action@v1.0.0-beta.11`:
    - Stellaris: `file_id`: 920143, `filename`: `release.zip`, `display_name`: `ui-star-names.zip`
    - Galactic Civilizations II: `file_id`: 8432274, `filename`: `release-galciv2.zip`, `display_name`: `ui-star-names-galciv2.zip`
+   - Galactic Civilizations III: `file_id`: 8444367, `filename`: `release-galciv3.zip`, `display_name`: `ui-star-names-galciv3.zip`
    - `version`: Tag without `v` prefix
    - `description`: Link to GitHub release
    - `archive_existing_version`: true
    - `update_mod_version`: true
-5. Nexus Mods page updated
+10. Nexus Mods page updated
 
 **Secrets Required**:
 - `NEXUSMODS_API_KEY`

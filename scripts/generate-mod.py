@@ -38,6 +38,12 @@ GALCIV3_STARS_FILE_RELATIVE_PATH = Path('Text') / 'StarNamesText.xml'
 GALCIV3_STAR_NAME_LABEL_PREFIX = 'RANDOM_STAR_NAME_'
 GALCIV3_REQUIRED_DIRECTORIES = ('ParticleScriptDefs', 'Text', 'Core', 'Game')
 
+# The game hashes each label with the 32-bit FNV-1a algorithm over UTF-16 and
+# rejects the load when two labels collide. The label RANDOM_STAR_NAME_35997
+# collides with the vanilla label Haven_TerranIndustrialSpecialization3_Name,
+# so index 35997 is reserved and skipped when assigning label indices.
+GALCIV3_RESERVED_STAR_NAME_INDICES = frozenset((35997,))
+
 SUPPORTED_GAMES = (GALCIV2_GAME, GALCIV3_GAME, STELLARIS_GAME)
 
 STARS_CATEGORY_DIRECTORY = 'stars'
@@ -155,6 +161,16 @@ def escape_xml_text(text):
     return text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
 
 
+def galciv3_star_name_index(ordinal):
+    index = ordinal
+
+    for reserved_index in sorted(GALCIV3_RESERVED_STAR_NAME_INDICES):
+        if reserved_index <= index:
+            index += 1
+
+    return index
+
+
 def render_galciv3_stars_file(entries):
     lines = [
         '<?xml version="1.0" encoding="utf-8"?>',
@@ -163,7 +179,9 @@ def render_galciv3_stars_file(entries):
         'xsi:noNamespaceSchemaLocation="../../Schema/Lib/StringTable.xsd">',
     ]
 
-    for index, entry in enumerate(entries):
+    for ordinal, entry in enumerate(entries):
+        index = galciv3_star_name_index(ordinal)
+
         lines.append('  <StringTable>')
         lines.append(f'    <Label>{GALCIV3_STAR_NAME_LABEL_PREFIX}{index}</Label>')
         lines.append(f'    <String>{escape_xml_text(entry)}</String>')
